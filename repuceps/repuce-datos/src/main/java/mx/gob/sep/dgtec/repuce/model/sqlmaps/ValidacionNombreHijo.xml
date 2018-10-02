@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ValidacionNombreHijo">
+  
+  <resultMap id="ValidacionMap" type="mx.gob.sep.dgtec.repuce.vo.ValidacionNombreHijoVO">
+   
+   	<result column="valnomhijo" jdbcType="INTEGER" property="valnomhijo" />
+    
+    
+    </resultMap>
+    
+  <select id="selectNombreHijo" parameterType="map" resultMap="ValidacionMap">
+  		select count(*) as valnomhijo
+			from ce_integrante
+			where c_cct=#{cCct,jdbcType=INTEGER}
+			and identificacion is null 
+			
+			
+  		</select>
+    
+</mapper>

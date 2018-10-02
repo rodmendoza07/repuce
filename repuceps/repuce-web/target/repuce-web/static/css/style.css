@@ -1,0 +1,75 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+ 
+#layoutPrincipal {
+    height: 100%;
+}
+#panelMenu {
+    width: 16em;
+}
+A:hover {
+            COLOR: #3D3D3D; TEXT-DECORATION: none;
+}
+A:visited {
+            COLOR: #3D3D3D; TEXT-DECORATION: underline;
+}
+A:link {
+            COLOR: #3D3D3D; TEXT-DECORATION: underline;
+}
+A {
+            COLOR: #3D3D3D; TEXT-DECORATION: underline;
+}
+
+pre {
+    background-color: #EEEEEE;
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+    margin-bottom: 10px;
+    max-height: 600px;
+    overflow: auto;
+    padding: 5px;
+    width: 80%;
+	font-size: 14px;
+}
+
+.s2ResultadosHead {
+    background: none repeat scroll 0 0 #6f6f6f;
+    border-top: 1px solid #6f6f6f;
+    color: #FFFFFF;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 10px;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.s2Resultados {
+    background: none repeat scroll 0 0 #848484;
+    border-top: 1px solid #848484;
+    color: #FFFFFF;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 10px;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+#metas table{
+	border-collapse:collapse;
+	
+}
+
+#metas td{
+	border:1px solid #CCC;
+}

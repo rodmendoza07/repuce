@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ApecPlanTrabajoMapperCstm">
+	<resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ApecPlanTrabajoCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_accion" jdbcType="SMALLINT" property="cAccion" />
+	</resultMap>
+
+		<select id="selectAccionesRegistradasPosterior" parameterType="map"
+			resultMap="BaseResultMap">
+
+			select c_accion, c_reunion, c_apec
+			from apec_plan_trabajo
+			where c_apec=#{cApec,jdbcType=INTEGER}
+			and c_reunion<![CDATA[>]]>#{cReunion,jdbcType=SMALLINT}
+			order by c_accion							
+						
+			
+		</select>
+
+
+</mapper>
+
+

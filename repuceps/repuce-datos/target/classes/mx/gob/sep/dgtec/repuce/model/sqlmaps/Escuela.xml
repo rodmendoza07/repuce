@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ValidaEscuela">
+  
+  <resultMap id="EscuelaMap" type="mx.gob.sep.dgtec.repuce.vo.DatosEscuelaVO">
+   
+   	<result column="cve_cct" jdbcType="INTEGER" property="cveCct" />
+    <result column="nom_cct" jdbcType="INTEGER" property="nomCct" />
+    
+    </resultMap>
+  
+  <resultMap id="tiposEscuelasMap" type="mx.gob.sep.dgtec.repuce.vo.DatosEscuelaPorLocyMunVO">
+   
+   	<result column="nom_nivel" jdbcType="VARCHAR" property="nomNivel" />
+    <result column="c_nivel" jdbcType="INTEGER" property="cNivel" />
+    
+    </resultMap>
+ 
+ 
+  <resultMap id="Escuela2Map" type="mx.gob.sep.dgtec.repuce.vo.DatosEscuelaVO">
+   
+   	<result column="cve_cct" jdbcType="INTEGER" property="cveCct" />
+    <result column="nom_cct" jdbcType="INTEGER" property="nomCct" />
+    
+    </resultMap>       
+  <select id="selectEscuelas" parameterType="map" resultMap="EscuelaMap">
+  		select cve_cct,nom_cct
+			from c_cct cct, ubicacion_cct uc
+				where cct.c_cct=uc.c_cct
+				and status_cct=1
+				and cve_dep_nor!='CE'
+				and cve_control=1
+				and id_entidadfed=#{idEnt,jdbcType=INTEGER}
+				and id_municipio=#{idMun,jdbcType=INTEGER}
+	order by nom_cct
+				
+  		</select>
+
+  <select id="selectTipoEscuelas" parameterType="map" resultMap="tiposEscuelasMap">
+  		select distinct(nom_nivel),c_nivel
+			from c_cct cct, ubicacion_cct uc
+				where cct.c_cct=uc.c_cct
+				and status_cct=1
+				and cve_dep_nor!='CE'
+				and cve_control=1
+				and id_entidadfed=#{idEnt,jdbcType=INTEGER}
+				and id_municipio=#{idMun,jdbcType=INTEGER}
+	
+				
+  		</select>
+  		
+  		<select id="selectEscuelas2" parameterType="map" resultMap="Escuela2Map">
+  		select cve_cct,nom_cct
+			from c_cct cct, ubicacion_cct uc
+				where cct.c_cct=uc.c_cct
+				and status_cct=1
+				and cve_dep_nor!='CE'
+				and cve_control=1
+				and id_entidadfed=#{idEnt,jdbcType=INTEGER}
+				and id_municipio=#{idMun,jdbcType=INTEGER}
+				and c_nivel=#{cNivel,jdbcType=INTEGER}
+	order by nom_cct
+				
+  		</select>
+  		  
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ValidaPaloma2Sesion">
+  
+  <resultMap id="ValidacionMap" type="mx.gob.sep.dgtec.repuce.vo.ValidacionSegundaSesionVO">    
+    <result column="nom_nivel" property="nomNivel" jdbcType="VARCHAR" />
+    <result column="c_nivel" property="cNivel" jdbcType="INTEGER" />
+    <result column="pro_pri" property="proPri" jdbcType="INTEGER" />
+    <result column="pro_seg" property="proSeg" jdbcType="INTEGER" />
+    <result column="rec_seg" property="recSeg" jdbcType="INTEGER" />
+    <result column="acc_seg" property="accSeg" jdbcType="INTEGER" />
+    <result column="nor_seg" property="norSeg" jdbcType="INTEGER" />
+    <result column="eva_seg" property="evaSeg" jdbcType="INTEGER" />
+    <result column="com_seg" property="comSeg" jdbcType="INTEGER" />
+    <result column="comi_seg" property="comiSeg" jdbcType="INTEGER" />
+    <result column="pre_seg" property="preSeg" jdbcType="INTEGER" />
+  </resultMap> 
+    
+  <select id="selectValidadPaloma" parameterType="map" resultMap="ValidacionMap">
+  		select nom_nivel,
+		     c_nivel,
+			(select 1 from ce_act_sesion c1 where cct.c_cct=c1.c_cct and c_actividad=21 ) as pro_pri,
+			(select 1 from ce_act_sesion c2 where cct.c_cct=c2.c_cct and c_actividad=31 ) as pro_seg,
+			(select 1 from ce_act_sesion c3 where cct.c_cct=c3.c_cct and c_actividad=32 ) as rec_seg,
+			(select 1 from ce_act_sesion c4 where cct.c_cct=c4.c_cct and c_actividad=33 ) as acc_seg,
+			(select 1 from ce_act_sesion c5 where cct.c_cct=c5.c_cct and c_actividad=34 ) as nor_seg,
+			(select 1 from ce_act_sesion c6 where cct.c_cct=c6.c_cct and c_actividad=35 ) as eva_seg,
+			(select 1 from ce_act_sesion c7 where cct.c_cct=c7.c_cct and c_actividad=36 ) as com_seg,
+			(select 1 from ce_act_sesion c8 where cct.c_cct=c8.c_cct and c_actividad=37 ) as comi_seg,
+			(select 1 from ce_act_sesion c9 where cct.c_cct=c9.c_cct and c_actividad=40 ) as pre_seg
+		from c_cct cct
+		where cct.c_cct=#{cCct,jdbcType=INTEGER}
+  		</select>
+    
+</mapper>

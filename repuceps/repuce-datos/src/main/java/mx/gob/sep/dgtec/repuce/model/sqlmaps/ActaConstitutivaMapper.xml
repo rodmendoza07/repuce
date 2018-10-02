@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper">
+  
+  <resultMap id="ActaConstitutivaMap" type="mx.gob.sep.dgtec.conafe.vo.ActaConstitutivaVO">
+    <!--
+    	Mapeo para obtener la informacion para el formulario de la Segunda Asamblea
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    -->
+
+    <association property="apec" column="c_apec" 
+    		javaType="ApecCstm" 
+    		select="selectApec" />
+    		
+    <association property="reunion" column="{cApec=c_apec,cReunion=c_reunion}" 
+    		javaType="ApecReunion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ApecReunionMapper.selectByPrimaryKey" />
+
+	<collection property="centrosConafe" column="{cApec=c_apec}"
+	   		javaType="ArrayList"
+   			ofType="mx.gob.sep.dgtec.repuce.vo.CCctLight"
+    		select="selectCcts" />
+
+   		
+    <collection property="integrantes" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm"
+			select="selectIntegrantes" />
+
+	<collection property="instructores" column="{cApec=c_apec,cReunion=c_reunion}"
+	 		javaType="ArrayList"
+	 		ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm"
+	 		select="selectInstructoresRelacion" />      
+
+	<collection property="asistentes" column="{cApec=c_apec,cReunion=c_reunion}" 
+	 		javaType="ArrayList"
+	 		ofType="ApecAsistenteCstm"
+	 		select="selectAsistentes" />
+	 		
+	 		
+    <collection property="promotores" column="{cApec=c_apec,cReunion=c_reunion}" 
+	 		javaType="ArrayList"
+	 		ofType="ApecPromotor"
+	 		select="selectPromotores" />
+
+  </resultMap>
+  
+  <resultMap id="ApecMap" type="mx.gob.sep.dgtec.repuce.model.ApecCstm">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <result column="fch_integracion" jdbcType="DATE" property="fchIntegracion" />
+    <result column="periodo" jdbcType="VARCHAR" property="periodo" />
+    <result column="status_apec" jdbcType="VARCHAR" property="statusApec" />
+    <result column="tpo_registro" jdbcType="VARCHAR" property="tpoRegistro" />
+    <result column="id_localidad" jdbcType="INTEGER" property="idLocalidad" />
+    <result column="id_municipio" jdbcType="INTEGER" property="idMunicipio" />
+    <result column="id_entidadfed" jdbcType="SMALLINT" property="idEntidadfed" />
+    <result column="ind_aula_compartida" jdbcType="BOOLEAN" property="indAulaCompartida" />
+    <result column="nom_localidad" jdbcType="VARCHAR" property="nomLocalidad" />
+    <result column="nom_municipio" jdbcType="VARCHAR" property="nomMunicipio" />
+    <result column="nom_entidadfed" jdbcType="VARCHAR" property="nomEntidadfed" />
+  </resultMap>
+  
+ 
+  <resultMap id="ApecIntegranteMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_integrante" jdbcType="SMALLINT" property="cIntegrante" />
+		<id column="c_apec" jdbcType="SMALLINT" property="cApecIntegrante" />		
+		<result column="nom_cargo" jdbcType="VARCHAR" property="nomCargo" />
+		<result column="nom_niveleduc" jdbcType="VARCHAR" property="nomNiveleduc" />
+		<association property="integrante" column="{cApec=c_apec,cIntegrante=c_integrante}" 
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecIntegrante"
+			select="mx.gob.sep.dgtec.repuce.dao.ApecIntegranteMapper.selectByPrimaryKey" />
+
+	</resultMap>
+  
+  <resultMap id="ApecInstructorMap" type="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+    <id column="c_instructor" jdbcType="SMALLINT" property="cInstructor" />
+    <id column="c_apec" jdbcType="SMALLINT" property="cApecInstructor" />
+        
+    <association property="instructor" column="{cApec=c_apec,cInstructor=c_instructor}" 
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecInstructorCstm"
+		select="selectInstructor" />					   	 
+  </resultMap>
+  
+  <resultMap id="InstructorMap" type="mx.gob.sep.dgtec.repuce.model.ApecInstructorCstm">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />    
+    <id column="c_instructor" jdbcType="SMALLINT" property="cInstructor" />    
+    <result column="paterno_instructor" jdbcType="VARCHAR" property="paternoInstructor" />
+    <result column="materno_instructor" jdbcType="VARCHAR" property="maternoInstructor" />
+    <result column="nombre_instructor" jdbcType="VARCHAR" property="nombreInstructor" />
+    <result column="genero" jdbcType="CHAR" property="genero" />
+    <result column="edad" jdbcType="SMALLINT" property="edad" />
+    <result column="c_niveleduc" jdbcType="INTEGER" property="cNiveleduc" />
+    <result column="curp" jdbcType ="VARCHAR" property ="curp"/>
+    <result column="nom_niveleduc" jdbcType="VARCHAR" property="nomNiveleduc" />
+    
+    
+	<collection property="ccts" column="{cApec=c_apec,cInstructor=c_instructor}"
+   		javaType="ArrayList"
+   		ofType="mx.gob.sep.dgtec.repuce.vo.CCctLight"
+   		select="selectCctProgramas" />
+            					   
+  </resultMap>
+  
+  <resultMap id="ApecAsistenteMap" type="mx.gob.sep.dgtec.repuce.model.ApecAsistenteCstm">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+    <id column="c_instructor" jdbcType="SMALLINT" property="cInstructor" />
+    <id column="c_asistente" jdbcType="SMALLINT" property="cAsistente" />
+    <result column="paterno_asistente" jdbcType="VARCHAR" property="paternoAsistente" />
+    <result column="materno_asistente" jdbcType="VARCHAR" property="maternoAsistente" />
+    <result column="nombre_asistente" jdbcType="VARCHAR" property="nombreAsistente" />
+    <result column="c_calidad" jdbcType="INTEGER" property="cCalidad" />
+    <result column="nom_calidad" jdbcType="VARCHAR" property="nomCalidad" />
+    <result column="c_niveleduc" jdbcType="INTEGER" property="cNiveleduc" />
+    <result column="nom_niveleduc" jdbcType="VARCHAR" property="nomNiveleduc" />
+  </resultMap>
+    
+    <resultMap id="ApecPromotorMap" type="mx.gob.sep.dgtec.repuce.model.ApecPromotor">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_promotor" jdbcType="SMALLINT" property="cPromotor" />
+    <result column="paterno_promotor" jdbcType="VARCHAR" property="paternoPromotor" />
+    <result column="materno_promotor" jdbcType="VARCHAR" property="maternoPromotor" />
+    <result column="nombre_promotor" jdbcType="VARCHAR" property="nombrePromotor" />
+    <result column="num_serv" jdbcType="VARCHAR" property="numServ" />
+    <result column="edad" jdbcType="SMALLINT" property="edad" />
+    <result column="nom_niveleduc" jdbcType="INTEGER" property="nomNiveleduc" />
+  </resultMap>  
+    
+    
+  <select id="selectActaConstitutiva" parameterType="Integer" 
+  		resultType="mx.gob.sep.dgtec.conafe.vo.ActaConstitutivaVO" 
+  		resultMap="ActaConstitutivaMap">      
+   	select c_apec, 1 as c_reunion
+ 	from apec
+ 	where c_apec = #{cApec}  		
+  </select>    
+
+  <select id="selectApec" parameterType="Integer" resultType="ApecCstm" 
+  			resultMap="ApecMap">
+		select   c_apec, fch_integracion, periodo, status_apec, 
+		        tpo_registro, l.id_localidad, m.id_municipio, 
+		 a.id_entidadfed, ind_aula_compartida,
+		 trim(nom_entidadfed) as nom_entidadfed, 
+		 trim(nom_municipio) as nom_municipio, 
+		 trim(nom_localidad) as nom_localidad
+		 from apec a
+		 join c_entidad e on a.id_entidadfed = e.id_entidadfed
+		 join c_municipio m on a.id_entidadfed = m.id_entidadfed
+		        and a.id_municipio = m.id_municipio
+		 join c_localidad_conafe l on a.id_entidadfed = l.id_entidadfed
+		        and a.id_municipio = l.id_municipio
+		        and a.id_localidad = l.id_localidad
+		 where c_apec = #{cApec}
+  </select> 
+
+  <select id="selectCcts" parameterType="Map" 
+  			resultMap="mx.gob.sep.dgtec.repuce.dao.CCctMapperCstm.ResultMap">
+		select c.cve_cct, c.c_cct, c.nom_nivel
+		from apec a join ubicacion_cct u on a.id_localidad=u.id_localidad
+             and a.id_municipio=u.id_municipio   
+             and a.id_entidadfed=u.id_entidadfed
+             join c_cct c on u.c_cct=c.c_cct
+		where a.c_apec = #{cApec}
+			  and cve_dep_nor='CE'
+			  and status_cct='1'
+		group by c.cve_cct, c.c_cct, c.nom_nivel  
+  </select>
+
+  <select id="selectCctProgramas" parameterType="Map" 
+  			resultMap="mx.gob.sep.dgtec.repuce.dao.CCctMapperCstm.ResultMap">
+		select c.cve_cct, c.c_cct, c.nom_nivel
+		from c_cct c join c_cct_instructor i on c.c_cct = i.c_cct
+		where c_apec = #{cApec}		   
+		    and c_instructor = #{cInstructor,jdbcType=SMALLINT} 
+  </select>
+
+   
+  <select id="selectIntegrantes" parameterType="Map" resultMap="ApecIntegranteMap">
+
+
+		select
+		a.c_apec, a.c_reunion, a.c_integrante,c.nom_cargo, n.nom_niveleduc, b.curp
+		from apec_reunion_integrante a , apec_integrante b,	c_cargo_int c,c_niveleduc_conafe n
+		where
+		a.c_apec=b.c_apec
+		and a.c_integrante=b.c_integrante
+		and a.c_apec = #{cApec}
+		and	a.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and b.c_cargo = c.c_cargo
+		and	b.c_niveleduc = n.c_niveleduc
+		order by b.c_cargo
+	</select>
+  
+  
+  <select id="selectAsistentes" parameterType="Map" resultMap="ApecAsistenteMap">
+      	select
+		    c_apec, c_reunion, c_asistente, paterno_asistente, materno_asistente, nombre_asistente, 
+		    genero, edad, n.c_niveleduc,  nom_niveleduc 
+            from apec_asistente a
+            join c_niveleduc_conafe n on a.c_niveleduc = n.c_niveleduc
+	    where c_apec = #{cApec,jdbcType=SMALLINT}
+	        and c_reunion = #{cReunion,jdbcType=SMALLINT}
+	    order by c_asistente
+  </select>
+  
+    <select id="selectPromotores" parameterType="Map" resultMap="ApecPromotorMap">
+      	select *
+            from apec_promotor 
+        where c_apec = #{cApec,jdbcType=SMALLINT}
+
+	    order by c_promotor
+  </select>
+  
+  <select id="selectInstructoresRelacion" parameterType="Map" resultMap="ApecInstructorMap">
+        	
+	select distinct(c_instructor) c_instructor, min(c_reunion) c_reunion, c_apec
+	from apec_reunion_instructor  
+	where c_apec=#{cApec,jdbcType=SMALLINT}
+	and c_reunion <![CDATA[<=]]>#{cReunion,jdbcType=SMALLINT}
+	group by c_instructor, c_apec order by c_instructor,c_reunion
+	    
+  </select>
+  
+  
+   <select id="selectInstructoresRelacionXReunion" parameterType="Map" resultMap="ApecInstructorMap">
+        	
+	select distinct(c_instructor) c_instructor, min(c_reunion) c_reunion, c_apec
+	from apec_reunion_instructor  
+	where c_apec=#{cApec,jdbcType=SMALLINT}
+	and c_reunion=#{cReunion,jdbcType=SMALLINT}
+	group by c_instructor, c_apec order by c_instructor,c_reunion
+	    
+  </select>
+  
+  <select id="selectInstructor" parameterType="Map" resultMap="InstructorMap">
+        	
+
+select a.c_apec, a.c_instructor, a.paterno_instructor, a.materno_instructor,
+ a.nombre_instructor, a.genero, a.c_niveleduc ,b.nom_niveleduc,a.edad, a.curp
+from apec_instructor a, c_niveleduc_conafe b
+where a.c_apec=#{cApec,jdbcType=SMALLINT}
+and a.c_instructor=#{cInstructor,jdbcType=SMALLINT}
+and a.c_niveleduc=b.c_niveleduc
+	    
+  </select>
+	
+  <select id="generateCApec" resultType="Integer">
+		select generateCApec.nextval from tab1
+  </select>  
+
+  <select id="selectReunionesRealizadas" parameterType="Map" 
+  				resultMap="mx.gob.sep.dgtec.repuce.dao.ApecReunionMapper.BaseResultMap">
+		select r.c_apec, c_reunion, fch_reunion, hora_ini, hora_fin, observaciones, fch_registro, 
+		    usr_captura, cadena
+		from apec_reunion r
+		join apec a on r.c_apec = a.c_apec
+		where id_entidadfed = #{idEntidadfed,jdbcType=SMALLINT}
+		and id_municipio = #{idMunicipio,jdbcType=INTEGER}
+		and id_localidad = #{idLocalidad,jdbcType=INTEGER}
+  </select>
+
+</mapper>

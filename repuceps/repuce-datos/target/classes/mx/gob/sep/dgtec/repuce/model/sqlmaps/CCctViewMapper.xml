@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper">
+  
+  <resultMap id="CCctViewMap" type="mx.gob.sep.dgtec.repuce.vo.CCctViewVO">
+    <!--
+    	Mapeo para obtener la informacion de lectruta para la primera pagina de las sesiones y asambleas
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    
+    <result column="cve_cct" jdbcType="VARCHAR" property="cveCct" />
+    <result column="nom_cct" jdbcType="VARCHAR" property="nomCct" />
+    <result column="domicilio" jdbcType="VARCHAR" property="domicilio" />
+    <result column="nom_director" jdbcType="VARCHAR" property="nomDirector" />
+    <result column="nom_turno" jdbcType="VARCHAR" property="nomTurno" />
+    <result column="tel_cct" jdbcType="VARCHAR" property="telCct" />
+    <result column="tel_ext_cct" jdbcType="VARCHAR" property="telExtCct" />
+    <result column="mail_cct" jdbcType="VARCHAR" property="mailCct" />
+    <result column="nom_nivel" jdbcType="VARCHAR" property="nomNivel" />
+    <result column="nom_subnivel" jdbcType="VARCHAR" property="nomSubnivel" />
+    <result column="cp" jdbcType="CHAR" property="codigoPostal" />
+    
+    
+    <result column="nom_entidadfed" jdbcType="VARCHAR" property="nomEntidadFed" />
+    <result column="nom_municipio" jdbcType="VARCHAR" property="nomMunicipio" />
+    <result column="nom_localidad" jdbcType="VARCHAR" property="nomLocalidad" />
+    <result column="zona_escolar" jdbcType="VARCHAR" property="zonaEscolar" />
+    <result column="cve_sector" jdbcType="VARCHAR" property="cveSector" />
+    <result column="num_integrantes" jdbcType="VARCHAR" property="numIntegrantes" />
+    <result column="nom_presidente" jdbcType="VARCHAR" property="nomPresidente" />
+    <result column="nom_secretario" jdbcType="VARCHAR" property="nomSecretario" />
+    <result column="cadena" jdbcType="VARCHAR" property="cadena" />
+    <result column="c_nivel" jdbcType="INTEGER" property="nivelEdu" />
+    
+  </resultMap>
+    
+  <select id="selectCCctView" parameterType="map" resultMap="CCctViewMap">
+  		select c.c_cct,
+		    cve_cct,
+		    trim(nom_cct) as nom_cct,
+		    trim(domicilio) as domicilio,
+		    nom_director,
+		    nom_turno,
+		    tel_cct,
+		    tel_ext_cct,
+		    mail_cct,
+		    trim(nom_subnivel) as nom_subnivel,
+		    trim(nom_nivel) as nom_nivel,
+		    cp,
+		    trim(nom_entidadfed) as nom_entidadfed,    
+		    trim(nom_municipio) as nom_municipio,
+		    trim(nom_localidad) as nom_localidad,
+		    zona_escolar,   
+		    cve_sector,    
+		    (select count(*) 
+		    from ce_integrante 
+		    where c_cct = #{cCct,jdbcType=INTEGER}
+		    	and c_sesion = 1) as num_integrantes,    
+		    (select trim(nombre_integrante) || ' ' ||
+		        trim(paterno_integrante) || ' ' || 
+		        trim(materno_integrante)
+		    from ce_integrante 
+		    where c_cct = #{cCct,jdbcType=INTEGER}
+		        and c_sesion = 1
+		        and c_cargo = 1) as nom_presidente,    
+		    (select trim(nombre_integrante) || ' ' ||
+		        trim(paterno_integrante) || ' ' || 
+		        trim(materno_integrante)
+		    from ce_integrante 
+		    where c_cct = #{cCct,jdbcType=INTEGER}
+		        and c_sesion = 1
+		        and c_cargo = 2) as nom_secretario,    
+		    periodo,
+		    c_nivel
+		from c_cct c
+		join ubicacion_cct u on c.c_cct = u.c_cct
+		join c_entidad e on u.id_entidadfed = e.id_entidadfed
+		join c_municipio m on u.id_entidadfed = m.id_entidadfed
+		        and u.id_municipio = m.id_municipio
+		join c_localidad l on u.id_entidadfed = l.id_entidadfed
+		        and u.id_municipio = l.id_municipio
+		        and u.id_localidad = l.id_localidad
+		join ce_inf_gral g on c.c_cct = g.c_cct
+		where c.c_cct = #{cCct,jdbcType=INTEGER}
+  </select>
+    
+</mapper>

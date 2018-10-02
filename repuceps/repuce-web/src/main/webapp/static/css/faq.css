@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+body{margin:0; font-family:calibri, "trebuchet MS", sans-serif; font-size:16px; color:#333;}
+#wrapp{
+	margin:auto; width:918px;}
+#menu{ width:19%; float:left; font-weight:bold;
+	}
+	#menu ul{padding:0; border: solid 1px #ccc; }
+#menu li{list-style:none; padding: 7px; text-align:left; background:#EBEBEB; margin-bottom:2px; border-bottom: dashed 1px #666;}
+#menu li:hover{background:#e2e1e1; color:#333333;}
+#menu a{ color:#666; text-decoration:none;}
+#menu a:hover{ color:#333333; text-decoration:none;}
+#cont{ width:80%; float:right;
+	}
+.arrowlistmenu{
+/*width: inherit; width of accordion menu*/
+}
+
+.arrowlistmenu .menuheader{ /*CSS class for menu headers in general (expanding or not!)*/
+font: bold 14px "Century Gothic", sans-serif ;
+color: #333;
+background:url(../../static/img/faq/bghdr0.png) repeat-x bottom #fff;
+margin-bottom: 10px; /*bottom spacing between header and rest of content*/
+text-transform: uppercase;
+padding: 4px 0 4px 10px; /*header text is indented 10px*/
+cursor: hand;
+cursor: pointer;
+border: solid 1px #ccc;
+}
+
+.arrowlistmenu .openheader{ /*CSS class to apply to expandable header when it's expanded*/
+background: url(../../static/img/faq/bghdr.png) repeat-x bottom #FEE1D3;
+}
+
+.arrowlistmenu ul{ /*CSS for UL of each sub menu*/
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 8px; /*bottom spacing between each UL and rest of content*/
+}
+
+.arrowlistmenu ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.arrowlistmenu ul li .opensubheader{ /*Open state CSS for sub menu header*/
+background: lightblue !important;
+}
+
+.arrowlistmenu ul li .closedsubheader{ /*Closed state CSS for sub menu header*/
+background: lightgreen !important;
+}
+
+.arrowlistmenu ul li a{
+color: #333;;
+background: url(arrowbullet.png) no-repeat center left; /*custom bullet list image*/
+display: block;
+padding: 2px 0;
+padding-left: 19px; /*link text is indented 19px*/
+text-decoration: none;
+font-weight: bold;
+border-bottom: 1px solid #dadada;
+font-size: 90%;
+}
+
+.arrowlistmenu ul li a:visited{
+color: #A70303;
+}
+
+.arrowlistmenu ul li a:hover{ /*hover state CSS*/
+background-color: #F3F3F3;
+}
+
+.arrowlistmenu ul li a.subexpandable:hover{ /*hover state CSS for sub menu header*/
+background: lightblue;
+}

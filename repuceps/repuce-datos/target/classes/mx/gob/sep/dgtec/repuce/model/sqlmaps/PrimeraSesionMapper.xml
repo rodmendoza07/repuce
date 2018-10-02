@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper">
+  
+  <resultMap id="PrimeraSesionMap" type="mx.gob.sep.dgtec.repuce.vo.PrimeraSesionVO">
+    <!--
+    	Mapeo para obtener la informacion para el formaulario de la Primera Sesion
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+
+    <result column="nomPresidente" jdbcType="VARCHAR" property="nomPresidente" />
+    <result column="nomSecretario" jdbcType="VARCHAR" property="nomPresidente" />
+
+    <result column="nomPresidente" jdbcType="VARCHAR" property="nomPresidente" />
+    
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+    		
+    <association property="planeacion" column="c_cct" 
+    		javaType="CePlaneacionCstm" 
+    		select="selectPlaneacion" />
+
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectNomConsejeros" />
+
+	<collection property="actividades" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectActividades" />
+
+	<collection property="programas" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaCstm"
+    		select="selectProgramas" />
+
+    <collection property="integrantesComites" column="c_cct" 
+			javaType="ArrayList"
+			ofType="ComiteVO"
+			select="selectIntegrantesComites" />
+
+    <collection property="comites" column="c_cct" 
+			javaType="ArrayList"
+			ofType="CeComiteCstm"
+			select="selectComites" />
+
+    <collection property="recursos" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeRecurso"
+    		select="selectRecursos" />
+
+  </resultMap>
+  
+  <resultMap id="CeActSesionMap" type="mx.gob.sep.dgtec.repuce.model.CeActSesion">
+    <id column="c_actividad" jdbcType="SMALLINT" property="cActividad" />
+    <result column="actividad_str" jdbcType="VARCHAR" property="nomOtraActividad" />
+  </resultMap>
+  
+  <resultMap id="CeProgramaMap" type="mx.gob.sep.dgtec.repuce.model.CeProgramaCstm">
+    <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />
+	<result column="tpo_programa" jdbcType="SMALLINT" property="tpoPrograma" />
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />
+    <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+  </resultMap>
+  
+  <resultMap id="CeComiteMap" type="mx.gob.sep.dgtec.repuce.model.CeComiteCstm">
+    <id column="c_comite" jdbcType="INTEGER" property="cComite" />
+    <result column="nom_comite" jdbcType="VARCHAR" property="nomComite" />
+    <result column="integrantes" jdbcType="VARCHAR" property="nomIntegrantes" />
+    <result column="ind_proy_anual_com" jdbcType="VARCHAR" property="indProyAnualCom" />
+    <result column="ind_cumplieron_act" jdbcType="VARCHAR" property="indCumplieronAct" />
+    <result column="actividades" jdbcType="VARCHAR" property="actividades" />
+  </resultMap>
+  
+  <resultMap id="CeCIntegrantesComiteMap" type="mx.gob.sep.dgtec.repuce.vo.ComiteVO">
+	<id column="csc_integrante" jdbcType="SMALLINT" property="cscIntegrante" />
+	<id column="esmiembroce" jdbcType="BOOLEAN" property="esMiembroCE" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombreIntegrante" />
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paternoIntegrante" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="maternoIntegrante" />
+    <result column="nom_cargo" jdbcType="VARCHAR" property="nomCargo" />
+    <result column="nom_calidad" jdbcType="VARCHAR" property="nomCalidad" />
+    <result column="nomComites" jdbcType="VARCHAR" property="nomComites" />
+    
+    <collection property="comites" column="{cCct=c_cct, cscIntegrante=csc_integrante, esMiembroCE=esmiembroce}" 
+    		javaType="ArrayList"
+    		ofType="INTEGER"
+    		select="selectComitesIntegrantes" />
+  </resultMap>
+
+  <resultMap id="CePlaneacionMap" type="mx.gob.sep.dgtec.repuce.model.CePlaneacionCstm">
+    <result column="ind_planeacion" jdbcType="BOOLEAN" property="indPlaneacion" />
+    <result column="c_planeacion" jdbcType="SMALLINT" property="cPlaneacion" />
+    <result column="planeacion_str" jdbcType="VARCHAR" property="nomPlaneacion" />
+    <result column="nom_planeacion" jdbcType="VARCHAR" property="nomPlaneacion" />
+    <result column="nom_otro_planeacion" jdbcType="VARCHAR" property="nomOtroPlaneacion" />
+    <result column="ind_participacion" jdbcType="BOOLEAN" property="indParticipacion" />
+    <result column="actividades" jdbcType="VARCHAR" property="actividades" />
+    <result column="ind_cumplio_planeacion" jdbcType="BOOLEAN" property="indCumplioPlaneacion" />    
+  </resultMap>
+
+  <select id="selectPrimeraSesion" parameterType="Integer" resultMap="PrimeraSesionMap">
+   	select c_cct, 2 as c_sesion
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion = 1          
+  </select>
+
+  <select id="selectPlaneacion" parameterType="Integer" resultMap="CePlaneacionMap">
+	 select ind_planeacion, p.c_planeacion, nom_planeacion, nom_otro_planeacion, 
+	 		ind_participacion, actividades, ind_cumplio_planeacion  
+   	from ce_planeacion p
+   	left outer join c_planeacion cp on p.c_planeacion = cp.c_planeacion  
+   	where c_cct = #{cCct}
+   		and c_sesion = 2
+  </select>
+    
+  <select id="selectProgramas" parameterType="Map" resultMap="CeProgramaMap">
+	select cp.c_programa, t.tpo_programa,
+		    nom_programa,  nom_otro_programa 
+	from 
+	   c_tpo_programa t,
+	outer (c_programa cp, ce_programa p)
+	where t.tpo_programa = cp.tpo_programa
+	      and cp.c_programa = p.c_programa
+	      and c_cct = #{cCct,jdbcType=INTEGER}
+	      and c_sesion = #{cSesion,jdbcType=SMALLINT}
+	      and categoria = 1
+	    order by t.tpo_programa, cp.c_programa
+  </select>
+
+  <select id="selectIntegrantesComites" parameterType="Integer" resultMap="CeCIntegrantesComiteMap">
+		   select distinct b.c_cct, b.csc_integrante,b.nombre_integrante, b.paterno_integrante, 
+		   	b.materno_integrante, ca.nom_cargo, c.nom_calidad, 1 as esmiembroce,
+		       (select GROUP_CONCAT(nom_comite) 
+		               from c_comite
+		                where c_comite in (
+		                	select c_comite 
+	                        from ce_integrante_comite_consejo
+	                         where c_cct_integrante = a.c_cct_integrante
+	                         and c_sesion_integrante= a.c_sesion_integrante
+	                         and csc_integrante = a.csc_integrante)) as nomComites
+			from ce_integrante_comite_consejo a 
+			        join ce_integrante b on a.c_cct_integrante = b.c_cct
+			        and a.c_sesion_integrante = b.c_sesion
+			        and a.csc_integrante = b.csc_integrante
+			        join c_cargo_int ca on b.c_cargo = ca.c_cargo
+			        join c_calidad_int c on b.c_calidad = c.c_calidad 
+			where a.c_cct_integrante =  #{cCct}
+			union all
+			select distinct b.c_cct, b.csc_integrante, b.nombre_integrante, b.paterno_integrante, 
+				b.materno_integrante,'' as nom_cargo, 'COMUNIDAD ESCOLAR' as nom_calidad, 0 as esmiembroce, 
+			        (select GROUP_CONCAT(nom_comite) 
+			        from c_comite
+			        where c_comite in (
+			        		select ce_comite_c_comite 
+	                        from ce_comite_integrante
+	                         where ce_integrante_comite_c_cct = a.ce_integrante_comite_c_cct
+	                         and ce_integrante_comite_c_sesion= a.ce_integrante_comite_c_sesion
+	                         and ce_integrante_comite_csc_integrante = a.ce_integrante_comite_csc_integrante)) as nomComites
+			from ce_comite_integrante a
+			        join ce_integrante_comite b on a.ce_integrante_comite_c_cct=b.c_cct
+			        and a.ce_integrante_comite_c_sesion=b.c_sesion
+			        and a.ce_integrante_comite_csc_integrante=b.csc_integrante
+			where a.ce_integrante_comite_c_cct= #{cCct}
+  </select>
+
+  <select id="selectComites" parameterType="Integer" resultMap="CeComiteMap">
+	   select c.c_comite, max(nom_comite) as nom_comite,
+	        group_concat(nombre) as integrantes,
+	        ind_proy_anual_com,
+	        ind_cumplieron_act as ind_cumplieron_act,
+	        max(actividades) as actividades
+	    from table(
+	    multiset(
+	            select c.c_comite, 
+	                nombre_integrante||' '||paterno_integrante||' '||materno_integrante
+	                        ||' (' ||nom_calidad||')' as nombre,
+	                nvl(ind_proy_anual_com,'F') as ind_proy_anual_com,
+	                ind_cumplieron_act,
+	                actividades
+	            from ce_comite c
+	            left outer join ce_integrante_comite_consejo cic
+	                on c.c_cct = cic.c_cct_comite
+	                and c.c_sesion = cic.c_sesion_comite
+	                and c.c_comite = cic.c_comite
+	            join ce_integrante i on cic.c_cct_integrante = i.c_cct
+	                and cic.c_sesion_integrante = i.c_sesion
+	                and cic.csc_integrante = i.csc_integrante
+	            join c_calidad_int ccal on i.c_calidad = ccal.c_calidad 
+	            where c.c_cct = #{cCct}
+	                and c.c_sesion = 2
+	            union all
+	            select c.c_comite,
+	                nombre_integrante||' '||paterno_integrante||' '||materno_integrante
+	                        ||' (COMUNIDAD ESCOLAR)' as nombre,
+	                nvl(ind_proy_anual_com,'F') as ind_proy_anual_com,
+	                ind_cumplieron_act,
+	                actividades
+	            from ce_comite c
+	            left outer join ce_comite_integrante cci
+	                on c.c_cct = cci.ce_comite_c_cct
+	                and c.c_sesion = cci.ce_comite_c_sesion
+	                and c.c_comite = cci.ce_comite_c_comite
+	            join ce_integrante_comite ic 
+	                on cci.ce_integrante_comite_c_cct = ic.c_cct
+	                and cci.ce_integrante_comite_c_sesion = ic.c_sesion
+	                and cci.ce_integrante_comite_csc_integrante = ic.csc_integrante
+	            where c.c_cct = #{cCct}
+	                and c.c_sesion = 2
+	        )) as c
+	    join c_comite cc on c.c_comite = cc.c_comite
+	    where cc.c_cct is null or cc.c_cct = #{cCct}    
+	    group by 1,4,5
+	    order by 1
+  </select>
+
+  <select id="selectComitesIntegrantes" parameterType="Map" resultType="Integer">
+    <if test= "1==esMiembroCE">
+        select c_comite as comite
+	    from ce_integrante_comite_consejo
+	    where c_cct_integrante=#{cCct}
+		    and c_sesion_integrante=1
+		    and csc_integrante = #{cscIntegrante}
+    </if>
+    <if test="esMiembroCE == 0">
+        select ce_comite_c_comite as comite
+	    from ce_comite_integrante
+	    where ce_integrante_comite_c_cct=#{cCct}
+		    and ce_integrante_comite_c_sesion=2
+		    and ce_integrante_comite_csc_integrante = #{cscIntegrante}
+	    order by comite
+      </if>
+  </select>
+
+  <select id="selectRecursos" parameterType="Integer" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.CeRecursoMapper.BaseResultMap">
+  	select c_cct, c_sesion, c_recurso, monto, monto_str, uso, especie, 
+  			ind_recurso, ind_transparenta
+  	from ce_recurso
+  	where c_cct = #{cCct}
+  		and c_sesion = 2
+  </select>
+  
+  <insert id="insertCComite" parameterType="CComite">
+    insert into c_comite (c_comite, nom_comite, fch_vigencia_ini, 
+      fch_vigencia_fin, fch_sistema_ini, fch_sistema_fin, 
+      d_vigencia, tpo_comite, nom_corto_comite, 
+      c_cct, observaciones)
+    values (
+   	  ccomiteseq.NEXTVAL,
+      #{nomComite,jdbcType=VARCHAR}, #{fchVigenciaIni,jdbcType=DATE}, 
+      #{fchVigenciaFin,jdbcType=DATE}, #{fchSistemaIni,jdbcType=DATE}, #{fchSistemaFin,jdbcType=DATE}, 
+      #{dVigencia,jdbcType=CHAR}, #{tpoComite,jdbcType=CHAR}, #{nomCortoComite,jdbcType=VARCHAR}, 
+      #{cCct,jdbcType=INTEGER}, #{observaciones,jdbcType=VARCHAR})
+  </insert>  
+
+</mapper>

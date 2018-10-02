@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.Categorias1SesionMapper">
+
+   <resultMap id="Categorias1SesionMap" type="mx.gob.sep.dgtec.repuce.vo.Categorias1SesionVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <result column="ce_actividad" jdbcType="SMALLINT" property="ceActividad" />  	   
+  	  <result column="categoria" jdbcType="VARCHAR" property="categoria" />
+  	  <result column="nom_otra_categoria" jdbcType="VARCHAR" property="nomOtraCategoria" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="SMALLINT" property="idobj" />	  
+	  <result column="actividad" jdbcType="VARCHAR" property="actividad" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="fuente" jdbcType="INTEGER" property="fuente" />
+	         		            
+   </resultMap>
+   
+   
+   
+	<select id="selectCategoria1SesionActa" parameterType="Map" resultMap="Categorias1SesionMap">
+	select a.c_cct, a.c_sesion, a.ce_actividad, 
+		   case 
+	       when b.id_detalle==1
+	            then (select descrip_categoria from c_categorias where c_categoria = a.ce_actividad )
+	            else ""
+	       end categoria
+	       ,nom_otra_categoria,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_actividad from c_actividades co where co.c_actividad = b.id_objetivo)
+	            else b.objetivo
+	       end actividad,
+	       b.meta,
+	       b.fuente
+	  from ce_actividad a,
+	       ce_actividad_detalle b
+	  where b.c_cct = a.c_cct
+	    and b.c_sesion = a.c_sesion
+	    and b.ce_actividad = a.ce_actividad
+	    and a.c_cct =  #{cCct,jdbcType=INTEGER}
+		and a.c_sesion= #{cSesion,jdbcType=SMALLINT}
+		order by 3
+	   	   	   	      
+  </select>
+  
+  	</mapper>

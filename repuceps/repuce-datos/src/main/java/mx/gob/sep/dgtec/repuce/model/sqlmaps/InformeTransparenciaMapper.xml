@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.InformeTransparenciaMapper">
+  
+  <resultMap id="InformeTransparenciaMap" type="mx.gob.sep.dgtec.repuce.vo.InformeTransparenciaVO">
+    <!--
+    	Mapeo para obtener la informacion para el Informe de Transparencia
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+
+    <result column="informoSegundaAsamblea" jdbcType="BOOLEAN" property="informoSegundaAsamblea" />
+    <result column="informoTerceraAsamblea" jdbcType="BOOLEAN" property="informoTerceraAsamblea" />
+    
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceInfGral" column="c_cct" 
+    		javaType="CeInfGral" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeInfGralMapper.selectByPrimaryKey" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=cs_c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+
+    <association property="planeacion" column="{cCct=c_cct,cSesion=ps_c_sesion}" 
+    		javaType="CePlaneacionCstm" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CuartaSesionMapper.selectPlaneacion" />
+
+    <association property="seguimientoMunicipal" column="{cCct=c_cct,cSesion=ts_c_sesion}" 
+    		javaType="CmSeguimiento" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CmSeguimientoMapper.selectByPrimaryKey" />   
+
+    <association property="indicadorEnlace" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.IndicadorEnlaceVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectIndicadorEnlace" />
+	 
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectNomConsejeros" />
+
+    <collection property="integrantes" column="{cCct=c_cct,cSesion=pa_c_sesion}" 
+   		javaType="ArrayList"
+   		ofType="CeIntegranteCstm"
+   		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectIntegrantes" />
+
+	<collection property="sesiones" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeSesion"
+    		select="selectSesiones" />
+
+    <collection property="comites" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeComiteCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper.selectComites" />
+    		
+    <collection property="programas" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="ProgramaVO"
+    		select="selectProgramas" />
+
+    <collection property="mejoras" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeMejoraCctCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaAsambleaMapper.selectMejorasCct" />
+
+    <collection property="recursos" column="{cCct=c_cct,cSesion=ps_c_sesion}" 
+    		javaType="ArrayList"
+    		ofType="CeRecurso"
+    		select="selectRecursos" />
+
+    <collection property="resultados" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CctResultEnlace"
+    		select="selectResultados" />
+   		
+    <collection property="eventos" column="{cCct=c_cct,cSesion=ts_c_sesion}" 
+    		javaType="ArrayList"
+    		ofType="CeEventoCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.TerceraSesionMapper.selectEventos" />
+
+    <collection property="metas" column="{cCct=c_cct,cSesion=ss_c_sesion}" 
+    		javaType="ArrayList"
+    		ofType="CeCompEnlace"
+    		select="selectMetas" /> 
+ 
+    <collection property="compromisos" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeCompEnlace"
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectCompEnlace" />    		
+
+  </resultMap>
+  
+  <resultMap id="SesionesMap" type="mx.gob.sep.dgtec.repuce.vo.SesionVO">
+    <!--
+    	Mapeo para obtener la informacion de las secciones seleccionadas
+    -->
+    <id column="num_actividad" jdbcType="VARCHAR" property="numActividad" />
+
+    <result column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <result column="c_actividad" jdbcType="SMALLINT" property="cActividad" />
+    <result column="nom_sesion" jdbcType="VARCHAR" property="nomSesion" />
+    <result column="pct_sesion" jdbcType="DOUBLE" property="pctSesion" />
+    <result column="fch_sesion" jdbcType="DATE" property="fchSesion" />
+    <result column="nom_actividad" jdbcType="VARCHAR" property="nomActividad" />
+    <result column="nom_otra_actividad" jdbcType="VARCHAR" property="nomOtraActividad" />
+    <result column="observaciones" jdbcType="VARCHAR" property="observaciones" />
+  </resultMap>
+  
+  <resultMap id="ProgramasMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramaVO">
+    <!--
+    	Mapeo para obtener la informacion de los programas registrados en el REPUCE
+    -->
+    <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />
+
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />
+    <result column="nom_tpo_programa" jdbcType="DOUBLE" property="nomTpoPrograma" />
+    <result column="programa_gestionado" jdbcType="VARCHAR" property="programaGestionado" />
+    <result column="recurso_asignado" jdbcType="VARCHAR" property="recursoAsignado" />
+    <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+    <result column="objetivo_fin" jdbcType="VARCHAR" property="objetivoFin" />
+    <result column="monto_final" jdbcType="DECIMAL" property="montoFinal" />
+    <result column="nom_diferencia" jdbcType="VARCHAR" property="nomDiferencia" />
+    <result column="diferencia" jdbcType="DECIMAL" property="diferencia" />
+    <result column="ind_recurso" jdbcType="VARCHAR" property="indRecurso" />
+    <result column="anio_ingreso" jdbcType="VARCHAR" property="anioIngreso" />
+  </resultMap>
+  
+  <select id="selectRecursos" parameterType="map" 
+    	resultMap="mx.gob.sep.dgtec.repuce.dao.CeRecursoMapper.BaseResultMap">
+    select 
+    <include refid="mx.gob.sep.dgtec.repuce.dao.CeRecursoMapper.Base_Column_List" />
+    from ce_recurso
+    where c_cct = #{cCct,jdbcType=INTEGER}
+      and c_sesion = #{cSesion,jdbcType=SMALLINT}
+  </select>
+  
+  
+  <select id="selectProgramas" parameterType="Integer"
+  			resultMap="ProgramasMap">
+		select p.c_programa, 
+			 max(nom_programa||nvl(': ' || nom_otro_programa,'')) as nom_programa,
+			 max(nom_tpo_programa) as nom_tpo_programa,
+			 max(case when p.c_sesion = 2 then 'Sí' else 'No' end) as programa_gestionado,
+			 max(case when p.c_sesion = 5 then 'Sí' else 'No' end) as recurso_asignado,
+			 max(objetivo) as objetivo,
+			 max(case when p.c_sesion = 5 then monto_final else null end) as monto_final,
+			 max(nom_diferencia||nvl(': ' || otra_diferencia,'')) as nom_diferencia,
+			 max(case when p.c_sesion = 5 then monto_final else null end) - max(case when p.c_sesion = 5 then monto else null end) as diferencia,
+			 max(case when p.c_sesion = 5 then ind_recurso else null end) as ind_recurso,
+			 max(case when p.c_sesion = 5 then trim(anio_ingreso) else null end) as anioIngreso,
+			 max(objetivo_fin) as objetivo_fin
+		from ce_programa p
+		join c_programa cp on p.c_programa = cp.c_programa
+		join c_tpo_programa t on cp.tpo_programa = t.tpo_programa
+		left join c_diferencia_pgr dp on p.c_diferencia = dp.c_diferencia
+		where p.c_cct = #{cCct,jdbcType=INTEGER}
+		group by p.c_cct, p.c_programa
+		order by p.c_programa
+  </select>
+
+  <select id="selectSesiones" parameterType="Integer" 
+  		resultMap="SesionesMap">
+   select substr(ca.c_actividad,1,1)||'.'||substr(ca.c_actividad,2,1) as num_actividad,
+        cs.c_sesion  as c_sesion,
+        case when cs.c_sesion != 4 then a.c_actividad else (
+                select ca2.c_actividad
+                from ce_act_sesion a2 join c_act_sesion ca2
+                on num_pestania = a2.c_actividad
+                where c_cct = s.c_cct
+                    and ca2.c_actividad = ca.c_actividad
+                    and a2.c_sesion in (2,3)
+        )end as c_actividad,
+        fch_sesion,
+        observaciones, trim(nom_sesion) as nom_sesion,
+        trim(nom_actividad) as nom_actividad,
+        trim(nom_otra_actividad) as nom_otra_actividad,
+        case when s.c_sesion is null then 0 when s.c_sesion = 1 then 16.0 else 14.0 end as pct_sesion
+    from c_sesion cs, c_act_sesion ca,
+    outer (ce_sesion s,  outer(ce_act_sesion a))
+    where cs.c_sesion = ca.c_sesion
+        and ca.c_actividad = a.c_actividad
+        and cs.c_sesion = s.c_sesion
+        and s.c_cct = a.c_cct
+        and s.c_sesion = a.c_sesion
+        and s.c_cct = #{cCct}
+        and cs.c_sesion between 1 and 7
+    order by cs.c_sesion , ca.c_actividad 		
+  </select>
+  
+  <select id="selectResultados" parameterType="map" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.CctResultEnlaceMapper.BaseResultMap">
+    select 
+    <include refid="mx.gob.sep.dgtec.repuce.dao.CctResultEnlaceMapper.Base_Column_List" />
+    from cct_result_enlace
+    where c_cct = #{cCct,jdbcType=INTEGER}
+    order by anio_result, num_grado, num_materia
+  </select>
+  
+  <select id="selectMetas" parameterType="map" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.CeMetaEnlaceMapper.BaseResultMap">
+    select 
+    <include refid="mx.gob.sep.dgtec.repuce.dao.CeMetaEnlaceMapper.Base_Column_List" />
+    from ce_meta_enlace
+    where c_cct = #{cCct,jdbcType=INTEGER}
+      and c_sesion = #{cSesion,jdbcType=SMALLINT}
+    order by num_grado, num_materia
+  </select>
+  
+  <select id="selectInformeTransparencia" parameterType="Integer" resultMap="InformeTransparenciaMap">
+   	select s.c_cct, 
+   		1 as pa_c_sesion,
+   		2 as ps_c_sesion,
+   		3 as ss_c_sesion,
+   		4 as sa_c_sesion,
+   		5 as ts_c_sesion, 
+   		6 as cs_c_sesion, 
+        max(case when s2.c_sesion = 4 then 'T' else 'F' end) as informoSegundaAsamblea,
+        max(case when s2.c_sesion = 7 then 'T' else 'F' end) as informoTerceraAsamblea
+   	from ce_sesion s 
+        left join ce_sesion s2 on s.c_cct = s2.c_cct 
+   	where s.c_cct = #{cCct}
+   		and s.c_sesion = 6
+        group by s.c_cct        
+  </select>
+
+</mapper>

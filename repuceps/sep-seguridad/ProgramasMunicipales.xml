@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper">
+
+   <resultMap id="ProgramasMunicipalesMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="monto_decimal" jdbcType="VARCHAR" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />       		            
+   </resultMap>
+  
+	<select id="selectProgramasMunicipales" parameterType="Map" resultMap="ProgramasMunicipalesMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto
+	            else ""
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo and tpo_programa = tipo_programa+1)
+	            else b.objetivo
+	       end objetivo,
+	       b.meta
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.tipo_programa = 2
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+  
+</mapper>

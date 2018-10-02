@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper">
+  
+  <resultMap id="SegundaSesionMap" type="mx.gob.sep.dgtec.repuce.vo.SegundaSesionVO">
+    <!--
+    	Mapeo para obtener la informacion para el formaulario de la Segunda Asamblea
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+
+    <result column="num_consejeros" jdbcType="INTEGER" property="numConsejeros" />
+
+    <association property="cctViewVO" column="c_cct"
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+
+    <association property="indicadorEnlace" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.IndicadorEnlaceVO" 
+    		select="selectIndicadorEnlace" />
+
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectNomConsejeros" />
+
+	<collection property="actividades" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectActividades" />
+
+    <collection property="metas" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeMetaEnlace"
+    		select="selectMetaEnlace" /> 
+
+    <collection property="hMetas" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="HCeMetaEnlace"
+    		select="selectHMetaEnlace" /> 
+
+    <collection property="compromisos" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeCompEnlaceCstm"
+    		select="selectCompEnlace" />
+
+    <collection property="resultadosEnlace" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CctResultEnlace"
+    		select="selectResultadosEnlace" />
+    		
+  </resultMap>
+  
+  <resultMap id="CeCompEnlaceMap" type="mx.gob.sep.dgtec.repuce.model.CeCompEnlaceCstm">
+    <result column="c_comp_enlace" jdbcType="SMALLINT" property="cCompEnlace" />
+    <result column="tpo_comp_enlace" jdbcType="SMALLINT" property="tpoCompEnlace" />
+    <result column="nom_comp_enlace" jdbcType="VARCHAR" property="nomCompEnlace" />
+    <result column="nom_otro_comp" jdbcType="VARCHAR" property="nomOtroComp" />
+  </resultMap>
+
+  <resultMap id="IndicadorEnlaceMap" type="mx.gob.sep.dgtec.repuce.vo.IndicadorEnlaceVO">
+    <result column="c_cct" jdbcType="SMALLINT" property="cCct" />
+    <result column="pct_insuf_meta_esp" jdbcType="DOUBLE" property="pctInsufMetaEsp" />
+    <result column="pct_insuf_meta_mat" jdbcType="DOUBLE" property="pctInsufMetaMat" />
+    <result column="pct_insuf_logro_esp" jdbcType="DOUBLE" property="pctInsufLogroEsp" />
+    <result column="pct_insuf_logro_mat" jdbcType="DOUBLE" property="pctInsufLogroMat" />
+  </resultMap>
+
+  <select id="selectSegundaSesion" parameterType="Integer" resultMap="SegundaSesionMap">
+   	select c_cct, 3 as c_sesion
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion = 1        
+  </select>
+
+  <select id="selectMetaEnlace" parameterType="Integer" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.CeMetaEnlaceMapper.BaseResultMap">
+	select c_cct, c_sesion, num_grado, num_materia, puntos_cct, pct_insuf, 
+		pct_elem, pct_bueno, pct_excel
+    from ce_meta_enlace
+    where c_cct = #{cCct}
+      and c_sesion = 3
+	order by num_grado, num_materia	        
+  </select>
+  
+  <select id="selectHMetaEnlace" parameterType="Integer" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.HCeMetaEnlaceMapper.BaseResultMap">
+	select c_cct, num_grado, num_materia, puntos_cct, pct_insuf, 
+		pct_elem, pct_bueno, pct_excel
+    from h_ce_meta_enlace
+    where c_cct = #{cCct}
+	order by num_grado, num_materia	        
+  </select>
+
+  <select id="selectCompEnlace" parameterType="Integer" resultMap="CeCompEnlaceMap">
+	select tpo_comp_enlace, ce.c_comp_enlace, 
+                nom_comp_enlace, nom_otro_comp
+	from ce_comp_enlace ce
+	join c_comp_enlace cc on ce.c_comp_enlace = cc.c_comp_enlace
+	where ce.c_cct = #{cCct}
+	        and c_sesion = 3
+	order by 1,2	        
+  </select>
+
+  <select id="selectResultadosEnlace" parameterType="Integer" 
+  		resultMap="mx.gob.sep.dgtec.repuce.dao.CctResultEnlaceMapper.BaseResultMap">
+	select c_cct, num_grado, num_materia, anio_result, puntos_nal, puntos_edo, 
+		puntos_cct, pct_insuf, pct_elem, pct_bueno, pct_excel
+    from cct_result_enlace
+    where c_cct = #{cCct}
+	order by anio_result, num_grado, num_materia	        
+  </select>
+
+  <select id="selectIndicadorEnlace" parameterType="Integer" 
+  		resultMap="IndicadorEnlaceMap">
+		select c_cct, sum(pct_insuf_meta_esp+0) as pct_insuf_meta_esp,
+			sum(pct_insuf_meta_mat+0) as pct_insuf_meta_mat, 
+		    sum(pct_insuf_logro_esp+0) as pct_insuf_logro_esp, 
+		    sum(pct_insuf_logro_mat+0) as pct_insuf_logro_mat
+		from table ( multiset (
+		    select 1 as c_cct, 
+		        avg(case when num_materia=1 then (pct_insuf+0) else null end)||'' as pct_insuf_meta_esp,
+		        avg(case when num_materia=2 then (pct_insuf+0) else null end)||'' as pct_insuf_meta_mat,
+		        nvl(null,null) as pct_insuf_logro_esp, nvl(null,null) as pct_insuf_logro_mat
+		    from h_ce_meta_enlace
+		    where c_cct = #{cCct,jdbcType=INTEGER}
+		    union all
+		    select 1 as c_cct, nvl(null,null) as pct_insuf_meta_esp, nvl(null,null) as pct_insuf_meta_mat,
+		        avg(case when pct_insuf in ('S/D','SD') or num_materia != 1 then null when num_materia=1 
+		            then substr(pct_insuf,1,length(pct_insuf)-1)+0 end)||'' as pct_insuf_logro_esp,
+		        avg(case when pct_insuf in ('S/D','SD') or num_materia != 2 then null when num_materia=2 
+		            then substr(pct_insuf,1,length(pct_insuf)-1)+0 end)||'' as pct_insuf_logro_mat
+		    from cct_result_enlace
+		    where anio_result = (select max(anio_result) from cct_result_enlace)
+		     and c_cct = #{cCct,jdbcType=INTEGER}
+		))
+		group by c_cct  
+  </select>
+
+</mapper>

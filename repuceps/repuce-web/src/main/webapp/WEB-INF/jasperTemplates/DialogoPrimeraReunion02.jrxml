@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-09-05T17:39:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AcuerdoActa" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e3de6d25-3d47-4657-840a-b9aa1f06d6dd">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="mx.gob.sep.dgtec.repuce.model.ApecCstm"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="horaIni" class="java.lang.String"/>
+	<field name="horaFin" class="java.lang.String"/>
+	<field name="cReunion" class="java.lang.Short"/>
+	<variable name="descripAC" class="java.lang.String">
+		<initialValueExpression><![CDATA["No habiendo otro asunto que tratar, se declara terminada la instalación de la Asociación Promotora de Educación Comunitaria, a  las "+$F{horaFin}+" horas del mismo día y año de su inicio, y se levanta la presente acta por duplicado, para los efectos legales correspondientes y para su inscripción ante las instancias correspondientes, firmando al calce y al margen los que en ella intervinieron"
++"\r\r"
++"Los instructores (as) comunitarios (as)"]]></initialValueExpression>
+	</variable>
+	<variable name="descripR1" class="java.lang.String">
+		<initialValueExpression><![CDATA["No habiendo otro asunto que tratar, se declara terminada la reunión para la elaboración "
++"del diagnóstico y plan de trabajo de la Asociación Promotora de Educación "
++"Comunitaria (APEC), a las "+$F{horaFin}+" horas del mismo día y "
++"año de su inicio, y se levanta la presente minuta por duplicado, un tanto se utilizará "
++"para su constancia en el Registro Público de los Consejos Escolares de Participación Social "
++"en la Educación, firmando al calce representantes de la APEC que en ella intervinieron e instructores comunitarios."]]></initialValueExpression>
+	</variable>
+	<variable name="descripR2" class="java.lang.String">
+		<initialValueExpression><![CDATA["No habiendo otro asunto que tratar, se declara terminada la reunión intermedia para el seguimiento al plan"
++" de trabajo de la Asociación Promotora de Educación "
++"Comunitaria (APEC), a las "+$F{horaFin}+" horas del mismo día y "
++"año de su inicio, y se levanta la presente minuta por duplicado, un tanto se utilizará "
++"para su constancia en el Registro Público de los Consejos Escolares de Participación Social "
++"en la Educación, firmando al calce representantes de la APEC que en ella intervinieron e instructores comunitarios."]]></initialValueExpression>
+	</variable>
+	<variable name="descripR3" class="java.lang.String">
+		<initialValueExpression><![CDATA["No habiendo otro asunto que tratar, se declara terminada la reunión de cierre de ciclo escolar"
++" con la Asociación Promotora de Educación "
++"Comunitaria (APEC), a las "+$F{horaFin}+" horas del mismo día y "
++"año de su inicio, y se levanta la presente minuta por duplicado, un tanto se utilizará "
++"para su constancia en el Registro Público de los Consejos Escolares de Participación Social "
++"en la Educación, firmando al calce representantes de la APEC que en ella intervinieron e instructores comunitarios."]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="78">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="740" height="76" uuid="7ce7bd05-c32b-40df-aa52-77707d26ea48"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["\r\r"+"No habiendo otro asunto que tratar, se declara terminada la 1ª reunión para la elaboración del plan de trabajo en el Consejo Escolar, siendo las  "+$F{horaFin}+" horas del mismo día y año de su inicio. Se levanta la presente minuta por duplicado; uno de los tantos se utilizará para su constancia en el Registro Público de los Consejos Escolares de Participación Social en la Educación, mientras que el otro tanto será para el expediente que resguardará la APEC."
++"\r\r"
++"Firman al calce los siguientes representantes de la APEC que en ella intervinieron y los Líderes para la Educación Comunitaria."
++"\r\r"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

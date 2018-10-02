@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionC1415Mapper">
+  
+  <resultMap id="PrimeraSesionC1415Map" type="mx.gob.sep.dgtec.repuce.vo.PrimeraSesionC1415VO">
+    <!--
+    	Mapeo para obtener la informacion para el formaulario de la Primera Sesion
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+     
+     <association property="programasFederalesActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper.selectProgramasFederales" />	
+    		
+    <association property="programasEstatalesActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper.selectProgramasEstatales" />
+    		
+    <association property="programasMunicipalesActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper.selectProgramasMunicipales" />
+    		
+    <association property="programasOSCActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper.selectProgramasOSC" />	
+    
+    <association property="comitesActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.Comites1SesionMapper.selectComites1SesionActa" />	
+    		
+    <association property="categoriasActa" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.Categorias1SesionMapper.selectCategoria1SesionActa" />
+      		
+	<association property="programas" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper.selectProgramas" />
+	
+	
+	<collection property="actividades" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectActividades" />
+
+	<collection property="federales" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaDetalleC1415Cstm"
+    		select="selectFederales" />
+
+	<collection property="estatales" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaDetalleC1415Cstm"
+    		select="selectEstatales" />
+
+	<collection property="municipales" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaDetalleC1415Cstm"
+    		select="selectMunicipales" />
+
+	<collection property="oscs" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaDetalleC1415Cstm"
+    		select="selectOscs" />
+
+	<collection property="acciones" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeAccion"
+    		select="selectAccion" />
+    		
+    <collection property="temas" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeTema"
+    		select="selectTemas" />
+    
+	<collection property="categorias" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeActividadDetalleC1415Cstm"
+    		select="selectCategoria" />
+    
+	<collection property="asuntos" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeAsunto"
+	 		select="selectAsuntos" />   
+	 		
+	<collection property="consejeros" column="{cCct=c_cct,cSesion=c_sesion}"
+			javaType="ArrayList"
+			ofType="ConsejeroC1415"
+			select="selectConsejero" /> 		
+			
+	<collection property="comites" column="{cCct=c_cct,cSesion=c_sesion}"
+             javaType="ArrayList"
+             ofType="CeComites"
+             select="selectComites" />
+             
+    <collection property="preguntas2" column="{cCct=c_cct}"
+	 		javaType="mx.gob.sep.dgtec.repuce.model.CePreguntas2"
+	 		ofType="CePreguntas2"
+	 		select="selectPreguntas2" />
+	
+	<collection property="normalidad" column="{cCct=c_cct}"
+    		javaType="ArrayList"
+    		ofType="CeNormalidadCstm"
+    		select="selectNormalidad" /> 
+
+  </resultMap>
+  
+  <resultMap id="CeActSesionMap" type="mx.gob.sep.dgtec.repuce.model.CeActSesion">
+    <id column="c_actividad" jdbcType="SMALLINT" property="cActividad" />
+    <result column="actividad_str" jdbcType="VARCHAR" property="nomOtraActividad" />
+  </resultMap>
+    
+  <resultMap id="CeProgramasMap" type="mx.gob.sep.dgtec.repuce.model.CeProgramaDetalleC1415Cstm">    
+    <id column="c_Programa" jdbcType="SMALLINT" property="idPrograma" />    
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />      
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    <result column="monto_str" jdbcType="VARCHAR" property="montoStr" />
+  </resultMap>
+  
+  <resultMap id="CeProgEstatalMap" type="mx.gob.sep.dgtec.repuce.model.CeProgramaDetalleC1415Cstm">    
+    <id column="c_Programa" jdbcType="SMALLINT" property="idPrograma" />    
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />      
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    <result column="monto_str" jdbcType="VARCHAR" property="montoStr" />
+  </resultMap>
+ 
+  <resultMap id="CeProgMunicipalMap" type="mx.gob.sep.dgtec.repuce.model.CeProgramaDetalleC1415Cstm">    
+    <id column="c_Programa" jdbcType="SMALLINT" property="idPrograma" />    
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />      
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    <result column="monto_str" jdbcType="VARCHAR" property="montoStr" />
+  </resultMap>       
+  
+  <resultMap id="CeProgOSCMap" type="mx.gob.sep.dgtec.repuce.model.CeProgramaDetalleC1415Cstm">    
+    <id column="c_Programa" jdbcType="SMALLINT" property="idPrograma" />    
+    <result column="nom_programa" jdbcType="VARCHAR" property="nomPrograma" />      
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    <result column="monto_str" jdbcType="VARCHAR" property="montoStr" />
+  </resultMap>       
+
+  <resultMap id="CeAccionMap" type="mx.gob.sep.dgtec.repuce.model.CeAccionCstm">    
+    <id column="id_accion" jdbcType="SMALLINT" property="idAccion" />    
+    <result column="accion" jdbcType="VARCHAR" property="accion" />      
+    <result column="recomendacion" jdbcType="VARCHAR" property="recomendacion" />
+    <result column="id_ruta" jdbcType="SMALLINT" property="idRuta" />
+    <result column="nom_otra_ruta" jdbcType="VARCHAR" property="nomOtraRuta" />
+    <result column="nom_ruta" jdbcType="VARCHAR" property="nomRuta" />       
+  </resultMap>       
+  
+  <resultMap id="CeTemaMap" type="mx.gob.sep.dgtec.repuce.model.CeTema">    
+    <id column="id_secuencia" jdbcType="SMALLINT" property="idSecuencia" />    
+    <result column="id_tema" jdbcType="VARCHAR" property="idTema" />      
+    <result column="tema" jdbcType="VARCHAR" property="tema" />
+    <result column="nom_otro_tema" jdbcType="VARCHAR" property="nomOtroTema" />     
+  </resultMap>        
+  
+  <resultMap id="CeCategoriaMap" type="mx.gob.sep.dgtec.repuce.model.CeActividadDetalleC1415Cstm">    
+    <id column="ce_actividad" jdbcType="SMALLINT" property="ceActividad" />    
+    <result column="actividad" jdbcType="VARCHAR" property="actividad" />  
+    <result column="nom_otra_categoria" jdbcType="VARCHAR" property="nomOtraCategoria" />    
+  </resultMap>  
+  
+   <resultMap id="CeAsuntoMap" type="mx.gob.sep.dgtec.repuce.model.CeAsunto">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="csc_asunto" jdbcType="SMALLINT" property="cscAsunto" />
+    <result column="asunto" jdbcType="VARCHAR" property="asunto" />
+    <result column="acuerdo" jdbcType="VARCHAR" property="acuerdo" />        
+  </resultMap>
+  
+  <resultMap id="ConsejeroC1415Map" type="mx.gob.sep.dgtec.repuce.model.ConsejeroC1415">    
+    <id column="csc_integrante" jdbcType="SMALLINT" property="cscIntegrante" />    
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paternoIntegrante" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="maternoIntegrante" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombreIntegrante" />      
+  </resultMap>           
+  
+  <resultMap id="CeComitesMap" type="mx.gob.sep.dgtec.repuce.model.CeComites">   
+    <id column="c_cct" property="cCct" jdbcType="INTEGER" />
+    <id column="c_sesion" property="cSesion" jdbcType="SMALLINT" />
+    <id column="ce_comites" property="ceComites" jdbcType="INTEGER" />
+    <result column="id_comite" property="idComite" jdbcType="INTEGER" />
+    <result column="nom_comite" property="nomComite" jdbcType="VARCHAR" />
+    <result column="num_integrantes" property="numIntegrantes" jdbcType="SMALLINT" />
+    <result column="nom_presidente" property="nomPresidente" jdbcType="VARCHAR" />
+    <result column="id_calidad" property="idCalidad" jdbcType="INTEGER" />
+    <result column="nomcalidad" property="nomcalidad" jdbcType="VARCHAR" />
+    <result column="id_acuerdo" property="idAcuerdo" jdbcType="INTEGER" />
+    <result column="acuerdo" property="acuerdo" jdbcType="VARCHAR" />  
+    <result column="nom_otro_comite" jdbcType="VARCHAR" property="nomOtroComite" />  
+  </resultMap>    
+  
+   <resultMap id="CeNormalidadMap" type="mx.gob.sep.dgtec.repuce.model.CeNormalidadCstm">
+    <id column="c_normalidad" property="cNormalidad" jdbcType="SMALLINT" />
+    <result column="descrip_normalidad" jdbcType="VARCHAR" property="descripcion" />
+    <result column="opcion_nunca" property="opcionNunca" jdbcType="SMALLINT" />
+    <result column="opcion_casi_nunca" property="opcionCasiNunca" jdbcType="SMALLINT" />
+    <result column="opcion_casi_siempre" property="opcionCasiSiempre" jdbcType="SMALLINT" />
+    <result column="opcion_siempre" property="opcionSiempre" jdbcType="SMALLINT" />
+    <result column="accion1" property="accion1" jdbcType="VARCHAR" />
+    <result column="accion2" property="accion2" jdbcType="VARCHAR" />
+  </resultMap> 
+  
+     <resultMap id="CePreguntas2Map" type="mx.gob.sep.dgtec.repuce.model.CePreguntas2" >
+    <id column="cct_id" property="cctId" jdbcType="INTEGER" />
+    <id column="c_sesion" property="cSesion" jdbcType="SMALLINT" />
+    <result column="respuesta_1" property="respuesta1" jdbcType="INTEGER" />
+    <result column="respuesta_2" property="respuesta2" jdbcType="INTEGER" />
+    <result column="respuesta_3" property="respuesta3" jdbcType="INTEGER" />
+    <result column="respuesta_4" property="respuesta4" jdbcType="INTEGER" />
+    <result column="respuesta_5" property="respuesta5" jdbcType="INTEGER" />
+  </resultMap>
+
+
+  <select id="selectPrimeraSesionC1415" parameterType="Integer" resultMap="PrimeraSesionC1415Map">
+   	select c_cct, 2 as c_sesion
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion = 1          
+  </select>
+  
+  <select id="selectFederales" parameterType="Map" resultMap="CeProgramasMap">
+<!-- 		select a.c_Cct, a.c_Sesion, a.c_Programa, monto, monto_Str, tipo_Programa, id_Detalle, id_Objetivo, objetivo, meta  -->
+	select a.c_Programa, c.nom_programa, monto, monto_str
+	  from ce_programas a,
+	       ce_programas_detalle b,
+       c_programa c
+ where a.c_programa = c.c_programa
+   and a.tipo_programa = c.tpo_programa
+   and a.c_cct = b.c_cct
+   and a.c_sesion = b.c_sesion
+   and a.c_programa = b.c_programa
+   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}
+   and tipo_programa = 1	   	   	      
+  </select>
+  
+<select id="selectEstatales" parameterType="Map" resultMap="CeProgEstatalMap">
+<!-- 		select a.c_Cct, a.c_Sesion, a.c_Programa, monto, monto_Str, tipo_Programa, id_Detalle, id_Objetivo, objetivo, meta  -->
+	select a.c_Programa, c.nom_programa, monto, monto_str
+	  from ce_programas a,
+	       ce_programas_detalle b,
+       c_programa c
+ where a.c_programa = c.c_programa
+   and a.tipo_programa = c.tpo_programa
+   and a.c_cct = b.c_cct
+   and a.c_sesion = b.c_sesion
+   and a.c_programa = b.c_programa
+   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}
+   and tipo_programa = 2	   	   	      
+  </select>  
+
+  <select id="selectMunicipales" parameterType="Map" resultMap="CeProgMunicipalMap">
+<!-- 		select a.c_Cct, a.c_Sesion, a.c_Programa, monto, monto_Str, tipo_Programa, id_Detalle, id_Objetivo, objetivo, meta  -->
+	select a.c_Programa, c.nom_programa, monto, monto_str
+	  from ce_programas a,
+	       ce_programas_detalle b,
+       c_programa c
+ where a.c_programa = c.c_programa
+   and a.tipo_programa = c.tpo_programa
+   and a.c_cct = b.c_cct
+   and a.c_sesion = b.c_sesion
+   and a.c_programa = b.c_programa
+   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}
+   and tipo_programa = 3	   	   	      
+  </select>  
+    
+ <select id="selectOscs" parameterType="Map" resultMap="CeProgOSCMap">
+<!-- 		select a.c_Cct, a.c_Sesion, a.c_Programa, monto, monto_Str, tipo_Programa, id_Detalle, id_Objetivo, objetivo, meta  -->
+	select a.c_Programa, c.nom_programa, monto, monto_str
+	  from ce_programas a,
+	       ce_programas_detalle b,
+       c_programa c
+ where a.c_programa = c.c_programa
+   and a.tipo_programa = c.tpo_programa
+   and a.c_cct = b.c_cct
+   and a.c_sesion = b.c_sesion
+   and a.c_programa = b.c_programa
+   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}
+   and tipo_programa = 4	   	   	      
+  </select>      
+  
+  <select id="selectAccion" parameterType="Map" resultMap="CeAccionMap">
+	 select id_accion, accion, recomendacion,id_ruta,nom_otra_ruta,nom_ruta
+	  from ce_accion a,
+	  c_ruta b
+ where a.c_cct = #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}
+   and a.id_ruta=b.c_ruta   	
+   order by id_ruta   	      
+  </select>
+  
+  <select id="selectTemas" parameterType="Map" resultMap="CeTemaMap">
+	select id_secuencia, id_tema, tema,nom_otro_tema
+	  from ce_tema a
+ where a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	
+   order by 2   	   	      
+  </select>
+  
+  <select id="selectCategoria" parameterType="Map" resultMap="CeCategoriaMap">
+	select ce_actividad,actividad,nom_otra_categoria
+	  from ce_actividad a
+ where a.c_cct =  #{cCct,jdbcType=INTEGER}
+   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}  
+   order by 1 	   	   	      
+  </select>
+  
+  
+   <select id="selectAsuntos" parameterType="Map" resultMap="CeAsuntoMap">			
+    	select
+		    c_cct, c_sesion, csc_asunto, asunto, acuerdo 
+		from ce_asunto
+	    where c_cct = #{cCct}
+	        and c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    order by c_sesion			    
+  </select>
+  
+   <select id="selectConsejero" parameterType="Map" resultMap="ConsejeroC1415Map">			
+    	select ce.csc_integrante,ce.paterno_integrante,ce.materno_integrante,ce.nombre_integrante
+			from ce_integrante ce where ce.csc_integrante not in
+				(select idconsejero
+			from ce_candidatopresi cec , ce_integrante cei
+				where cec.votos =(select max(votos) from ce_candidatopresi pre where pre.c_cct=cec.c_cct and pre.c_sesion=cec.c_sesion)
+				and csc_integrante=idconsejero  and cec.c_cct=cei.c_cct  
+				and cec.c_cct=ce.c_cct) and ce.csc_integrante not in
+				(select idconsejero
+			from ce_candidatosecre sec , ce_integrante cei
+				where sec.votos =(select max(votos) from ce_candidatosecre se where se.c_cct=sec.c_cct and se.c_sesion=sec.c_sesion)
+				and csc_integrante=idconsejero  and sec.c_cct=cei.c_cct  
+				and sec.c_cct=ce.c_cct)
+				and ce.c_cct=#{cCct}
+	       			    
+  </select>
+  
+	<select id="selectComites" parameterType="Map" resultMap="CeComitesMap">
+	       select c_cct, c_sesion, ce_comites, id_comite, nom_comite, num_integrantes, nom_presidente, id_calidad, nomcalidad, id_acuerdo, acuerdo,nom_otro_comite 
+	         from ce_comites
+	where c_cct =  #{cCct,jdbcType=INTEGER}
+	   and c_sesion = #{cSesion,jdbcType=SMALLINT}   
+	   order by 4                         
+	  </select>
+	  
+	   <select id="selectNormalidad" parameterType="Map" resultMap="CeNormalidadMap">
+	select a.c_normalidad, a.descrip_normalidad, b.opcion_nunca,b.opcion_casi_nunca,b.opcion_casi_siempre,b.opcion_siempre,b.accion1,b.accion2
+	  from c_normalidad a,
+	       ce_normalidad b
+	 where a.c_normalidad = b.c_normalidad
+	   and b.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and b.c_sesion = 2
+  </select>  
+ <select id="selectPreguntas2" parameterType="Map" resultMap="CePreguntas2Map">			
+    	select *
+			from ce_preguntas2
+		 where cct_id= #{cCct}
+		   and c_sesion = 2
+   </select>
+
+</mapper>

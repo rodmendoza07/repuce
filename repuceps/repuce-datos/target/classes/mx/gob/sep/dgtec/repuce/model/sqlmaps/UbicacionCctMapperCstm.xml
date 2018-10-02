@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.UbicacionCctMapperCstm">
+  <resultMap id="BaseResultMapCstm" type="mx.gob.sep.dgtec.repuce.vo.UbicacionCctCstm">
+    <!--
+	Este elemento está personalizado y basado en el elemento generado por MyBatisGenerator  
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <result column="id_localidad" jdbcType="INTEGER" property="localidad.idLocalidad" />
+    <result column="nom_localidad" jdbcType="VARCHAR" property="localidad.nomLocalidad" />
+    <result column="id_municipio" jdbcType="INTEGER" property="municipio.idMunicipio" />
+    <result column="nom_municipio" jdbcType="VARCHAR" property="municipio.nomMunicipio" />
+    <result column="id_entidadfed" jdbcType="SMALLINT" property="entidad.idEntidadfed" />
+    <result column="nom_entidadfed" jdbcType="VARCHAR" property="entidad.nomEntidadfed" />
+    <result column="domicilio" jdbcType="VARCHAR" property="domicilio" />
+    <result column="nom_colonia" jdbcType="VARCHAR" property="nomColonia" />
+    <result column="cp" jdbcType="CHAR" property="cp" />
+    <result column="entre_calle" jdbcType="VARCHAR" property="entreCalle" />
+    <result column="y_calle" jdbcType="VARCHAR" property="yCalle" />
+    <result column="cve_sector" jdbcType="CHAR" property="cveSector" />
+    <result column="cct_sector" jdbcType="CHAR" property="cctSector" />
+    <result column="zona_escolar" jdbcType="CHAR" property="zonaEscolar" />
+    <result column="cct_zona_escolar" jdbcType="CHAR" property="cctZonaEscolar" />
+    <result column="ambito" jdbcType="CHAR" property="ambito" />
+    <result column="cve_colonia" jdbcType="CHAR" property="cveColonia" />
+    <result column="longitud" jdbcType="CHAR" property="longitud" />
+    <result column="latitud" jdbcType="CHAR" property="latitud" />
+    <result column="altitud" jdbcType="CHAR" property="altitud" />
+    <result column="indice_marginacion" jdbcType="SMALLINT" property="indiceMarginacion" />
+    <result column="gdo_marginacion" jdbcType="VARCHAR" property="gdoMarginacion" />
+  </resultMap>
+  <sql id="Base_Column_ListCstm">
+    c_cct, l.id_localidad, nom_localidad, m.id_municipio, nom_municipio, e.id_entidadfed, 
+    nom_entidadfed,domicilio, nom_colonia, cp, entre_calle, y_calle, cve_sector, cct_sector, 
+    zona_escolar, cct_zona_escolar, ambito, cve_colonia, longitud, latitud, altitud, 
+    indice_marginacion, gdo_marginacion
+  </sql>
+  <sql id="From_UbicacionCCT">
+    from ubicacion_cct u
+    join c_entidad e on u.id_entidadfed = e.id_entidadfed
+    join c_municipio m on u.id_entidadfed = m.id_entidadfed
+     	and u.id_municipio = m.id_municipio   
+    join c_localidad l on u.id_entidadfed = l.id_entidadfed
+    	and u.id_municipio = l.id_municipio
+    	and u.id_localidad = l.id_localidad
+  </sql>
+  <select id="selectByPrimaryKeyCstm" parameterType="java.lang.Integer" resultMap="BaseResultMapCstm">
+    select 
+    <include refid="Base_Column_ListCstm" />
+    <include refid="From_UbicacionCCT" />
+    where c_cct = #{cCct,jdbcType=INTEGER}
+  </select>
+
+</mapper>

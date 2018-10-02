@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ValidacionPeriodo">
+  
+  <resultMap id="ValidacionPeriodoMap" type="mx.gob.sep.dgtec.repuce.vo.ValidacionPeriodoVO">
+   
+   	<result column="validacion" jdbcType="INTEGER" property="validacion" />
+    
+    
+    </resultMap>
+    
+  <select id="selectPeriodo" parameterType="map" resultMap="ValidacionPeriodoMap">
+  		select case when periodo='2015-2017' then 1 else 0 end as validacion
+			from ce_inf_gral
+			where c_cct=#{cCct,jdbcType=INTEGER}
+  		</select>
+    
+</mapper>

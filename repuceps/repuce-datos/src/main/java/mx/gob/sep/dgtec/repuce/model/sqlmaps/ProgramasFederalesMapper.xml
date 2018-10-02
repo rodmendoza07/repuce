@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ProgramasFederalesMapper">
+
+   <resultMap id="ProgramasFederalesMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="objetivoPrograma" jdbcType="VARCHAR" property="objetivoPrograma" />  
+	       		            
+   </resultMap>
+   
+   
+   <resultMap id="ProgramasEstatalesMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />       		            
+   </resultMap>
+  
+   <resultMap id="ProgramasMunicipalesMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />       		            
+   </resultMap>
+  
+   <resultMap id="ProgramasOSCMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />       		            
+   </resultMap>
+  
+  <resultMap id="ProgramasMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />       		            
+   </resultMap>
+  
+  <resultMap id="ProgramasFederales2SesionMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="objetivoPrograma" jdbcType="VARCHAR" property="objetivoPrograma" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		            
+   </resultMap>
+  
+  <resultMap id="ProgramasEstatales2SesionMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   		            
+   </resultMap>
+  
+   <resultMap id="ProgramasMunicipales2SesionMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   	       		            
+   </resultMap>
+  
+   <resultMap id="ProgramasOSC2SesionMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   	       		            
+   </resultMap>
+   
+   <resultMap id="ProgramasFederales2AsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="recibido_decimal" jdbcType="INTEGER" property="recibidodecimal" />
+	  <result column="recibido_str" jdbcType="VARCHAR" property="recibidostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="objetivoPrograma" jdbcType="VARCHAR" property="objetivoPrograma" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		            
+   </resultMap>
+  
+  <resultMap id="ProgramasEstatales2AsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="recibido_decimal" jdbcType="INTEGER" property="recibidodecimal" />
+	  <result column="recibido_str" jdbcType="VARCHAR" property="recibidostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   		            
+   </resultMap>
+  
+   <resultMap id="ProgramasMunicipales2AsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="recibido_decimal" jdbcType="INTEGER" property="recibidodecimal" />
+	  <result column="recibido_str" jdbcType="VARCHAR" property="recibidostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   	       		            
+   </resultMap>
+  
+   <resultMap id="ProgramasOSC2AsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.ProgramasFederalesVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="c_programa" jdbcType="SMALLINT" property="cPrograma" />  	   
+  	  <id column="tipo_programa" jdbcType="INTEGER" property="tipoPrograma" />
+  	  <result column="id_detalle" jdbcType="INTEGER" property="iddetalle" />
+  	  <result column="id_objetivo" jdbcType="INTEGER" property="idobjetivo" />	  
+	  <result column="programa_str" jdbcType="VARCHAR" property="programastr" />
+	  <result column="nom_otro_programa" jdbcType="VARCHAR" property="nomOtroPrograma" />
+	  <result column="monto_decimal" jdbcType="INTEGER" property="montodecimal" />
+	  <result column="monto_str" jdbcType="VARCHAR" property="montostr" />
+	  <result column="recibido_decimal" jdbcType="INTEGER" property="recibidodecimal" />
+	  <result column="recibido_str" jdbcType="VARCHAR" property="recibidostr" />
+	  <result column="objetivo" jdbcType="VARCHAR" property="objetivo" />
+	  <result column="meta" jdbcType="VARCHAR" property="meta" />
+	  <result column="avance" jdbcType="VARCHAR" property="avance" />
+	  <result column="descripcion_avance" jdbcType="VARCHAR" property="descripcionAvance" />  
+	       		                   	       		            
+   </resultMap>
+   
+	<select id="selectProgramasFederales" parameterType="Map" resultMap="ProgramasFederalesMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,a.nom_otro_programa,
+	       case 
+	       when b.id_detalle==1
+	            then a.monto
+	            else 0
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+	            else b.objetivo
+	       end objetivo,
+	       b.meta,
+	       case 
+	       when b.id_detalle==1
+	            then (select objetivo from c_programa where c_programa = a.c_programa )
+	            else ""
+	       end objetivoPrograma
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.tipo_programa = 0
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+  	<select id="selectProgramasEstatales" parameterType="Map" resultMap="ProgramasEstatalesMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,a.nom_otro_programa,
+	       case 
+	       when b.id_detalle==1
+	            then a.monto
+	            else 0
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo and tpo_programa = tipo_programa+1)
+	            else b.objetivo
+	       end objetivo,
+	       b.meta
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.tipo_programa = 1
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+  <select id="selectProgramasMunicipales" parameterType="Map" resultMap="ProgramasMunicipalesMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,a.nom_otro_programa,
+	       case 
+	       when b.id_detalle==1
+	            then a.monto
+	            else 0
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo and tpo_programa = tipo_programa+1)
+	            else b.objetivo
+	       end objetivo,
+	       b.meta
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.tipo_programa = 2
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+  	<select id="selectProgramasOSC" parameterType="Map" resultMap="ProgramasOSCMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,a.nom_otro_programa,
+	       case 
+	       when b.id_detalle==1
+	            then a.monto
+	            else 0
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo and tpo_programa = tipo_programa+1)
+	            else b.objetivo
+	       end objetivo,
+	       b.meta
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.tipo_programa = 3
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+  
+  <select id="selectProgramas" parameterType="Map" resultMap="ProgramasMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+		   case 
+	       when b.id_detalle==1
+	            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+	            else ""
+	       end programa_str
+	       ,a.nom_otro_programa,
+	       case 
+	       when b.id_detalle==1
+	            then a.monto
+	            else 0
+	       end monto_decimal,
+	       case 
+	       when b.id_detalle==1
+	            then ""||a.monto_str
+	            else ""
+	       end  monto_str
+	       ,
+	       b.id_detalle,	       
+	       b.id_objetivo,
+	       case 
+	       when b.id_objetivo is not null
+	            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo and tpo_programa = tipo_programa+1)
+	            else b.objetivo
+	       end objetivo,
+	       b.meta
+	  from ce_programas a,
+	       ce_programas_detalle b
+	 where b.c_cct = a.c_cct
+	   and b.c_sesion = a.c_sesion
+	   and b.c_programa = a.c_programa
+	   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+	   and a.c_sesion = #{cSesion,jdbcType=SMALLINT}   	   	   	      
+  </select>
+  
+<select id="selectProgramasFederales2Sesion" parameterType="Map" resultMap="ProgramasFederales2SesionMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                       case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then c.monto2_sesion
+                                       else a.monto end)
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then ""||c.monto_str2_sesion
+                                       else ""||a.monto_str end)
+                            else ""
+                       end  monto_str
+                       ,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                               "Metas sin avance por falta de liberación del recurso"
+                       when c.avance=2 then
+                               "Las metas están retrasadas de acuerdo con lo previsto a la fecha"
+                       when c.avance=3 then
+                               "El avance de metas está de acuerdo con lo previsto a la fecha"
+                       when c.avance=4 then
+                               "Las metas van adelantadas de acuerdo con lo previsto a la fecha"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_sesion = a.c_sesion
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and b.c_sesion = a.c_sesion
+                   and b.c_programa = a.c_programa
+                   and a.tipo_programa = 0
+                   and b.c_sesion != 4
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                    order by c_programa,id_detalle
+	    	   	   	      
+  </select>  
+  
+  
+  	<select id="selectProgramasEstatales2Sesion" parameterType="Map" resultMap="ProgramasEstatales2SesionMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                          case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then c.monto2_sesion
+                                       else a.monto end)
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then ""||c.monto_str2_sesion
+                                       else ""||a.monto_str end)
+                            else ""
+                       end  monto_str
+                       ,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                               "Metas sin avance por falta de liberación del recurso"
+                       when c.avance=2 then
+                               "Las metas están retrasadas de acuerdo con lo previsto a la fecha"
+                       when c.avance=3 then
+                               "El avance de metas está de acuerdo con lo previsto a la fecha"
+                       when c.avance=4 then
+                               "Las metas van adelantadas de acuerdo con lo previsto a la fecha"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_sesion = a.c_sesion
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and b.c_sesion = a.c_sesion
+                   and b.c_programa = a.c_programa
+                   and a.tipo_programa = 1
+                   and b.c_sesion != 4
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                    order by c_programa,id_detalle
+	     </select>
+  
+  <select id="selectProgramasMunicipales2Sesion" parameterType="Map" resultMap="ProgramasMunicipales2SesionMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                         case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then c.monto2_sesion
+                                       else a.monto end)
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then ""||c.monto_str2_sesion
+                                       else ""||a.monto_str end)
+                            else ""
+                       end  monto_str
+                       ,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                               "Metas sin avance por falta de liberación del recurso"
+                       when c.avance=2 then
+                               "Las metas están retrasadas de acuerdo con lo previsto a la fecha"
+                       when c.avance=3 then
+                               "El avance de metas está de acuerdo con lo previsto a la fecha"
+                       when c.avance=4 then
+                               "Las metas van adelantadas de acuerdo con lo previsto a la fecha"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_sesion = a.c_sesion
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and b.c_sesion = a.c_sesion
+                   and b.c_programa = a.c_programa
+                   and a.tipo_programa = 2
+                   and b.c_sesion != 4
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                    order by c_programa,id_detalle
+	</select>
+  
+  	<select id="selectProgramasOSC2Sesion" parameterType="Map" resultMap="ProgramasOSC2SesionMap">
+	select a.c_cct, a.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                      case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then c.monto2_sesion
+                                       else a.monto end)
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then (case when cambio_monto==1 then ""||c.monto_str2_sesion
+                                       else ""||a.monto_str end)
+                            else ""
+                       end  monto_str
+                       ,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                               "Metas sin avance por falta de liberación del recurso"
+                       when c.avance=2 then
+                               "Las metas están retrasadas de acuerdo con lo previsto a la fecha"
+                       when c.avance=3 then
+                               "El avance de metas está de acuerdo con lo previsto a la fecha"
+                       when c.avance=4 then
+                               "Las metas van adelantadas de acuerdo con lo previsto a la fecha"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_sesion = a.c_sesion
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and b.c_sesion = a.c_sesion
+                   and b.c_programa = a.c_programa
+                   and a.tipo_programa = 3
+                   and b.c_sesion != 4
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                    order by c_programa,id_detalle
+	</select>
+
+
+<select id="selectProgramasFederales2Asamblea" parameterType="Map" resultMap="ProgramasFederales2AsambleaMap">
+select a.c_cct, c.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                       case 
+                       when b.id_detalle==1
+                            then a.monto
+                            else null
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.monto_str
+                            else ""
+                       end  monto_str
+                       ,
+                       case 
+                       when b.id_detalle==1
+                            then a.recibido
+                            else null
+                       end recibido_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.recibido_str
+                            else ""
+                       end  recibido_str,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                                    "Menos del 60% "
+                       when c.avance=2 then
+                               "Entre el 61 y el 75% "
+                       when c.avance=3 then
+                               "Entre el 76 y el 90% "
+                       when c.avance=4 then
+                               "Entre el 91 y el 99%"
+                       when c.avance=5 then
+                               "El 100%"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and c.c_sesion=4
+                   and b.c_programa = a.c_programa
+                   and a.tipo_programa = 0
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                   order by c_programa,id_detalle
+	    	   	   	      
+  </select>  
+  
+  
+  	<select id="selectProgramasEstatales2Asamblea" parameterType="Map" resultMap="ProgramasEstatales2AsambleaMap">
+	select a.c_cct, c.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                       case 
+                       when b.id_detalle==1
+                            then a.monto
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.monto_str
+                            else ""
+                       end  monto_str
+                       ,
+                       case 
+                       when b.id_detalle==1
+                            then a.recibido
+                            else 0
+                       end recibido_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.recibido_str
+                            else ""
+                       end  recibido_str,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                                    "Menos del 60% "
+                       when c.avance=2 then
+                               "Entre el 61 y el 75% "
+                       when c.avance=3 then
+                               "Entre el 76 y el 90% "
+                       when c.avance=4 then
+                               "Entre el 91 y el 99%"
+                       when c.avance=5 then
+                               "El 100%"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and c.c_sesion=4
+                   and b.c_programa = a.c_programa
+                                  and a.tipo_programa = 1
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                   order by c_programa
+	     </select>
+  
+  <select id="selectProgramasMunicipales2Asamblea" parameterType="Map" resultMap="ProgramasMunicipales2AsambleaMap">
+	select a.c_cct, c.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                       case 
+                       when b.id_detalle==1
+                            then a.monto
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.monto_str
+                            else ""
+                       end  monto_str
+                       ,
+                       case 
+                       when b.id_detalle==1
+                            then a.recibido
+                            else 0
+                       end recibido_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.recibido_str
+                            else ""
+                       end  recibido_str,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                                       "Menos del 60% "
+                       when c.avance=2 then
+                               "Entre el 61 y el 75% "
+                       when c.avance=3 then
+                               "Entre el 76 y el 90% "
+                       when c.avance=4 then
+                               "Entre el 91 y el 99%"
+                       when c.avance=5 then
+                               "El 100%"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and c.c_sesion=4
+                   and b.c_programa = a.c_programa
+                                  and a.tipo_programa = 2
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                   order by c_programa
+	</select>
+  
+  	<select id="selectProgramasOSC2Asamblea" parameterType="Map" resultMap="ProgramasOSC2AsambleaMap">
+	select a.c_cct, c.c_sesion, a.c_programa, a.tipo_programa, 
+                                  case 
+                       when b.id_detalle==1
+                            then (select nom_programa from c_programa where c_programa = a.c_programa and tpo_programa = tipo_programa+1)
+                            else ""
+                       end programa_str
+                       ,a.nom_otro_programa,
+                       case 
+                       when b.id_detalle==1
+                            then a.monto
+                            else 0
+                       end monto_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.monto_str
+                            else ""
+                       end  monto_str
+                       ,
+                       case 
+                       when b.id_detalle==1
+                            then a.recibido
+                            else 0
+                       end recibido_decimal,
+                       case 
+                       when b.id_detalle==1
+                            then ""||a.recibido_str
+                            else ""
+                       end  recibido_str,
+                       b.id_detalle,                     
+                       b.id_objetivo,
+                       case 
+                       when b.id_objetivo is not null
+                            then (select descrip_objetivo from c_objetivos co where co.c_objetivo = b.id_objetivo )
+                            else b.objetivo
+                       end objetivo,
+                       b.meta,
+                       case 
+                       when b.id_detalle==1
+                            then (select objetivo from c_programa where c_programa = a.c_programa )
+                            else ""
+                       end objetivoPrograma,
+                       avance,
+                       case 
+                       when c.avance=1 then
+                                       "Menos del 60% "
+                       when c.avance=2 then
+                               "Entre el 61 y el 75% "
+                       when c.avance=3 then
+                               "Entre el 76 y el 90% "
+                       when c.avance=4 then
+                               "Entre el 91 y el 99%"
+                       when c.avance=5 then
+                               "El 100%"
+                       end descripcion_avance,
+                       c.seguimiento
+                       
+                       
+                  from ce_programas a,
+                       ce_programas_detalle b,
+                       ce_programas_seguimiento c
+                where c.c_cct = a.c_cct
+                   and c.c_programa = a.c_programa
+                   and c.id_detalle = b.id_detalle
+                   and b.c_cct = a.c_cct
+                   and c.c_sesion=4
+                   and b.c_programa = a.c_programa
+                                      and a.tipo_programa = 3
+                   and a.c_cct =  #{cCct,jdbcType=INTEGER}
+                   order by c_programa
+	</select>
+  
+</mapper>

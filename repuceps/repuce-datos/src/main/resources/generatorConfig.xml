@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+<generatorConfiguration>
+  <context id="FlatJava5" targetRuntime="MyBatis3" defaultModelType="flat">
+    <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+
+    <jdbcConnection driverClass="com.informix.jdbc.IfxDriver"
+                    connectionURL="jdbc:informix-sqli://168.255.101.30:2010/repuce:informixserver=srvtests_tcp"
+                    userId="grarnct1" 
+                    password="gomrnct2">
+    </jdbcConnection>  
+        
+    <javaModelGenerator targetPackage="mx.gob.sep.dgtec.repuce.model" 
+    			targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="mx.gob.sep.dgtec.repuce.model.sqlmaps"  
+    			targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="mx.gob.sep.dgtec.repuce.dao"
+    			targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    
+    
+   
+    
+    <!--// vblake se insertan la tabla para que el sistema tome los cambios    -->
+    
+   <!--// <table tableName = "apec_informe_final"/> -->
+
+   <table tableName = "apec_actividades_uno"/>
+     <table tableName = "apec_actividades_cuatro"/>
+ 
+   
+    
+    <!--   -->
+    <!--
+    // 
+      		<table tableName = "apec_actividades_cuatro"/>
+      		<table tableName = "apec_actividades_tres"/>
+      		<table tableName = "apec_actividades_uno"/>
+      		<table tableName = "apec_principales_dificultades"/>
+   			<table tableName = "apec_principales_necesidades"/>
+    vblake <table tableName = "apec_promotor"/>
+    vblake <table tableName = "c_informe_final"/>
+    vblake <table tableName = "apec_necesidades_educativas"/>
+    vblake <table tableName = "apec_bullying"/>
+    vblake <table tableName = "apec_necesidades_educativas"/>
+    vblake <table tableName = "c_apoyo2"/>
+    vblake <table tableName = "apec_numero_alumnos"/>
+    vblake <table tableName = "apec_plan_trabajo"/>
+    vblake se insertan la tabla de apec_apoyo para que el sistema tome los cambios
+    <table tableName = "apec_apoyo"/>
+     vblake se insertan las tablas para Contraloria Social
+    <table tableName = "apec_opiniones_comentarios"/>
+    <table tableName = "apec_denuncias_quejas"/>
+    
+     <table tableName = "ce_programas_seguimiento"/>
+     <table tableName = "ce_programa_comite"/>
+    <table tableName = "ce_actividad_comite"/>
+    <table tableName = "ce_contraloria_comite"/>
+    
+    <table tableName ="c_opciones_cat"/>
+        
+    <table tableName ="apec_necesidades_educativas"/>
+    <table tableName = "apec_bullying"/>
+            
+    <table tableName ="apec_necesidades_educativas"/>
+    <table tableName = "apec_bullying"/>
+    
+    <table tableName ="ce_actividad_detalle"/>
+    <table tableName ="ce_preguntas_estatal"/>
+    <table tableName ="ce_preguntas_municipal"/>
+    
+    
+    <table tableName ="apec_necesidades_educativas"/>
+    <table tableName = "apec_bullying"/>
+    <table tableName="c_co_tipo_bullying"/>
+    <table tableName="c_co_tipo_bullying"/>
+    <table tableName="c_co_bullying"/>
+    <table tableName="c_co_nee"/>
+    <table tableName="c_co_tipobullying"/>
+    
+    -->
+    
+    
+    <!--
+    <table tableName="consejo_mun1415"/>
+    <table tableName="ce_programas_participacion"/>
+    <table tableName="ce_accion_seguimiento"/>
+    <table tableName="c_participacion"/>
+    <table tableName="c_normalidad"/>
+    <table tableName="ce_evaluaciones"/>
+    <table tableName="ce_compromisos"/>
+    <table tableName="ce_comites_seguimiento"/>
+    <table tableName="ce_programas_participacion"/>
+    <table tableName="ce_eventos"/>
+    <table tableName="ce_estimulos"/>
+    
+    <table tableName="c_metas"/>
+    <table tableName="c_metas_avance"/>
+    <table tableName="ce_programas_seguimiento"/>
+    <table tableName="ce_programas_recursos_asignados"/>
+    
+     <table tableName="ce_actividad"/>
+       
+    <table tableName="ce_programas"/>
+    <table tableName="ce_programas_detalle"/>
+    <table tableName="ce_accion"/>
+    <table tableName="ce_tema"/>
+    <table tableName="ce_actividad"/>
+    <table tableName="ce_actividad_detalle"/>
+    
+    <table tableName="ce_integrante"/>
+    <table tableName="ce_integrante_baja"/>    
+
+      <table tableName="c_cct_instructor"/>
+    <table tableName="c_tipo_apoyo"/>
+    <table tableName="apec_apoyo"/>
+    <table tableName="c_tipo_diagnostico_com"/>
+    <table tableName="c_diagnostico_com"/>
+    <table tableName="c_poblacion_indigena"/>
+    <table tableName="apec_diagnostico_com"/>
+    <table tableName="apec_poblacion_indigena"/>
+    <table tableName="c_tipo_accion"/>
+    <table tableName="c_tipo_respuesta"/>
+    <table tableName="c_accion"/>
+    <table tableName="c_respuesta"/>
+    <table tableName="apec_plan_trabajo"/>
+    <table tableName="c_seccion_registro"/>
+    <table tableName="apec_seccion"/>
+    <table tableName="c_desercion"/>
+    <table tableName="apec_desercion"/>
+    <table tableName="c_medicion_satisfaccion"/>
+    <table tableName="apec_encuesta_satisfaccion"/>
+    <table tableName="c_apoyo"/>
+    <table tableName="c_lengua"/>
+<table tableName="apec_instructor"/>
+<table tableName="apec_reunion_instructor"/>
+<table tableName="c_cct_instructor"/>
+<table tableName="apec_integrante"/>
+<table tableName="apec_reunion_integrante"/>
+      -->
+
+
+<!--
+        <table tableName="" domainObjectName="Cct">
+            <generatedKey column="c_cct" sqlStatement="JDBC" identity="true"/>
+        </table>
+-->
+<!-- 
+    <table tableName="apec_reunion"/>
+    <table tableName="c_localidad_conafe"/>
+    <table tableName="apec"/>
+    <table tableName="c_cct_instructor"/>
+    <table tableName="ccts_apec"/>
+
+    <table tableName="bitacora" />
+    <table tableName="c_act_sesion"/>
+    <table tableName="c_cargo_int"/>
+    <table tableName="c_calidad_int"/>
+    <table tableName="c_cct"/>
+    <table tableName="c_comite"/>
+    <table tableName="c_comp_enlace"/>
+    <table tableName="c_comunidad_escolar"/>
+    <table tableName="c_diferencia_pgr"/>
+    <table tableName="c_entidad"/>
+    <table tableName="c_evento"/>
+    <table tableName="c_grado"/>
+    <table tableName="c_link"/>
+    <table tableName="c_localidad"/>
+    <table tableName="c_mejora_cct"/>
+    <table tableName="c_municipio"/>
+    <table tableName="c_niveleduc"/>
+    <table tableName="c_parametros"/>
+    <table tableName="c_planeacion"/>
+    <table tableName="c_programa"/>
+    <table tableName="c_tpo_programa"/>
+    <table tableName="c_programa_escolar"/>
+    <table tableName="c_sesion"/>
+    <table tableName="cct_result_enlace"/>
+    <table tableName="ce_act_sesion"/>
+    <table tableName="ce_asistente"/>
+    <table tableName="ce_comite"/>
+    <table tableName="ce_comite_integrante"/>
+    <table tableName="ce_integrante_comite"/>
+    <table tableName="ce_comp_enlace"/>
+    <table tableName="ce_evento"/>
+    <table tableName="ce_inf_gral"/>
+    <table tableName="ce_integrante"/>
+    <table tableName="ce_integrante_baja"/>
+    <table tableName="ce_integrante_comite_consejo"/>
+    <table tableName="ce_mejora_cct"/>
+    <table tableName="ce_meta_enlace"/>
+    <table tableName="ce_monto"/>
+    <table tableName="ce_obs_cct"/>
+    <table tableName="ce_planeacion"/>
+    <table tableName="ce_programa"/>
+    <table tableName="ce_recurso"/>
+    <table tableName="ce_sesion"/>
+    <table tableName="cm_seguimiento"/>
+    <table tableName="consejo_mun"/>
+    <table tableName="encuesta_cct"/>
+    <table tableName="informacion_cct"/>
+    <table tableName="ubicacion_cct"/>
+    <table tableName="h_ce_meta_enlace"/>
+    -->
+    <!--
+    <table tableName="c_cct" alias="Cct"/>
+    <table tableName="PKOnly" />
+    <table tableName="PKFields" alias="B" />
+    <table tableName="PKBlobs" />
+    <table tableName="PKFieldsBlobs" />
+    <table tableName="FieldsBlobs" />
+    <table tableName="awful table" alias="A">
+      <generatedKey column="CuStOmEr iD" sqlStatement="HSQLDB" identity="true" />
+      <columnOverride column="first name" property="firstFirstName" />
+      <columnOverride column="first_name" property="secondFirstName" />
+      <columnOverride column="firstName" property="thirdFirstName" />
+      <columnOverride column="from" delimitedColumnName="true" >
+        <property name="fredswife" value="wilma"/>
+      </columnOverride>
+      <columnOverride column="active" javaType="boolean" />
+    </table>
+    -->
+  </context>
+
+</generatorConfiguration>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ReportesMapper">
+  
+ <resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.CCctCstm">
+
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <result column="cve_cct" jdbcType="CHAR" property="cveCct" />
+    <result column="nom_cct" jdbcType="VARCHAR" property="nomCct" />
+    <result column="nom_director" jdbcType="VARCHAR" property="nomDirector" />
+    <result column="cve_turno" jdbcType="SMALLINT" property="cveTurno" />
+    <result column="nom_turno" jdbcType="VARCHAR" property="nomTurno" />
+    <result column="c_nivel" jdbcType="SMALLINT" property="cNivel" />
+    <result column="nom_nivel" jdbcType="VARCHAR" property="nomNivel" />
+    <result column="c_subnivel" jdbcType="CHAR" property="cSubnivel" />
+    <result column="nom_subnivel" jdbcType="VARCHAR" property="nomSubnivel" />
+    <result column="cve_dep_nor" jdbcType="CHAR" property="cveDepNor" />
+    <result column="nom_dep_nor" jdbcType="VARCHAR" property="nomDepNor" />
+    <result column="cve_control" jdbcType="SMALLINT" property="cveControl" />
+    <result column="nom_control" jdbcType="VARCHAR" property="nomControl" />
+    <result column="cve_subcontrol" jdbcType="SMALLINT" property="cveSubcontrol" />
+    <result column="nom_subcontrol" jdbcType="VARCHAR" property="nomSubcontrol" />
+    <result column="status_cct" jdbcType="SMALLINT" property="statusCct" />
+    <result column="tel_cct" jdbcType="VARCHAR" property="telCct" />
+    <result column="tel_ext_cct" jdbcType="VARCHAR" property="telExtCct" />
+    <result column="mail_cct" jdbcType="VARCHAR" property="mailCct" />
+    <result column="domicilio" jdbcType="VARCHAR" property="domicilio" />
+    <result column="nom_colonia" jdbcType="VARCHAR" property="colonia" />
+    <result column="cp" jdbcType="VARCHAR" property="codigoPostal" />
+    <result column="nom_programa" jdbcType="VARCHAR" property="programa" />
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    
+    <result column="genero_presidente" jdbcType="VARCHAR" property="presidente" />
+    <result column="calidad_secretario" jdbcType="VARCHAR" property="secretario" />
+    <result column="integrantes" jdbcType="VARCHAR" property="integrantes" />
+  </resultMap>
+  
+
+
+   <select id="countBy1415" parameterType="map" resultType="java.lang.Integer">
+
+    select count(*) 
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm1415" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause1415" /> 
+  </select>
+   
+   <sql id="from_cct_ubicacion_infgral_cm1415">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+    join ce_inf_gral g on c.c_cct = g.c_cct
+    join ce_preguntas2 cm on cm.cct_id = c.c_cct
+  </sql>
+  
+    <sql id="where_Clause1415">
+	  <where>
+	    id_entidadfed = #{idEntidad}
+	    AND id_municipio = #{idMunicipio}
+	    AND status_cct = 1 
+	    AND cve_control = 1 
+	    AND c_nivel NOT IN (41 ,42, 51, 52)
+	    <if test="statusCe">
+	    	AND status_ce !=2
+	    </if>
+	    <if test="consejoMun">
+	        AND respuesta_1=1
+	    </if>
+		<if test="apoyo">
+	        AND ind_apoyo =1
+	    </if>
+	    <if test="enlace">
+	        AND ind_seg_enlace =1
+	    </if>
+	  </where>
+  </sql>
+    
+    <select id="selectReporteMunicipal1415Consejo" parameterType="map" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm1415consejo" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause_consejo" />  
+      
+  </select>
+    
+     <sql id="from_cct_ubicacion_infgral_cm1415consejo">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+    join ce_inf_gral g on c.c_cct = g.c_cct
+  </sql>
+    
+     <sql id="where_Clause_consejo">
+	  <where>
+	    id_entidadfed = #{idEntidad}
+	    AND id_municipio = #{idMunicipio}
+	    AND status_cct = 1 
+	    AND cve_control = 1 
+	    AND c_nivel NOT IN (41 ,42, 51, 52)
+	    <if test="statusCe">
+	    	AND status_ce !=2
+	    </if>
+	    <if test="consejoMun">
+	        AND ind_consejo_mun =2
+	    </if>
+	     
+		<if test="apoyo">
+	        AND ind_apoyo =1
+	    </if>
+	    <if test="enlace">
+	        AND ind_seg_enlace =1
+	    </if>
+	  </where>
+  </sql>
+    
+   <sql id="Base_Column_List">
+    c.c_cct, cve_cct, nom_cct, nom_director, cve_turno, nom_turno, c_nivel, nom_nivel, 
+    c_subnivel, nom_subnivel, cve_dep_nor, nom_dep_nor, cve_control, nom_control, cve_subcontrol, 
+    nom_subcontrol, status_cct, tel_cct, tel_ext_cct, mail_cct,domicilio,nom_colonia,cp
+    ,nvl((select case when genero='M' then 'HOMBRE' when genero='F' then 'MUJER' else 'OTRO' end                        
+    from ce_candidatopresi cec1 , 
+        ce_integrante cei1                 
+  	where cec1.idconsejero =(select max(idconsejero)
+                               from ce_candidatopresi cec , ce_integrante cei
+                               where cec.c_cct=cei1.c_cct and cec.votos =(select max(votos) 
+                                               from ce_candidatopresi pre 
+                                               where pre.c_cct=cec.c_cct 
+                                       and pre.c_sesion=cec.c_sesion)
+                               and csc_integrante=idconsejero  
+                               and cec.c_cct=cei.c_cct )             
+    and csc_integrante=idconsejero  
+    and cec1.c_cct=cei1.c_cct 
+    and cec1.c_cct=c.c_cct),'No tiene Candidato') as genero_presidente
+    ,    nvl((select nom_calidad from ce_candidatosecre cec1 , ce_integrante cei1,c_calidad_int cc1                       
+	where cec1.idconsejero =(select max(idconsejero)
+                               from ce_candidatosecre cec , ce_integrante cei
+                               where cec.c_cct=cei1.c_cct and cec.votos =(select max(votos) 
+                                               from ce_candidatosecre pre 
+                                               where pre.c_cct=cec.c_cct 
+                                       and pre.c_sesion=cec.c_sesion)
+                               and csc_integrante=idconsejero  
+                               and cec.c_cct=cei.c_cct )             
+	and csc_integrante=idconsejero  
+	and cec1.c_cct=cei1.c_cct 
+	and cei1.c_calidad=cc1.c_calidad 
+	and cec1.c_cct=c.c_cct),'No tiene Candidato') as calidad_secretario
+    ,(SELECT count(*)  FROM ce_integrante a where a.c_cct = c.c_cct) as integrantes
+    <if test="apoyo">
+	        ,nom_programa,monto
+	</if>    
+  </sql>  
+    
+       <select id="countByProgramas" parameterType="map" resultType="java.lang.Integer">
+
+    select count(*) 
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral_programas" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause_programas" /> 
+  </select>
+    
+   <sql id="from_cct_ubicacion_infgral_programas">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+  </sql>
+  
+  
+   <sql id="where_Clause_programas">
+	  <where>
+	    id_entidadfed = #{idEntidad}
+	    AND id_municipio = #{idMunicipio}
+	    AND status_cct = 1 
+	    AND cve_control = 1 
+	    AND c_nivel NOT IN (41 ,42, 51, 52)
+	  </where>
+  </sql>  
+    
+    
+    <select id="selectReporteMunicipal1415Programas" parameterType="map" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm1415Programas" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause_Programas" />  
+      
+  </select>
+  
+    <sql id="from_cct_ubicacion_infgral_cm1415Programas">
+   from c_cct c ,ce_programas cpr, ubicacion_cct uc,c_programa cp
+  </sql>
+    
+     <sql id="where_Clause_Programas">
+	  <where>
+	    id_entidadfed = #{idEntidad}
+	    AND id_municipio = #{idMunicipio}
+	    AND status_cct = 1 
+	    and cp.c_programa=cpr.c_programa
+		and tpo_programa=2
+		and	c.c_cct=uc.c_cct
+		and c.c_cct=cpr.c_cct
+	  </where>
+  </sql>
+   
+ 
+    
+       <select id="countBy" parameterType="map" resultType="java.lang.Integer">
+
+    select count(*) 
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause" /> 
+  </select>
+   
+     <sql id="where_Clause">
+	  <where>
+	    id_entidadfed = #{idEntidad}
+	    AND id_municipio = #{idMunicipio}
+	    AND status_cct = 1 
+	    AND cve_control = 1 
+	    AND c_nivel NOT IN (41 ,42, 51, 52)
+	    <if test="statusCe">
+	    	AND status_ce !=2
+	    </if>
+	    <if test="consejoMun">
+	        AND ind_consejo_mun =2
+	    </if>
+		<if test="apoyo">
+	        AND ind_apoyo =1
+	    </if>
+	    <if test="enlace">
+	        AND ind_seg_enlace =1
+	    </if>
+	  </where>
+  </sql> 
+    
+    
+     <select id="selectReporteMunicipal" parameterType="map" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    <choose>
+	    <when test="joinSeguimiento">
+	      <include refid="from_cct_ubicacion_infgral_cm" />
+	    </when>
+	    <when test="joinInfGral">
+	      <include refid="from_cct_ubicacion_infgral" />
+	    </when>
+	    <otherwise>
+	      <include refid="from_cct_ubicacion" />
+	    </otherwise>
+	</choose>
+	<include refid="where_Clause" />  
+      
+  </select>
+  
+      <sql id="from_cct_ubicacion_infgral">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+    join ce_inf_gral g on c.c_cct = g.c_cct
+  </sql>
+    
+    <sql id="from_cct_ubicacion">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+  </sql>
+ 
+  <sql id="from_cct_ubicacion_infgral_cm">
+    from c_cct c join ubicacion_cct u on c.c_cct = u.c_cct
+    join ce_inf_gral g on c.c_cct = g.c_cct
+    join cm_seguimiento cm on cm.c_cct = c.c_cct
+  </sql>  
+</mapper>

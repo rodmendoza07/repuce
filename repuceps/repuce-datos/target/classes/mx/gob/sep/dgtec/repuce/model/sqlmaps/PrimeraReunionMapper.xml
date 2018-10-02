@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.PrimeraReunionMapper">
+
+	<resultMap id="PrimeraReunionMap" type="mx.gob.sep.dgtec.conafe.vo.PrimeraReunionVO">
+		<!-- Mapeo para obtener la informacion para el formulario de la Segunda 
+			Asamblea <id column="c_apec" jdbcType="INTEGER" property="cApec" /> -->
+
+		<association property="apec" column="c_apec"
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectApec" />
+
+		<association property="reunion" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ApecReunion"
+			select="mx.gob.sep.dgtec.repuce.dao.ApecReunionMapper.selectByPrimaryKey" />
+
+		<collection property="centrosConafe" column="{cApec=c_apec}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.vo.CCctLight"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectCcts" />
+
+		<collection property="integrantes" column="{cApec=c_apec,cReunion=c_reunion1}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectIntegrantes" />
+
+		<collection property="integrantesR1" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectIntegrantes" />
+
+		<collection property="instructores" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectInstructoresRelacion" />
+
+		<collection property="instructoresR1" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectInstructoresRelacionXReunion" />
+					
+		<collection property="promotor" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecPromotor" select="selectPromotor" />	
+			
+		<collection property="apoyosConafe" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecApoyoCstm" select="selectApoyosConafe" />
+
+		<collection property="apoyosFederales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecApoyoCstm" select="selectApoyosFederales" />
+
+		<collection property="apoyosEstatales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecApoyoCstm" select="selectApoyosEstatales" />
+
+		<collection property="necesidadesEspeciales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecNecesidadesEducativasCstm" select="selectNecesidadesEspeciales" />
+			
+		<collection property="bullying" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecBullyingCstm" select="selectBullying" />
+						
+		<collection property="diagnostico" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecDiagnosticoComCstm" select="selectDiagnosticoComunitario" />
+
+		<collection property="pobIndigena" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecPoblacionIndigenaCstm" select="selectPoblacionIndigena" />
+
+		<collection property="planTrabajo" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecPlanTrabajoCstm" select="selectPlanTrabajo" />
+
+		<collection property="seccionesReunion" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecPlanTrabajoCstm" select="selectSeccionesReunion" />
+
+		<collection property="numeroAlumnos" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecNumeroAlumnos" select="selectNumeroAlumnos" />
+			
+		<collection property="opiniones" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecOpinionesComentarios" select="selectOpiniones" />	
+			
+		<collection property="denuncias" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecDenunciasQuejas" select="selectDenuncias" />
+			
+		<collection property="dificultades" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecPrincipalesDificultades" select="selectDificultades" />	
+			
+		<collection property="necesidades" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecPrincipalesNecesidades" select="selectNecesidades" />
+			
+		<collection property="actividadesUno" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecActividadesUno" ofType="ApecActividadesUno" select="selectActividadesUno" />
+			
+		<collection property="actividadesTres" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecActividadesTres" ofType="ApecActividadesTres" select="selectActividadesTres" />	
+			
+		<collection property="actividadesCuatro" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecActividadesCuatro" ofType="ApecActividadesCuatro" select="selectActividadesCuatro" />			
+
+	</resultMap>
+
+
+
+
+	<resultMap id="ApecApoyosMap" type="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_apoyo" jdbcType="INTEGER" property="cApoyo" />
+		<result column="descrip_Otro" jdbcType="VARCHAR" property="descripOtro" />
+		<result column="beneficiariosr1" jdbcType="INTEGER" property="beneficiariosr1" />
+		<result column="montor2" jdbcType="INTEGER" property="montor2" />
+		<result column="beneficiariosr2" jdbcType="INTEGER" property="beneficiariosr2" />
+		<result column="montor3" jdbcType="INTEGER" property="montor3" />
+		<result column="especier2" jdbcType="VARCHAR" property="especier2" />
+		<result column="especier3" jdbcType="VARCHAR" property="beneficiariosr3" />
+		<result column="c_tipo_apoyo" jdbcType="SMALLINT" property="tipoApoyo" />
+		<result column="nombre" jdbcType="VARCHAR" property = "nombre" />
+		<result column="cantidad" jdbcType="INTEGER" property="cantidad" />
+		<result column="descrip_apoyo" jdbcType="VARCHAR" property = "descripApoyo" />	
+		<result column="num_benef" jdbcType="INTEGER" property="numBenef" />		
+		<result column="gestion" jdbcType="VARCHAR" property = "gestion" />
+		<result column="otro" jdbcType="VARCHAR" property = "otro" />
+					
+<!-- 		<association property="apoyo" column="c_apoyo" -->
+<!-- 			javaType="mx.gob.sep.dgtec.repuce.model.CApoyo" -->
+<!-- 			select="mx.gob.sep.dgtec.repuce.dao.CApoyoMapper.selectByPrimaryKey" /> -->
+	</resultMap>
+
+	<resultMap id="DiagnosticoComMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecDiagnosticoComCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_diagnostico_com" jdbcType="INTEGER" property="cDiagnosticoCom" />
+		<result column="pobAfec" jdbcType="INTEGER" property="poblacionAfectada" />
+		<result column="descrip_otro" jdbcType="VARCHAR" property="descripOtro" />
+		<result column="nom_tipo_diag_comunitario" jdbcType="VARCHAR" property="tipoDiagnostico" />
+
+		<association property="diagnostico" column="c_diagnostico_com"
+			javaType="mx.gob.sep.dgtec.repuce.model.CDiagnosticoCom"
+			select="mx.gob.sep.dgtec.repuce.dao.CDiagnosticoComMapper.selectByPrimaryKey" />
+
+	</resultMap>
+
+
+
+	<resultMap id="PoblacionIndigenaMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecPoblacionIndigenaCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_poblacion_indigena" jdbcType="INTEGER" property="cPoblacionIndigena" />
+		<result column="poblacion_afectada" jdbcType="INTEGER" property="poblacionAfectada" />
+		<result column="c_lengua" jdbcType="INTEGER" property="cLengua" />
+		<result column="descrip_larga" jdbcType="VARCHAR" property="poblacionIndigena" />
+		<result column="nom_lengua" jdbcType="VARCHAR" property="lengua" />
+	</resultMap>
+	
+	<resultMap id="BullyingMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecBullyingCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_co_tipo_bullying" jdbcType="SMALLINT" property="cCoTipoBullying" />
+		<id column="c_co_bullying" jdbcType="INTEGER" property="cCoBullying" />
+		<result column="cuantos" jdbcType="INTEGER" property="cuantos" />
+		<result column="numvecesr1" jdbcType="VARCHAR" property="numvecesr1" />
+		<result column="nom_tipo_bullying" jdbcType="VARCHAR" property="nomTipoBullying" />
+		<result column="descrip_cortar1" jdbcType="VARCHAR" property="descripCortar1" />
+	</resultMap>
+	
+	<resultMap id="NecesidadesEducativasMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecNecesidadesEducativasCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_apoyo" jdbcType="INTEGER" property="cApoyo" />
+		<result column="c_nee" jdbcType="INTEGER" property="cNee" />
+		<result column="c_nee1" jdbcType="INTEGER" property="cNee1" />
+		<result column="cuantos" jdbcType="INTEGER" property="cuantos" />
+		<result column="cuantos1" jdbcType="INTEGER" property="cuantos1" />
+		<result column="gestionar" jdbcType="VARCHAR" property="gestionar" />
+		<result column="gestionar1" jdbcType="VARCHAR" property="gestionar1" />
+		<result column="descrip_larga" jdbcType="VARCHAR" property="descripLarga" />
+		<result column="nom_nee" jdbcType="VARCHAR" property="nomNee" />
+		<result column="nom_nee1" jdbcType="VARCHAR" property="nomNee1" />
+	</resultMap>
+	
+	<resultMap id="PlanTrabajoMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecPlanTrabajoCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_accion" jdbcType="INTEGER" property="cAccion" />
+		<result column="nom_otra" jdbcType="VARCHAR" property="nomOtra" />
+		<result column="num_vecesr1" jdbcType="INTEGER" property="numVecesr1" />
+		<result column="num_vecesr2" jdbcType="INTEGER" property="numVecesr2" />
+		<result column="c_espuestar2" jdbcType="VARCHAR" property="cRespuestar2" />
+		<result column="num_vecesr3" jdbcType="INTEGER" property="numVecesr3" />
+		<result column="c_espuestar3" jdbcType="VARCHAR" property="cRespuestar3" />
+		<result column="c_espuestar3" jdbcType="VARCHAR" property="tipoAccion" />
+		<result column="resp2" jdbcType="VARCHAR" property="respuestaR2" />
+		<result column="resp3" jdbcType="VARCHAR" property="respuestaR3" />
+		<result column="nom_tipo_accion" jdbcType="VARCHAR" property="tipoAccion" />
+
+		<association property="accion" column="c_accion"
+			javaType="mx.gob.sep.dgtec.repuce.model.CAccion"
+			select="mx.gob.sep.dgtec.repuce.dao.CAccionMapper.selectByPrimaryKey" />
+	</resultMap>
+
+	<resultMap id="SeccionesRegistroMap" type="mx.gob.sep.dgtec.repuce.model.ApecSeccionCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_seccion_registro" jdbcType="INTEGER" property="cSeccionRegistro" />
+		<result column="nom_seccion_registro" jdbcType="VARCHAR"
+			property="nombreSeccion" />
+	</resultMap>
+	
+	<resultMap id="OpinionesMap" type="mx.gob.sep.dgtec.repuce.model.ApecOpinionesComentarios">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_opiniones" jdbcType="SMALLINT" property="cOpiniones" />
+    <result column="opiniones" jdbcType="VARCHAR" property="opiniones" />
+   </resultMap>
+	
+	<resultMap id="DenunciasMap" type="mx.gob.sep.dgtec.repuce.model.ApecDenunciasQuejas">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_denuncias" jdbcType="SMALLINT" property="cDenuncias" />
+    <result column="denuncias" jdbcType="VARCHAR" property="denuncias" />
+   </resultMap>
+	
+
+  <resultMap id="NumeroAlumnosMap" type="mx.gob.sep.dgtec.repuce.model.ApecNumeroAlumnos">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+    <id column="c_numalum" jdbcType="SMALLINT" property="cNumalum" />
+    <result column="cct" jdbcType="VARCHAR" property="cct" />
+    <result column="ninos" jdbcType="INTEGER" property="ninos" />
+    <result column="ninas" jdbcType="INTEGER" property="ninas" />
+  </resultMap>
+  
+  
+  	<resultMap id="DificultadesMap" type="mx.gob.sep.dgtec.repuce.model.ApecPrincipalesDificultades">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_dificultades" jdbcType="SMALLINT" property="cDificultades" />
+    <result column="dificultades" jdbcType="VARCHAR" property="dificultades" />
+   </resultMap>
+	
+	<resultMap id="NecesidadesMap" type="mx.gob.sep.dgtec.repuce.model.ApecPrincipalesNecesidades">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_necesidades" jdbcType="SMALLINT" property="cNecesidades" />
+    <result column="necesidades" jdbcType="VARCHAR" property="necesidades" />
+   </resultMap>
+   
+   <resultMap id="ApecActividadesUno" type="mx.gob.sep.dgtec.repuce.model.ApecActividadesUno" >
+    <id column="c_apec" property="cApec" jdbcType="INTEGER" />
+    <id column="c_reunion" property="cReunion" jdbcType="SMALLINT" />
+    <result column="respuesta1" property="respuesta1" jdbcType="DATE" />
+    <result column="respuesta2" property="respuesta2" jdbcType="DATE" />
+    <result column="respuesta3" property="respuesta3" jdbcType="DATE" />
+    <result column="respuesta4" property="respuesta4" jdbcType="DATE" />
+    <result column="respuesta5" property="respuesta5" jdbcType="DATE" />
+    <result column="respuesta6" property="respuesta6" jdbcType="DATE" />
+    <result column="respuesta7" property="respuesta7" jdbcType="VARCHAR" />
+    <result column="respuesta8" property="respuesta8" jdbcType="VARCHAR" />
+    <result column="respuesta9" property="respuesta9" jdbcType="DATE" />
+    <result column="respuesta10" property="respuesta10" jdbcType="VARCHAR" />
+    <result column="respuesta11" property="respuesta11" jdbcType="DATE" />
+    <result column="respuesta12" property="respuesta12" jdbcType="VARCHAR" />
+    <result column="respuesta13" property="respuesta13" jdbcType="DATE" />
+    <result column="respuesta14" property="respuesta14" jdbcType="VARCHAR" />
+    <result column="respuesta15" property="respuesta15" jdbcType="VARCHAR" />
+    <result column="respuesta16" property="respuesta16" jdbcType="DATE" />
+    <result column="respuesta17" property="respuesta17" jdbcType="VARCHAR" />
+    <result column="respuesta18" property="respuesta18" jdbcType="VARCHAR" />
+    <result column="respuesta19" property="respuesta19" jdbcType="DATE" />
+    <result column="respuesta20" property="respuesta20" jdbcType="VARCHAR" />
+    <result column="respuesta21" property="respuesta21" jdbcType="DATE" />
+    <result column="respuesta22" property="respuesta22" jdbcType="VARCHAR" />
+    <result column="respuesta23" property="respuesta23" jdbcType="VARCHAR" />
+    <result column="respuesta24" property="respuesta24" jdbcType="DATE" />
+    <result column="respuesta25" property="respuesta25" jdbcType="VARCHAR" />
+    <result column="respuesta26" property="respuesta26" jdbcType="DATE" />
+    <result column="respuesta27" property="respuesta27" jdbcType="VARCHAR" />
+    <result column="respuesta28" property="respuesta28" jdbcType="VARCHAR" />
+    <result column="respuesta29" property="respuesta29" jdbcType="INTEGER" />
+    <result column="respuesta30" property="respuesta30" jdbcType="VARCHAR" />
+    <result column="respuesta31" property="respuesta31" jdbcType="INTEGER" />
+    <result column="respuesta32" property="respuesta32" jdbcType="INTEGER" />
+    <result column="respuesta33" property="respuesta33" jdbcType="VARCHAR" />
+    <result column="respuesta34" property="respuesta34" jdbcType="VARCHAR" />
+    <result column="respuesta35" property="respuesta35" jdbcType="VARCHAR" />
+    <result column="respuesta36" property="respuesta36" jdbcType="VARCHAR" />
+    <result column="respuesta37" property="respuesta37" jdbcType="VARCHAR" />
+    <result column="respuesta38" property="respuesta38" jdbcType="INTEGER" />
+    <result column="respuesta39" property="respuesta39" jdbcType="VARCHAR" />
+    <result column="respuesta40" property="respuesta40" jdbcType="VARCHAR" />
+    <result column="respuesta41" property="respuesta41" jdbcType="VARCHAR" />
+    <result column="respuesta42" property="respuesta42" jdbcType="INTEGER" />
+    <result column="respuesta3a" property="respuesta3a" jdbcType="VARCHAR" />  
+    <result column="respuesta22a" property="respuesta22a" jdbcType="VARCHAR" />  
+    <result column="respuesta27a" property="respuesta27a" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  
+  <resultMap id="ApecActividadesTres" type="mx.gob.sep.dgtec.repuce.model.ApecActividadesTres" >
+    <id column="c_apec" property="cApec" jdbcType="INTEGER" />
+    <id column="c_reunion" property="cReunion" jdbcType="SMALLINT" />
+    <result column="respuesta1" property="respuesta1" jdbcType="VARCHAR" />
+    <result column="respuesta2" property="respuesta2" jdbcType="VARCHAR" />
+    <result column="respuesta3" property="respuesta3" jdbcType="VARCHAR" />
+    <result column="respuesta4" property="respuesta4" jdbcType="VARCHAR" />
+    <result column="respuesta5" property="respuesta5" jdbcType="INTEGER" />
+    <result column="respuesta6" property="respuesta6" jdbcType="VARCHAR" />
+    <result column="respuesta7" property="respuesta7" jdbcType="VARCHAR" />
+    <result column="respuesta8" property="respuesta8" jdbcType="VARCHAR" />
+    <result column="respuesta9" property="respuesta9" jdbcType="INTEGER" />
+    <result column="respuesta10" property="respuesta10" jdbcType="VARCHAR" />
+    <result column="respuesta11" property="respuesta11" jdbcType="VARCHAR" />
+    <result column="respuesta12" property="respuesta12" jdbcType="VARCHAR" />
+    <result column="respuesta13" property="respuesta13" jdbcType="INTEGER" />
+    <result column="respuesta14" property="respuesta14" jdbcType="VARCHAR" />
+    <result column="respuesta15" property="respuesta15" jdbcType="VARCHAR" />
+    <result column="respuesta16" property="respuesta16" jdbcType="VARCHAR" />
+    <result column="respuesta17" property="respuesta17" jdbcType="INTEGER" />
+    <result column="respuesta18" property="respuesta18" jdbcType="VARCHAR" />
+    <result column="respuesta19" property="respuesta19" jdbcType="VARCHAR" />
+    <result column="respuesta20" property="respuesta20" jdbcType="VARCHAR" />
+    <result column="respuesta21" property="respuesta21" jdbcType="VARCHAR" />
+    <result column="respuesta22" property="respuesta22" jdbcType="INTEGER" />
+    <result column="respuesta23" property="respuesta23" jdbcType="INTEGER" />
+    <result column="respuesta24" property="respuesta24" jdbcType="VARCHAR" />
+    <result column="respuesta25" property="respuesta25" jdbcType="VARCHAR" />
+    <result column="respuesta26" property="respuesta26" jdbcType="VARCHAR" />
+    <result column="respuesta27" property="respuesta27" jdbcType="INTEGER" />
+    <result column="respuesta28" property="respuesta28" jdbcType="INTEGER" />
+    <result column="respuesta29" property="respuesta29" jdbcType="VARCHAR" />
+    <result column="respuesta30" property="respuesta30" jdbcType="VARCHAR" />
+    <result column="respuesta31" property="respuesta31" jdbcType="VARCHAR" />
+    <result column="respuesta32" property="respuesta32" jdbcType="INTEGER" />
+    <result column="respuesta33" property="respuesta33" jdbcType="INTEGER" />
+    <result column="respuesta34" property="respuesta34" jdbcType="VARCHAR" />
+    <result column="respuesta35" property="respuesta35" jdbcType="VARCHAR" />
+    <result column="respuesta36" property="respuesta36" jdbcType="INTEGER" />
+    <result column="respuesta37" property="respuesta37" jdbcType="VARCHAR" />
+    <result column="respuesta38" property="respuesta38" jdbcType="VARCHAR" />
+    <result column="respuesta39" property="respuesta39" jdbcType="VARCHAR" />
+    <result column="respuesta40" property="respuesta40" jdbcType="VARCHAR" />
+    <result column="respuesta41" property="respuesta41" jdbcType="VARCHAR" />
+    <result column="respuesta42" property="respuesta42" jdbcType="INTEGER" />
+    <result column="respuesta43" property="respuesta43" jdbcType="INTEGER" />
+    <result column="respuesta44" property="respuesta44" jdbcType="VARCHAR" />
+    <result column="respuesta45" property="respuesta45" jdbcType="VARCHAR" />
+    <result column="respuesta46" property="respuesta46" jdbcType="INTEGER" />
+    <result column="respuesta47" property="respuesta47" jdbcType="INTEGER" />
+    <result column="respuesta48" property="respuesta48" jdbcType="VARCHAR" />
+    <result column="respuesta49" property="respuesta49" jdbcType="INTEGER" />
+    <result column="respuesta50" property="respuesta50" jdbcType="VARCHAR" />
+    <result column="respuesta51" property="respuesta51" jdbcType="DATE" />
+    <result column="respuesta52" property="respuesta52" jdbcType="VARCHAR" />
+    <result column="respuesta53" property="respuesta53" jdbcType="DATE" />
+    <result column="respuesta54" property="respuesta54" jdbcType="VARCHAR" />
+    <result column="respuesta55" property="respuesta55" jdbcType="DATE" />
+    <result column="respuesta56" property="respuesta56" jdbcType="VARCHAR" />
+    <result column="respuesta57" property="respuesta57" jdbcType="INTEGER" />
+    <result column="respuesta58" property="respuesta58" jdbcType="INTEGER" />
+    <result column="respuesta59" property="respuesta59" jdbcType="DATE" />
+    <result column="respuesta60" property="respuesta60" jdbcType="INTEGER" />
+    <result column="respuesta61" property="respuesta61" jdbcType="INTEGER" />
+    <result column="respuesta62" property="respuesta62" jdbcType="DATE" />
+    <result column="respuesta63" property="respuesta63" jdbcType="VARCHAR" />
+    <result column="respuesta64" property="respuesta64" jdbcType="DATE" />
+    <result column="respuesta65" property="respuesta65" jdbcType="VARCHAR" />
+    <result column="respuesta66" property="respuesta66" jdbcType="VARCHAR" />
+    <result column="respuesta67" property="respuesta67" jdbcType="VARCHAR" />
+    <result column="respuesta68" property="respuesta68" jdbcType="VARCHAR" />
+    <result column="respuesta69" property="respuesta69" jdbcType="VARCHAR" />
+    <result column="respuesta70" property="respuesta70" jdbcType="VARCHAR" />
+    <result column="respuesta71" property="respuesta71" jdbcType="VARCHAR" />
+    <result column="respuesta72" property="respuesta72" jdbcType="VARCHAR" />
+    <result column="respuesta73" property="respuesta73" jdbcType="VARCHAR" />
+    <result column="respuesta74" property="respuesta74" jdbcType="VARCHAR" />
+    <result column="respuesta75" property="respuesta75" jdbcType="VARCHAR" />
+    <result column="respuesta76" property="respuesta76" jdbcType="VARCHAR" />
+    <result column="respuesta77" property="respuesta77" jdbcType="VARCHAR" />
+    <result column="respuesta78" property="respuesta78" jdbcType="DATE" />
+    <result column="respuesta79" property="respuesta79" jdbcType="VARCHAR" />
+    <result column="respuesta80" property="respuesta80" jdbcType="DATE" />
+    <result column="respuesta81" property="respuesta81" jdbcType="VARCHAR" />
+</resultMap>
+
+
+ <resultMap id="ApecActividadesCuatro" type="mx.gob.sep.dgtec.repuce.model.ApecActividadesCuatro" >
+    <id column="c_apec" property="cApec" jdbcType="INTEGER" />
+    <id column="c_reunion" property="cReunion" jdbcType="SMALLINT" />
+    <result column="respuesta1" property="respuesta1" jdbcType="DATE" />
+    <result column="respuesta2" property="respuesta2" jdbcType="VARCHAR" />
+    <result column="respuesta2a" property="respuesta2a" jdbcType="VARCHAR" />
+    <result column="respuesta3" property="respuesta3" jdbcType="DATE" />
+    <result column="respuesta4" property="respuesta4" jdbcType="VARCHAR" />
+     <result column="respuesta4a" property="respuesta4a" jdbcType="VARCHAR" />
+    <result column="respuesta5" property="respuesta5" jdbcType="DATE" />
+    <result column="respuesta6" property="respuesta6" jdbcType="VARCHAR" />
+    <result column="respuesta7" property="respuesta7" jdbcType="VARCHAR" />
+    <result column="respuesta8" property="respuesta8" jdbcType="VARCHAR" />
+    <result column="respuesta9" property="respuesta9" jdbcType="VARCHAR" />
+    <result column="respuesta10" property="respuesta10" jdbcType="DATE" />
+    <result column="respuesta11" property="respuesta11" jdbcType="VARCHAR" />
+    <result column="respuesta12" property="respuesta12" jdbcType="VARCHAR" />
+    <result column="respuesta13" property="respuesta13" jdbcType="DATE" />
+    <result column="respuesta14" property="respuesta14" jdbcType="VARCHAR" />
+    <result column="respuesta15" property="respuesta15" jdbcType="VARCHAR" />
+    <result column="respuesta16" property="respuesta16" jdbcType="DATE" />
+    <result column="respuesta17" property="respuesta17" jdbcType="VARCHAR" />
+    <result column="respuesta18" property="respuesta18" jdbcType="VARCHAR" />
+    <result column="respuesta19" property="respuesta19" jdbcType="DATE" />
+    <result column="respuesta20" property="respuesta20" jdbcType="VARCHAR" />
+    <result column="respuesta21" property="respuesta21" jdbcType="VARCHAR" />
+    <result column="respuesta22" property="respuesta22" jdbcType="VARCHAR" />
+    <result column="respuesta23" property="respuesta23" jdbcType="VARCHAR" />
+    <result column="respuesta24" property="respuesta24" jdbcType="VARCHAR" />
+    <result column="respuesta25" property="respuesta25" jdbcType="VARCHAR" />
+    <result column="respuesta26" property="respuesta26" jdbcType="VARCHAR" />
+    <result column="respuesta27" property="respuesta27" jdbcType="VARCHAR" />
+    <result column="respuesta28" property="respuesta28" jdbcType="VARCHAR" />
+    <result column="respuesta29" property="respuesta29" jdbcType="VARCHAR" />
+    <result column="respuesta30" property="respuesta30" jdbcType="VARCHAR" />
+    <result column="respuesta31" property="respuesta31" jdbcType="VARCHAR" />
+    <result column="respuesta32" property="respuesta32" jdbcType="VARCHAR" />
+    <result column="respuesta33" property="respuesta33" jdbcType="VARCHAR" />
+    <result column="respuesta34" property="respuesta34" jdbcType="VARCHAR" />
+    <result column="respuesta31a" property="respuesta31a" jdbcType="VARCHAR" />
+ </resultMap>
+ 
+ 
+ <resultMap id="PromotorMap" type="mx.gob.sep.dgtec.repuce.model.ApecPromotor">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="paterno_promotor" jdbcType="VARCHAR" property="paternoPromotor" />
+	    <id column="materno_promotor" jdbcType="VARCHAR" property="maternoPromotor" />
+	    <id column="nombre_promotor" jdbcType="VARCHAR" property="nombrePromotor" />
+    <result column="promotor" jdbcType="VARCHAR" property="promotor" />
+ </resultMap>
+
+	<select id="selectPrimeraReunion" parameterType="Integer"
+		resultType="mx.gob.sep.dgtec.conafe.vo.PrimeraReunionVO" resultMap="PrimeraReunionMap">
+		select c_apec, 2 as c_reunion, 1 as c_reunion1
+		from apec
+		where c_apec =
+		#{cApec}
+	</select>
+
+	<select id="selectApoyosConafe" parameterType="Map" resultMap="ApecApoyosMap">
+		select c_apec, c_reunion,ap.c_apoyo, nombre, descrip_otro, beneficiariosr1,
+		montor2, especier2, beneficiariosr2, montor3, ap.beneficiariosr3,
+		c_tipo_apoyo, cantidad, descrip_apoyo, num_benef, gestion, otro
+		from apec_apoyo ap,c_apoyo2 cp
+		where
+		ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=1
+		order by cp.c_apoyo
+	</select>
+
+	<select id="selectApoyosFederales" parameterType="Map" resultMap="ApecApoyosMap">
+		select c_apec, c_reunion, ap.c_apoyo, nombre, descrip_otro,
+		montor2, especier2, cantidad, descrip_apoyo, num_benef, gestion, otro
+		from apec_apoyo ap,c_apoyo2 cp
+		where
+		ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=2
+		order by cp.c_apoyo
+	</select>
+
+	<select id="selectApoyosEstatales" parameterType="Map" resultMap="ApecApoyosMap">
+		select c_apec, c_reunion,ap.c_apoyo, nombre, descrip_otro, beneficiariosr1,
+		montor2, especier2, beneficiariosr2, montor3, ap.beneficiariosr3,
+		c_tipo_apoyo, cantidad, descrip_apoyo, num_benef, gestion, otro
+		from apec_apoyo ap,c_apoyo2 cp
+		where
+		ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=3
+		order by cp.c_apoyo
+	</select>
+
+	<select id="selectNecesidadesEspeciales" parameterType="Map"
+		resultMap="NecesidadesEducativasMap">	
+		select c_apec, c_reunion, an.c_apoyo , cp.descrip_larga, 
+        an.c_nee, an.cuantos, an.gestionar, nee.nom_nee, 
+        an.c_nee1, an.cuantos1, an.gestionar1,nee1.nom_nee as nom_nee1
+		from apec_necesidades_educativas an,
+		c_apoyo cp, c_co_nee nee, c_co_nee nee1
+		where
+		an.c_apec=#{cApec,jdbcType=SMALLINT} and
+		an.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and an.c_apoyo=cp.c_apoyo
+		and nee.c_nee=an.c_nee
+		and nee1.c_nee=an.c_nee1
+		order by cp.c_apoyo
+	</select>
+
+	<select id="selectDiagnosticoComunitario" parameterType="Map"
+		resultMap="DiagnosticoComMap">
+
+		select a.c_apec, a.c_reunion, a.c_diagnostico_com,
+		a.poblacion_afectada
+		pobAfec, a.descrip_otro,
+		c.nom_tipo_diag_comunitario,b.subtipo,b.c_subtipo_diagnostico
+		from
+		apec_diagnostico_com a,c_diagnostico_com b,c_tipo_diagnostico_com c
+		where a.c_apec=#{cApec,jdbcType=SMALLINT} and
+		a.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and
+		a.c_diagnostico_com=b.c_diagnostico_com
+		and
+		b.c_tipo_diagnostico_com=c.c_tipo_diagnostico_com
+		order by
+		b.c_tipo_diagnostico_com, b.c_diagnostico_com
+
+	</select>
+
+	<select id="selectPoblacionIndigena" parameterType="Map"
+		resultMap="PoblacionIndigenaMap">
+
+		select c_apec, c_reunion, a.c_poblacion_indigena,
+		poblacion_afectada, a.c_lengua, descrip_larga, nom_lengua from
+		apec_poblacion_indigena a, c_poblacion_indigena b, c_lengua c
+		where
+		a.c_apec=#{cApec,jdbcType=SMALLINT} and
+		a.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and
+		a.c_poblacion_indigena=b.c_poblacion_indigena
+		and
+		a.c_lengua=c.c_lengua;
+
+	</select>
+	<select id="selectBullying" parameterType="Map" resultMap="BullyingMap">
+		select  c_apec, c_reunion, b.c_co_tipo_bullying, b.c_co_bullying, 
+		cuantos, numvecesr1, descrip_cortar1, nom_tipo_bullying
+		from apec_bullying b, c_co_bullying cb, c_co_tipo_bullying ct
+		where
+		b.c_apec=#{cApec,jdbcType=SMALLINT} 
+		and b.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		and b.c_co_tipo_bullying=ct.c_co_tipo_bullying
+		and b.c_co_bullying=cb.c_co_bullying;
+
+	</select>
+	<select id="selectPlanTrabajo" parameterType="Map" resultMap="PlanTrabajoMap">
+
+		select a.c_apec, a.c_reunion, a.c_accion, a.nom_otra, a.num_vecesr1,
+		a.num_vecesr2,
+		a.c_respuestar2, a.num_vecesr3, a.c_respuestar3,
+		b1.nom_respuesta resp2, b2.nom_respuesta resp3,d.nom_tipo_accion
+		from
+		apec_plan_trabajo a
+		left join c_respuesta b1 on
+		a.c_respuestar2=b1.c_respuesta
+		left join c_respuesta b2 on
+		a.c_respuestar3=b2.c_respuesta
+		join c_accion c on a.c_accion=c.c_accion
+		join c_tipo_accion d on c.c_tipo_accion=d.c_tipo_accion
+		where
+		a.c_apec=#{cApec,jdbcType=SMALLINT} and
+		a.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		order by c.c_tipo_accion,
+		a.c_accion;
+
+	</select>
+
+	<select id="selectSeccionesReunion" parameterType="Map"
+		resultMap="SeccionesRegistroMap">
+
+		select a.c_seccion_registro, a.c_reunion, b.c_apec,
+		a.nom_seccion_registro
+		from c_seccion_Registro a
+		left join apec_seccion
+		b on a.c_seccion_registro=b.c_seccion_registro
+		and
+		b.c_apec=#{cApec,jdbcType=SMALLINT} and
+		b.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		where
+		a.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		order by
+		a.c_seccion_registro;
+
+	</select>
+	
+	<select id="selectNumeroAlumnos" parameterType="Map" resultMap="NumeroAlumnosMap">
+		select *
+		from apec_numero_alumnos
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	
+	<select id="selectOpiniones" parameterType="Map" resultMap="OpinionesMap">
+		select *
+		from apec_opiniones_comentarios
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectDenuncias" parameterType="Map" resultMap="DenunciasMap">
+		select *
+		from apec_denuncias_quejas
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectDificultades" parameterType="Map" resultMap="DificultadesMap">
+		select *
+		from apec_principales_dificultades
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectNecesidades" parameterType="Map" resultMap="NecesidadesMap">
+		select *
+		from apec_principales_necesidades
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectActividadesUno" parameterType="Map" resultMap="ApecActividadesUno">			
+    	select *
+			from apec_actividades_uno
+			where c_apec= #{cApec,jdbcType=SMALLINT}
+			and c_reunion = #{cReunion,jdbcType=SMALLINT}
+   	</select>
+   	
+   	<select id="selectActividadesTres" parameterType="Map" resultMap="ApecActividadesTres">			
+    	select *
+			from apec_actividades_tres
+			where c_apec= #{cApec,jdbcType=SMALLINT}
+			and c_reunion = #{cReunion,jdbcType=SMALLINT}
+   	</select>
+   	
+   	   	<select id="selectActividadesCuatro" parameterType="Map" resultMap="ApecActividadesCuatro">			
+    	select *
+			from apec_actividades_cuatro
+			where c_apec= #{cApec,jdbcType=SMALLINT}
+			and c_reunion = #{cReunion,jdbcType=SMALLINT}
+   	</select>
+   	
+   	<select id="selectPromotor" parameterType="Map" resultMap="PromotorMap">
+		select *
+		from apec_promotor
+		where c_apec=#{cApec,jdbcType=SMALLINT}
+	</select>
+	
+	
+</mapper>

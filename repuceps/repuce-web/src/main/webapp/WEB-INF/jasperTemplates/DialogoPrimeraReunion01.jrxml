@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-09-05T14:50:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DialogoPrimeraReunion01" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e3de6d25-3d47-4657-840a-b9aa1f06d6dd">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="mx.gob.sep.dgtec.repuce.model.ApecReunion"/>
+	<import value="mx.gob.sep.dgtec.repuce.model.ApecCstm"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="descripR1" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[" se reunieron los firmantes en el aula comunitaria para llevar a cabo la 1ª Reunión con la"
++" Asociación Promotora de Educación Comunitaria APEC, que funge como Consejo Análogo de"
++" Participación Social, con el objeto de elaborar el diagnóstico y plan de trabajo para  impulsar la"
++" participación de la APEC en actividades de gestión escolar  y de apoyo a la comunidad, así" +" como para identificar las acciones a emprender que en apoyo a los instructores comunitarios" +" fortalezcan el aprendizaje de los niños de la comunidad que cursan los servicios educativos" +" siguientes:"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="descripR2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[" reunidos en el aula comunitaria los firmantes para llevar "
++" a cabo la reunión intermedia para el seguimiento al plan de trabajo que realiza con la Asociación Promotora de Educación Comunitaria"
++ " APEC que funge como Consejo Análogo de Participación Social, con el objeto de impulsar la participación de la APEC en actividades"
++ " extraescolares así como darle a conocer los logros a la fecha y retos por superar en el aprendizaje de los niños de la comunidad en los"
++ " servicios educativos y las acciones siguientes:"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="descripR3" class="java.lang.String">
+		<defaultValueExpression><![CDATA["reunidos en el aula comunitaria los firmantes para llevar a "+
+"cabo la reunión de cierre de ciclo escolar con la Asociación "
++"Promotora de Educación Comunitaria APEC que funge como Consejo "
++"Análogo de Participación Social, con el objeto de dar por terminado "
++"el ciclo escolar mediante la exposición de los resultados y el intercambio de experiencias para mejorar los aspectos educativos y de gestión escolar, en los servicios educativos siguientes:"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="apec" class="mx.gob.sep.dgtec.repuce.model.ApecCstm"/>
+	<field name="reunion" class="mx.gob.sep.dgtec.repuce.model.ApecReunion"/>
+	<variable name="Meses" class="java.lang.Object"/>
+	<variable name="descripcionAC" class="java.lang.String">
+		<initialValueExpression><![CDATA[" se ha tenido a bien celebrar una asamblea con la finalidad de constituir la Asociación Promotora de Educación Comunitaria, que fungirá también como Consejo Análogo de Participación Social en la Educación, para el periodo escolar: "+$F{apec}.getPeriodo()
++" y elegir por mayoría de votos de la asamblea al presidente, vicepresidente o secretario, tesorero y vocales,  con el objeto de promover la impartición de la educación básica,  colaborar  con el Líder para la Educación Comunitaria para favorecer una mejor calidad educativa en la comunidad  y fortalecer la vida comunitaria a través de la educación."
++"\r"+"\r"
++"Los padres de familia, tutores y quienes ejercen la patria potestad de alumnos inscritos en el servicio de educación comunitaria en el medio rural y/o indígena, cuyos nombres y firmas constan al final de la presente acta, acordaron "
++($F{apec}.getTpoRegistro().equals("1")?"constituir":"renovar")
++" la Asociación Promotora de Educación Comunitaria, quedando legalmente electos como: "]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="63">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="740" height="63" uuid="338318e4-4618-400a-abfb-11bd76a2808d">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En la localidad (clave INEGI "+String.format("%04d",$F{apec}.getIdLocalidad())
++ ") de "+$F{apec}.getNomLocalidad().toUpperCase()
++" del municipio  (clave INEGI "+String.format("%03d",$F{apec}.getIdMunicipio())+") de "+$F{apec}.getNomMunicipio()+" en el estado de "+$F{apec}.getNomEntidadFed().toUpperCase()
++", siendo el " +(new SimpleDateFormat("'día' d ' del mes de' MMMMM 'del año de' yyyy", new Locale("es","MX")).format($F{reunion}.getcReunion()==1?$F{apec}.getFchIntegracion():$F{reunion}.getFchReunion()))
++", en cumplimiento de los artículos 53, 54 y Tercero Transitorio, Fracción I, del Reglamento de Asociaciones de Padres de Familia y con fundamento en los artículos 7,8, 40 y 43 de los Acuerdos secretariales 02/05/16 y 08/08/17 por los que se emiten y se modifican, los Lineamientos para la constitución, organización y funcionamiento de los Consejos de Participación Social en la Educación; asimismo, en cumplimiento del Numeral Vigésimo del acuerdo por el que se establecen los Lineamientos para la Promoción y Operación de la Contraloría Social en los Programas Federales de Desarrollo Social; se reunieron en el aula comunitaria los integrantes de la Asociación Promotora de Educación Comunitaria (APEC), las y los Líderes de Educación Comunitaria (LEC), así como padres y madres de familia de la comunidad, para llevar a cabo la 1.ª asamblea de Consejo escolar para elaborar el plan de trabajo mediante el cual se determinarán las actividades a realizar para mejorar las condiciones en las cuáles aprenden las alumnas y los alumnos. "+"\r "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

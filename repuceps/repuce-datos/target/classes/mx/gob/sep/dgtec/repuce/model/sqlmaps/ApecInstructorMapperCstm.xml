@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ApecInstructorMapperCstm">
+
+	<delete id="borrarInstructoresXReunion" parameterType="map">
+
+
+		delete from apec_instructor where c_instructor in (
+		select c_instructor from apec_reunion_instructor where
+		c_apec=#{cApec,jdbcType=INTEGER} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT})
+		and c_apec=#{cApec,jdbcType=INTEGER}
+	</delete>
+	
+	
+	<delete id="borrarCctsInstructoresXReunion" parameterType="map">
+
+
+		delete from c_cct_instructor where c_instructor in (
+		select c_instructor from apec_reunion_instructor where
+		c_apec=#{cApec,jdbcType=INTEGER} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT})
+		and c_apec=#{cApec,jdbcType=INTEGER}			
+	</delete>
+	
+	
+</mapper>

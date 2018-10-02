@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.seguridad.dao.UsuarioSeguridadDao">
+
+	<resultMap type="UsuarioSeguridad" id="usuarioResult">
+		<id property="id" column="id_t_usuario"/>
+		<result property="username" column="v_username"/>
+		<result property="password" column="v_password"/>
+		<result property="nombre" column="v_nombre_usuario"/>
+		<result property="activo" column="l_usuario_activo"/>
+	</resultMap>
+
+	<select id="consultarTodos" resultMap="usuarioResult">
+		select * from t_usuario_seguridad;
+	</select>
+
+	<select id="consultar" resultMap="usuarioResult">
+		select * from t_usuario_seguridad where id_t_usuario = #{id};
+	</select>
+
+	<select id="contar" resultType="int">
+		select count(*) from t_usuario_seguridad;
+	</select>
+	
+	<insert id="guardar" parameterType="UsuarioSeguridad" keyProperty="id">
+		insert into t_usuario_seguridad (id_t_usuario,v_username,v_password,v_nombre_usuario,l_usuario_activo)
+		<if test="#{activo}"> 		
+			values (0,#{username},#{password},#{nombre},'T')
+		</if>
+		<if test="!#{activo}">
+			values (0,#{username},#{password},#{nombre},'F')
+		</if>
+	</insert>
+	
+	<update id="actualizar" parameterType="UsuarioSeguridad">
+    update t_usuario_seguridad
+    <set>
+      <if test="#{username} != null">
+        v_username = #{username},
+      </if>
+      <if test="#{password} != null">
+        v_password = #{password},
+      </if>
+      <if test="#{nombre} != null">
+        v_nombre_usuario = #{nombre},
+      </if>
+      <if test="#{activo}"> 		
+		l_usuario_activo ='T',
+	  </if>
+	  <if test="!#{activo}">
+		l_usuario_activo ='F',
+		</if>
+    </set>
+    where id_t_usuario = #{id};
+  </update>
+	
+	
+		
+	<select id="consultarUserName" resultMap="usuarioResult">
+		select * from t_usuario_seguridad where v_username = #{userName};
+	</select>
+</mapper>

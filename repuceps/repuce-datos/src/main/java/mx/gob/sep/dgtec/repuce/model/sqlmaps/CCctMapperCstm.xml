@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.CCctMapperCstm">
+
+  <resultMap id="ResultMap" type="mx.gob.sep.dgtec.repuce.vo.CCctLight">
+    <id column="cve_cct" jdbcType="VARCHAR" property="cveCct" />
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="nom_nivel" jdbcType="VARCHAR" property="nomNivel" />
+  </resultMap>
+
+
+  <select id="selectCCtsPorLocalidad" parameterType="Map" resultMap="ResultMap" 
+  		resultType="mx.gob.sep.dgtec.repuce.vo.CCctLight">
+		select a.cve_cct, a.c_cct, a.nom_nivel
+		from c_cct a, ubicacion_cct b
+		where a.c_cct=b.c_cct
+			and a.status_cct = 1
+			and a.cve_dep_nor='CE'
+			and b.id_localidad=#{idLoc,jdbcType=INTEGER} 
+			and b.id_municipio=#{idMun,jdbcType=INTEGER} 
+			and b.id_entidadfed=#{idEnt,jdbcType=SMALLINT} 
+  </select>
+</mapper>

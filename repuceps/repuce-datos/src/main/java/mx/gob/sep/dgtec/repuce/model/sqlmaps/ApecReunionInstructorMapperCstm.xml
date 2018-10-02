@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ApecReunionInstructorMapperCstm">
+	<resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_instructor" jdbcType="SMALLINT" property="cInstructor" />
+		<id column="c_apec" jdbcType="SMALLINT" property="cApecInstructor" />
+
+	</resultMap>
+	<select id="selectInstructoresRegistradosXReunion"
+		parameterType="map" resultMap="BaseResultMap">		
+
+	select c_instructor, c_reunion, c_apec
+	from apec_reunion_instructor a 
+	where c_apec=#{cApec,jdbcType=INTEGER}
+	and c_reunion=#{cReunion,jdbcType=SMALLINT}
+	and c_instructor not in (select c_instructor from apec_reunion_instructor where c_apec=#{cApec,jdbcType=INTEGER}
+	and c_reunion<![CDATA[<]]>#{cReunion,jdbcType=SMALLINT})
+	order by c_instructor,c_reunion
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="selectIdInstructorMaximo" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	select max(c_instructor) from apec_reunion_instructor
+	 where c_apec=#{cApec,jdbcType=INTEGER}
+		
+  </select>
+</mapper>
+
+

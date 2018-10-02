@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ConConsejoMapper">
+	
+	<resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ConConsejoCstm">
+		<id column="numero" jdbcType="INTEGER" property="numero" />
+
+	</resultMap>
+	<select id="selectConConsejo"
+		parameterType="map" resultMap="BaseResultMap">		
+
+	select count(c_cct) as numero 
+	from ce_sesion
+	where c_cct=#{cCct,jdbcType=INTEGER}
+	and c_sesion=1
+	
+	</select>
+	</mapper>

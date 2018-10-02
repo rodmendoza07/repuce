@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.CeComiteMapperCstm">
+
+  <select id="selectComitesSinIntegrantes" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select c_comite
+		from ce_comite
+		where c_comite not in (
+		        select c_comite 
+		        from ce_integrante_comite_consejo 
+		        where c_cct_integrante = #{cCct,jdbcType=INTEGER} 
+		                and c_sesion_integrante = 1
+		                and c_cct_comite = #{cCct,jdbcType=INTEGER} 
+		                and c_sesion_comite = 2)
+		and c_comite not in (
+		        select ce_comite_c_comite 
+		        from ce_comite_integrante 
+		        where ce_integrante_comite_c_cct = #{cCct,jdbcType=INTEGER}
+		                and ce_integrante_comite_c_sesion = 2
+		                and ce_comite_c_cct =  #{cCct,jdbcType=INTEGER} 
+		                and ce_comite_c_sesion = 2)
+		and c_cct = #{cCct,jdbcType=INTEGER} 
+		and c_sesion = 2
+  </select>
+</mapper>

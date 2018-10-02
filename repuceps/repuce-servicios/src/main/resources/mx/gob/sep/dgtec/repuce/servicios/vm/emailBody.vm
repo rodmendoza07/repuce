@@ -1,0 +1,21 @@
+<html>
+<body>
+<FONT FACE="arial" SIZE=2>
+<p>Estimado(a) <b> ${nomDirector} </b>.
+<br>Director(a) del Centro Escolar: <b> ${nomCct}</b> con clave <b> ${cveCct}</b> .</br></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por medio del presente correo, le informamos que la nueva contrase&ntilde;a asignada a su Centro de Trabajo es:
+<b>${password}</b>,
+con la cual podr&aacute; acceder al <A HREF="http://www.repuce.sep.gob.mx">
+Registro P&uacute;blico de Consejos Escolares (REPUCE).</A></p>
+
+<p>
+<center>Atentamente.
+<br>
+Secretar&iacute;a T&eacute;cnica del Consejo Nacional de Participaci&oacute;n Social en la Educaci&oacute;n (CONAPASE).
+</center>
+</p>
+<p>Favor de <b>NO</b> responder este correo, ya que es generado autom&aacute;ticamente.</p>
+</FONT>
+
+</body>
+</html>

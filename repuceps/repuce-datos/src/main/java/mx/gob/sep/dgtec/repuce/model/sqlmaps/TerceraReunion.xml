@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.TerceraReunionMapper">
+
+	<resultMap id="TerceraReunionMap" type="mx.gob.sep.dgtec.conafe.vo.TerceraReunionVO">
+		<!-- Mapeo para obtener la informacion para el formulario de la Segunda 
+			Asamblea <id column="c_apec" jdbcType="INTEGER" property="cApec" /> -->
+
+		<association property="apec" column="c_apec"
+			javaType="mx.gob.sep.dgtec.repuce.model.ApecCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectApec" />
+
+		<association property="reunion" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ApecReunion"
+			select="mx.gob.sep.dgtec.repuce.dao.ApecReunionMapper.selectByPrimaryKey" />
+
+		<collection property="centrosConafe" column="{cApec=c_apec,cReunion=c_reunion1}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.vo.CCctLight"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectCcts" />
+
+		
+		<collection property="integrantes" column="{cApec=c_apec,cReunion=c_reunion1}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectIntegrantes" />
+
+		<collection property="integrantesR3" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionIntegranteCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectIntegrantes" />
+			
+				
+		<collection property="instructores" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectInstructoresRelacion" />
+
+		<collection property="instructoresR3" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecReunionInstructorCtsm"
+			select="mx.gob.sep.dgtec.repuce.dao.ActaConstitutivaMapper.selectInstructoresRelacionXReunion" />
+			
+		<collection property="apoyosConafe" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm"
+			select="selectApoyosConafe" />
+
+		<collection property="apoyosFederales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm"
+			select="selectApoyosFederales" />
+
+		<collection property="apoyosEstatales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm"
+			select="selectApoyosEstales" />
+
+		
+		<collection property="necesidadesEspeciales" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecNecesidadesEducativasCstm" select="selectNecesidadesEspeciales" />
+
+		<collection property="bullying" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecBullyingCstm" select="selectBullying" />
+	
+		<collection property="planTrabajo" column="{cApec=c_apec}"
+			javaType="ArrayList" ofType="ApecPlanTrabajoCstm" select="selectPlanTrabajo" />
+	
+		<collection property="opiniones" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecOpinionesComentarios" select="selectOpiniones" />	
+			
+		<collection property="denuncias" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecDenunciasQuejas" select="selectDenuncias" />
+			
+		<collection property="numeroAlumnos" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecNumeroAlumnos" select="selectNumeroAlumnos" />		
+		
+		<collection property="diagnosticoCierre" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecDiagnosticoComCstm" select="selectDiagnosticoCierre" />
+
+		<collection property="encuestaSatisfaccion" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecEncuestaSatisfaccionCstm" select="selectEncuestaSatisfaccion" />
+
+
+		<collection property="seccionesReunion" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="mx.gob.sep.dgtec.repuce.model.ApecPlanTrabajoCstm"
+			select="mx.gob.sep.dgtec.repuce.dao.PrimeraReunionMapper.selectSeccionesReunion" />
+			
+			
+		<collection property="informeFinal" column="{cApec=c_apec,cReunion=c_reunion}"
+		javaType="mx.gob.sep.dgtec.repuce.model.ApecInformeFinal"
+		ofType="ApecInformeFinal"
+		select="selectInformeFinal" />
+		
+		
+		<collection property="informeFinalOpciones" column="{cApec=c_apec,cReunion=c_reunion}"
+		javaType="mx.gob.sep.dgtec.conafe.vo.InformeFinalOpcionesVO"
+		ofType="InformeFinalOpcionesVO"
+		select="selectInformeFinalOpciones" />
+		
+		 	<collection property="seccionesReunion3" column="{cApec=c_apec,cReunion=c_reunion}"
+			javaType="ArrayList" ofType="ApecSeccionCstm" select="selectSeccionesReunion3" />
+		
+
+	</resultMap>
+
+
+<resultMap id="ApecApoyosMap" type="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+    <id column="c_apoyo" jdbcType="INTEGER" property="cApoyo" />
+    <result column="descrip_Otro" jdbcType="VARCHAR" property="descripOtro" />
+    <result column="beneficiariosr1" jdbcType="INTEGER" property="beneficiariosr1" />
+    <result column="montor2" jdbcType="INTEGER" property="montor2" />
+    <result column="especier2" jdbcType="VARCHAR" property="especier2" />
+    <result column="beneficiariosr2" jdbcType="INTEGER" property="beneficiariosr2" />
+    <result column="montor3" jdbcType="INTEGER" property="montor3" />
+    <result column="cantidad" jdbcType="VARCHAR" property="cantidad" />
+    <result column="descrip_apoyo" jdbcType="VARCHAR" property="descripApoyo" /> 
+    <result column="c_tipo_apoyo" jdbcType="SMALLINT" property="tipoApoyo" /> 
+    <result column="num_benef" jdbcType="INTEGER" property="numBenef" /> 
+    <result column="gestion" jdbcType="VARCHAR" property="gestion" /> 
+    <result column="otro" jdbcType="VARCHAR" property="otro" /> 
+	
+   <association property="apoyo" column="c_apoyo" 
+    		javaType="mx.gob.sep.dgtec.repuce.model.CApoyo" 
+    select="mx.gob.sep.dgtec.repuce.dao.CApoyoMapper.selectByPrimaryKey" />
+  </resultMap>
+  
+	<resultMap id="ApecDiagCierreMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecDesercionCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_desercion" jdbcType="SMALLINT" property="cDesercion" />
+		<result column="descrip_desercion" jdbcType="VARCHAR" property="preguntaLarga" />
+		<result column="descrip_corta" jdbcType="VARCHAR" property="preguntaCorta" />
+		<result column="cantidad" jdbcType="INTEGER" property="cantidad" />					
+
+	</resultMap>
+	
+    <resultMap id="NecesidadesEducativasMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecNecesidadesEducativasCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_apoyo" jdbcType="INTEGER" property="cApoyo" />
+		<result column="c_nee" jdbcType="INTEGER" property="cNee" />
+		<result column="c_nee1" jdbcType="INTEGER" property="cNee1" />
+		<result column="gestionar" jdbcType="VARCHAR" property="gestionar" />
+		<result column="gestionar1" jdbcType="VARCHAR" property="gestionar1" />
+		<result column="descrip_larga" jdbcType="VARCHAR" property="descripLarga" />
+		<result column="nom_nee" jdbcType="VARCHAR" property="nomNee" />
+		<result column="nom_nee1" jdbcType="VARCHAR" property="nomNee1" />
+		<result column ="beneficiarios" jdbcType = "INTEGER" property = "beneficiarios"/>
+		<result column ="beneficiarios1" jdbcType = "INTEGER" property = "beneficiarios1"/>
+		<result column="seconcreto" jdbcType="VARCHAR" property="seconcreto" />
+		<result column="seconcreto1" jdbcType="VARCHAR" property="seconcreto1" />
+		<result column="consiste" jdbcType="VARCHAR" property="consiste" />
+		<result column="consiste1" jdbcType="VARCHAR" property="consiste1" />
+		<result column="cuantos" jdbcType="INTEGER" property="cuantos" />
+		<result column="cuantos1" jdbcType="INTEGER" property="cuantos1" />		
+	</resultMap>
+	
+	  	
+	  <resultMap id="BullyingMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecBullyingCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_co_tipo_bullying" jdbcType="SMALLINT" property="cCoTipoBullying" />
+		<id column="c_co_bullying" jdbcType="INTEGER" property="cCoBullying" />
+		<result column="numvecesr1" jdbcType="VARCHAR" property="numvecesr1" />
+		<result column="nom_tipo_bullying" jdbcType="VARCHAR" property="nomTipoBullying" />
+		<result column="descrip_cortar1" jdbcType="VARCHAR" property="descripCortar1" />
+		<result column="beneficiarios" jdbcType ="INTEGER" property = "beneficiarios"/>
+		<result column="cuantos" jdbcType="INTEGER" property="cuantos" />
+		<result column="seconcreto" jdbcType="VARCHAR" property="seconcreto" />
+		<result column="consiste" jdbcType="VARCHAR" property="consiste" />
+		<result column="descrip_largar3" jdbcType="VARCHAR" property="descripLargar3" />
+	</resultMap>
+	
+	
+	<resultMap id="ApecEncuestaSatisfMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecEncuestaSatisfaccionCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_medicion_satisfaccion" jdbcType="INTEGER" property="cMedicionSatisfaccion" />
+		<result column="descrip_satisfaccion" jdbcType="VARCHAR" property="nombreActividad" />
+		<result column="c_respuesta" jdbcType="INTEGER" property="cRespuesta" />
+		<result column="c_tipo_respuesta" jdbcType="INTEGER" property="tipoRespuesta" />
+		<result column="nom_respuesta" jdbcType="INTEGER" property="respuesta" />
+		
+	    <collection property="respuestas" column="{cTipoRespuesta=c_tipo_respuesta}"
+   		javaType="ArrayList"
+   		ofType="mx.gob.sep.dgtec.repuce.model.CRespuesta"
+   		select="selectRespuestaPorTipo" />
+
+	</resultMap>
+	
+
+
+	<resultMap id="PlanTrabajoMap"
+		type="mx.gob.sep.dgtec.repuce.model.ApecPlanTrabajoCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_accion" jdbcType="INTEGER" property="cAccion" />
+		<result column="nom_otra" jdbcType="VARCHAR" property="nomOtra" />
+		<result column="num_vecesr1" jdbcType="INTEGER" property="numVecesr1" />
+		<result column="num_vecesr2" jdbcType="INTEGER" property="numVecesr2" />
+		<result column="c_respuestar2" jdbcType="VARCHAR" property="cRespuestar2" />
+		<result column="num_vecesr3" jdbcType="INTEGER" property="numVecesr3" />
+		<result column="c_respuestar3" jdbcType="VARCHAR" property="cRespuestar3" />
+		<result column="resp2" jdbcType="VARCHAR" property="respuestaR2" />
+		<result column="resp3" jdbcType="VARCHAR" property="respuestaR3" />
+		<result column="nom_tipo_accion" jdbcType="VARCHAR" property="tipoAccion" />
+
+		<association property="accion" column="c_accion"
+			javaType="mx.gob.sep.dgtec.repuce.model.CAccion"
+			select="mx.gob.sep.dgtec.repuce.dao.CAccionMapper.selectByPrimaryKey" />
+	</resultMap>
+	
+	
+		<resultMap id="OpinionesMap" type="mx.gob.sep.dgtec.repuce.model.ApecOpinionesComentarios">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_opiniones" jdbcType="SMALLINT" property="cOpiniones" />
+    <result column="opiniones" jdbcType="VARCHAR" property="opiniones" />
+   </resultMap>
+	
+	<resultMap id="DenunciasMap" type="mx.gob.sep.dgtec.repuce.model.ApecDenunciasQuejas">
+	    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+	    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+	    <id column="c_denuncias" jdbcType="SMALLINT" property="cDenuncias" />
+    <result column="denuncias" jdbcType="VARCHAR" property="denuncias" />
+   </resultMap>
+   
+   
+    <resultMap id="NumeroAlumnosMap" type="mx.gob.sep.dgtec.repuce.model.ApecNumeroAlumnos">
+    <id column="c_apec" jdbcType="INTEGER" property="cApec" />
+    <id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+    <id column="c_numalum" jdbcType="SMALLINT" property="cNumalum" />
+    <result column="cct" jdbcType="VARCHAR" property="cct" />
+    <result column="ninos" jdbcType="INTEGER" property="ninos" />
+    <result column="ninas" jdbcType="INTEGER" property="ninas" />
+  </resultMap>
+   
+   <resultMap id="ApecInformeFinal" type="mx.gob.sep.dgtec.repuce.model.ApecInformeFinal" >
+    <id column="c_apec" property="cApec" jdbcType="INTEGER" />
+    <id column="c_reunion" property="cReunion" jdbcType="SMALLINT" />
+    <result column="respuesta1" property="respuesta1" jdbcType="VARCHAR" />
+    <result column="respuesta2" property="respuesta2" jdbcType="VARCHAR" />
+    <result column="respuesta3" property="respuesta3" jdbcType="VARCHAR" />
+    <result column="respuesta4" property="respuesta4" jdbcType="VARCHAR" />
+    <result column="respuesta5" property="respuesta5" jdbcType="VARCHAR" />
+    <result column="respuesta61" property="respuesta61" jdbcType="VARCHAR" />
+    <result column="respuesta62" property="respuesta62" jdbcType="VARCHAR" />
+    <result column="respuesta63" property="respuesta63" jdbcType="VARCHAR" />
+    <result column="respuesta64" property="respuesta64" jdbcType="VARCHAR" />
+    <result column="respuesta65" property="respuesta65" jdbcType="VARCHAR" />
+    <result column="respuesta66" property="respuesta66" jdbcType="VARCHAR" />
+    <result column="respuesta7" property="respuesta7" jdbcType="VARCHAR" />
+    <result column="respuesta8" property="respuesta8" jdbcType="VARCHAR" />
+    <result column="respuesta9" property="respuesta9" jdbcType="VARCHAR" />
+    <result column="respuesta10" property="respuesta10" jdbcType="VARCHAR" />
+    <result column="respuesta10otro" property="respuesta10otro" jdbcType="VARCHAR" />
+    <result column="respuesta11" property="respuesta11" jdbcType="VARCHAR" />
+    <result column="respuesta12" property="respuesta12" jdbcType="VARCHAR" />
+    <result column="respuesta13" property="respuesta13" jdbcType="VARCHAR" />
+    <result column="respuesta13otro" property="respuestaotro" jdbcType="VARCHAR" />
+    <result column="respuesta14" property="respuesta14" jdbcType="VARCHAR" />
+    <result column="respuesta15" property="respuesta15" jdbcType="VARCHAR" />
+    <result column="respuesta16" property="respuesta16" jdbcType="VARCHAR" />
+    <result column="respuesta17" property="respuesta17" jdbcType="VARCHAR" />
+    <result column="respuesta18" property="respuesta18" jdbcType="VARCHAR" />
+    <result column="respuesta18otro" property="respuesta18otro" jdbcType="VARCHAR" />
+    
+  </resultMap>
+   
+      <resultMap id="InformeFinalOpcionesVO" type="mx.gob.sep.dgtec.conafe.vo.InformeFinalOpcionesVO" >
+    <id column="c_apec" property="cApec" jdbcType="INTEGER" />
+    <result column="grid1respuesta1" property="grid1respuesta1" jdbcType="VARCHAR" />
+    <result column="grid1respuesta2" property="grid1respuesta2" jdbcType="VARCHAR" />
+    <result column="grid1respuesta3" property="grid1respuesta3" jdbcType="VARCHAR" />
+    <result column="grid1respuesta4" property="grid1respuesta4" jdbcType="VARCHAR" />
+    <result column="grid1respuesta5" property="grid1respuesta5" jdbcType="VARCHAR" />
+    <result column="grid1respuesta6" property="grid1respuesta6" jdbcType="VARCHAR" />
+    <result column="grid1respuesta7" property="grid1respuesta7" jdbcType="VARCHAR" />
+    <result column="grid1respuesta8" property="grid1respuesta8" jdbcType="VARCHAR" />
+    <result column="grid1respuesta9" property="grid1respuesta9" jdbcType="VARCHAR" />
+    <result column="grid1respuesta10" property="grid1respuesta10" jdbcType="VARCHAR" />
+    <result column="grid1respuesta11" property="grid1respuesta11" jdbcType="VARCHAR" />
+    <result column="grid2respuesta12" property="grid2respuesta12" jdbcType="VARCHAR" />
+    <result column="grid2respuesta13" property="grid2respuesta13" jdbcType="VARCHAR" />
+    <result column="grid2respuesta14" property="grid2respuesta14" jdbcType="VARCHAR" />
+    <result column="grid2respuesta15" property="grid2respuesta15" jdbcType="VARCHAR" />
+    <result column="grid2respuesta16" property="grid2respuesta16" jdbcType="VARCHAR" />
+    <result column="grid2respuesta17" property="grid2respuesta17" jdbcType="VARCHAR" />
+    <result column="grid2respuesta18" property="grid2respuesta18" jdbcType="VARCHAR" />
+    <result column="grid2respuesta19" property="grid2respuesta19" jdbcType="VARCHAR" />
+    <result column="grid2respuesta20" property="grid2respuesta20" jdbcType="VARCHAR" />                        
+	<result column="grid3respuesta21" property="grid3respuesta21" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta22" property="grid3respuesta22" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta23" property="grid3respuesta23" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta24" property="grid3respuesta24" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta25" property="grid3respuesta25" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta26" property="grid3respuesta26" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta27" property="grid3respuesta27" jdbcType="VARCHAR" /> 
+	<result column="grid3respuesta28" property="grid3respuesta28" jdbcType="VARCHAR" />
+	<result column="grid4respuesta29" property="grid4respuesta29" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta30" property="grid4respuesta30" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta31" property="grid4respuesta31" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta32" property="grid4respuesta32" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta33" property="grid4respuesta33" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta34" property="grid4respuesta34" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta35" property="grid4respuesta35" jdbcType="VARCHAR" /> 
+	<result column="grid4respuesta36" property="grid4respuesta36" jdbcType="VARCHAR" />
+	<result column="grid5respuesta37" property="grid5respuesta37" jdbcType="VARCHAR" />
+	<result column="grid5respuesta38" property="grid5respuesta38" jdbcType="VARCHAR" />
+	<result column="grid5respuesta39" property="grid5respuesta39" jdbcType="VARCHAR" />
+	<result column="grid5respuesta40" property="grid5respuesta40" jdbcType="VARCHAR" />
+	<result column="grid5respuesta41" property="grid5respuesta41" jdbcType="VARCHAR" />
+	<result column="grid5respuesta42" property="grid5respuesta42" jdbcType="VARCHAR" />
+	<result column="grid5respuesta43" property="grid5respuesta43" jdbcType="VARCHAR" />
+	<result column="grid5respuesta44" property="grid5respuesta44" jdbcType="VARCHAR" />
+	<result column="grid5respuesta45" property="grid5respuesta45" jdbcType="VARCHAR" />
+	<result column="grid6respuesta46" property="grid6respuesta46" jdbcType="VARCHAR" />
+	<result column="grid6respuesta47" property="grid6respuesta47" jdbcType="VARCHAR" />
+	<result column="grid6respuesta48" property="grid6respuesta48" jdbcType="VARCHAR" />
+	<result column="grid6respuesta49" property="grid6respuesta49" jdbcType="VARCHAR" />
+	<result column="grid6respuesta50" property="grid6respuesta50" jdbcType="VARCHAR" />
+	<result column="grid6respuesta51" property="grid6respuesta51" jdbcType="VARCHAR" />
+	<result column="grid6respuesta52" property="grid6respuesta52" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta53" property="grid7respuesta53" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta54" property="grid7respuesta54" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta55" property="grid7respuesta55" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta56" property="grid7respuesta56" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta57" property="grid7respuesta57" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta58" property="grid7respuesta58" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta59" property="grid7respuesta59" jdbcType="VARCHAR" />	
+	<result column="grid7respuesta60" property="grid7respuesta60" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta61" property="grid8respuesta61" jdbcType="VARCHAR" />
+	<result column="grid8respuesta62" property="grid8respuesta62" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta63" property="grid8respuesta63" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta64" property="grid8respuesta64" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta65" property="grid8respuesta65" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta66" property="grid8respuesta66" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta67" property="grid8respuesta67" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta68" property="grid8respuesta68" jdbcType="VARCHAR" />	
+	<result column="grid8respuesta69" property="grid8respuesta69" jdbcType="VARCHAR" />	
+	<result column="grid9respuesta70" property="grid9respuesta70" jdbcType="VARCHAR" />
+	<result column="grid9respuesta71" property="grid9respuesta71" jdbcType="VARCHAR" />	
+	<result column="grid9respuesta72" property="grid9respuesta72" jdbcType="VARCHAR" />	
+	<result column="grid9respuesta73" property="grid9respuesta73" jdbcType="VARCHAR" />	
+	<result column="grid9respuesta74" property="grid9respuesta74" jdbcType="VARCHAR" />	
+	<result column="grid9respuesta75" property="grid9respuesta75" jdbcType="VARCHAR" />		
+  </resultMap>
+   
+   
+      <resultMap id="SeccionesRegistroMap" type="mx.gob.sep.dgtec.repuce.model.ApecSeccionCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_seccion_registro" jdbcType="INTEGER" property="cSeccionRegistro" />
+		<result column="nom_seccion_registro" jdbcType="VARCHAR"
+			property="nombreSeccion" />
+	</resultMap>
+   
+	
+		<select id="selectTerceraReunion" parameterType="Integer"
+		resultType="mx.gob.sep.dgtec.conafe.vo.TerceraReunionVO" resultMap="TerceraReunionMap">
+		select c_apec, 4 as c_reunion, 1 as c_reunion1, 2 as c_reunion2, 3 as
+		c_reunion3
+		from apec
+		where c_apec = #{cApec}
+	</select>
+	
+		<select id="selectApoyosConafe" parameterType="Map" resultMap="ApecApoyosMap">
+
+		select c_apec, c_reunion,ap.c_apoyo, descrip_otro, beneficiariosr1,
+		montor2, especier2, beneficiariosr2, montor3, ap.beneficiariosr3,
+		cantidad, descrip_apoyo, num_benef, gestion, otro, c_tipo_apoyo, nombre
+		from
+		apec_apoyo ap,c_apoyo2 cp
+		where ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion in
+		(select max(c_reunion) from apec_apoyo apc, c_apoyo2 cap 
+		where apc.c_apec=#{cApec,jdbcType=SMALLINT} and apc.c_apoyo=cap.c_apoyo and cap.c_tipo_apoyo=1)
+		and
+		ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=1
+		order by cp.c_apoyo
+	</select>
+	
+		<select id="selectApoyosFederales" parameterType="Map" resultMap="ApecApoyosMap">
+
+		select c_apec, c_reunion,ap.c_apoyo, descrip_otro, beneficiariosr1,
+		montor2, especier2, beneficiariosr2, montor3, ap.beneficiariosr3,
+		cantidad, descrip_apoyo, num_benef, gestion, otro, c_tipo_apoyo, nombre
+		from
+		apec_apoyo ap,c_apoyo2 cp
+		where ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion in
+		(select max(c_reunion) from apec_apoyo apc, c_apoyo2 cap 
+		where apc.c_apec=#{cApec,jdbcType=SMALLINT} and apc.c_apoyo=cap.c_apoyo and cap.c_tipo_apoyo=2)
+		and
+		ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=2
+		order by cp.c_apoyo
+	</select>
+
+
+	<select id="selectApoyosEstales" parameterType="Map" resultMap="ApecApoyosMap">
+
+		select c_apec, c_reunion,ap.c_apoyo, descrip_otro, beneficiariosr1,
+		montor2, especier2, beneficiariosr2, montor3, ap.beneficiariosr3,
+		cantidad, descrip_apoyo, num_benef, gestion, otro, c_tipo_apoyo, nombre
+		from
+		apec_apoyo ap,c_apoyo2 cp
+		where ap.c_apec=#{cApec,jdbcType=SMALLINT} and
+		ap.c_reunion in
+		(select max(c_reunion) from apec_apoyo apc, c_apoyo2 cap 
+		where apc.c_apec=#{cApec,jdbcType=SMALLINT} and apc.c_apoyo=cap.c_apoyo and cap.c_tipo_apoyo=3)
+		and
+		ap.c_apoyo=cp.c_apoyo
+		and cp.c_tipo_apoyo=3
+		order by cp.c_apoyo
+	</select>
+	
+		<select id="selectNecesidadesEspeciales" parameterType="Map"
+		resultMap="NecesidadesEducativasMap">	
+		select c_apec, c_reunion, an.c_apoyo , cp.descrip_larga, 
+        an.c_nee,  an.gestionar, nee.nom_nee, 
+        an.c_nee1,  an.gestionar1, nee1.nom_nee as nom_nee1, an.beneficiarios, an.beneficiarios1,
+        an.cuantos, an.cuantos1, an.seconcreto, an.consiste, an.seconcreto1, an.consiste1
+		from apec_necesidades_educativas an,
+		c_apoyo cp, c_co_nee nee, c_co_nee nee1
+		where
+		an.c_apec=#{cApec,jdbcType=SMALLINT} and
+		an.c_reunion in (select max(c_reunion) from apec_necesidades_educativas 
+		where c_apec=#{cApec,jdbcType=SMALLINT} )
+		and an.c_apoyo=cp.c_apoyo
+		and nee.c_nee=an.c_nee
+		and nee1.c_nee=an.c_nee1
+		order by cp.c_apoyo
+	</select>
+	
+<!--
+	Codigo Original comentado por vblake
+	
+	<select id="selectBullying" parameterType="Map" resultMap="BullyingMap">
+		select  c_apec, c_reunion, b.c_co_tipo_bullying, b.c_co_bullying, 
+		numvecesr1, cuantos, seconcreto, consiste, descrip_largar2,descrip_cortar1, nom_tipo_bullying, beneficiarios
+		from apec_bullying b, c_co_bullying cb, c_co_tipo_bullying ct
+		where
+		b.c_apec=#{cApec,jdbcType=SMALLINT} 
+		and b.c_reunion in (select max(c_reunion) from apec_bullying 
+		where c_apec=#{cApec,jdbcType=SMALLINT}  ) 
+		and b.c_co_tipo_bullying=ct.c_co_tipo_bullying
+		and b.c_co_bullying=cb.c_co_bullying
+		and b.c_co_bullying not in (select c_co_bullying
+		from apec_bullying b where c_reunion = 4 and beneficiarios is null 
+		and b.c_apec=#{cApec,jdbcType=SMALLINT});
+
+	</select>
+	
+-->
+	<select id="selectBullying" parameterType="Map" resultMap="BullyingMap">
+		select  c_apec, c_reunion, b.c_co_tipo_bullying, b.c_co_bullying, 
+		numvecesr1, cuantos, seconcreto, consiste, descrip_largar2, descrip_largar3,descrip_cortar1, nom_tipo_bullying, beneficiarios
+		from apec_bullying b, c_co_bullying cb, c_co_tipo_bullying ct
+		where
+		b.c_apec=#{cApec,jdbcType=SMALLINT} 
+		and b.c_reunion in (select max(c_reunion) from apec_bullying 
+		where c_apec=#{cApec,jdbcType=SMALLINT}  ) 
+		and b.c_co_tipo_bullying=ct.c_co_tipo_bullying
+		and b.c_co_bullying=cb.c_co_bullying
+		
+
+	</select>
+
+	<select id="selectPlanTrabajo" parameterType="Map" resultMap="PlanTrabajoMap">
+
+		select a.c_apec, a.c_reunion, a.c_accion, a.nom_otra, a.num_vecesr1,
+		a.num_vecesr2,
+		a.c_respuestar2, a.num_vecesr3, a.c_respuestar3,
+		b1.nom_respuesta resp2, b2.nom_respuesta resp3,d.nom_tipo_accion
+		from
+		apec_plan_trabajo a
+		left join c_respuesta b1 on
+		a.c_respuestar2=b1.c_respuesta
+		left join c_respuesta b2 on
+		a.c_respuestar3=b2.c_respuesta
+		join c_accion c on a.c_accion=c.c_accion
+		join c_tipo_accion d on c.c_tipo_accion=d.c_tipo_accion
+		where
+		a.c_apec=#{cApec,jdbcType=SMALLINT}
+		order by c.c_tipo_accion,
+		a.c_accion
+
+	</select>
+
+	<select id="selectOpiniones" parameterType="Map" resultMap="OpinionesMap">
+		select *
+		from apec_opiniones_comentarios
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectDenuncias" parameterType="Map" resultMap="DenunciasMap">
+		select *
+		from apec_denuncias_quejas
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=#{cReunion,jdbcType=SMALLINT}
+	</select>
+	
+	
+	<select id="selectNumeroAlumnos" parameterType="Map" resultMap="NumeroAlumnosMap">
+		select *
+		from apec_numero_alumnos
+		where c_apec=#{cApec,jdbcType=SMALLINT} and
+		c_reunion=2
+	</select>
+
+
+	<select id="selectDiagnosticoCierre" parameterType="Map"
+		resultMap="ApecDiagCierreMap">
+	
+		select		
+		a.c_desercion,a.descrip_desercion,a.descrip_corta,b.c_apec,b.c_reunion, b.cantidad
+		from c_desercion a , apec_desercion b
+		where a.c_desercion=b.c_desercion and
+		b.c_apec=#{cApec,jdbcType=SMALLINT} and
+		b.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		order by a.c_desercion
+	</select>
+
+
+
+	<select id="selectEncuestaSatisfaccion" parameterType="Map"
+		resultMap="ApecEncuestaSatisfMap">
+
+		select a.c_medicion_satisfaccion, a.descrip_satisfaccion,
+		a.c_tipo_respuesta, b.c_apec, b.c_reunion,b.c_respuesta, c.nom_respuesta
+		from c_medicion_satisfaccion a left join apec_encuesta_satisfaccion b
+		on
+		a.c_medicion_satisfaccion=b.c_medicion_satisfaccion
+		and b.c_apec=#{cApec,jdbcType=SMALLINT} and
+		b.c_reunion=#{cReunion,jdbcType=SMALLINT}
+		left join c_respuesta c on b.c_respuesta=c.c_respuesta
+		order by a.c_medicion_satisfaccion	
+	</select>
+
+<select id="selectRespuestaPorTipo" parameterType="Map"
+		resultMap="mx.gob.sep.dgtec.repuce.dao.CRespuestaMapper.BaseResultMap">
+
+		select c_respuesta,nom_respuesta, c_tipo_respuesta
+		from c_respuesta
+		WHERE c_tipo_respuesta=#{cTipoRespuesta,jdbcType=SMALLINT} 
+		order by c_respuesta
+	</select>
+	
+	
+	  <select id="selectInformeFinal" parameterType="Map" resultMap="ApecInformeFinal">			
+    	select *
+			from apec_informe_final
+			where c_apec= #{cApec,jdbcType=SMALLINT}
+			and c_reunion = #{cReunion,jdbcType=SMALLINT}
+   	</select>
+   	
+   	
+   	
+   	  <select id="selectInformeFinalOpciones" parameterType="Map" resultMap="InformeFinalOpcionesVO">			
+    	select c_apec,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%1,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta1,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%2,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta2,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%3,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta3,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%4,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta4,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%5,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta5,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%6,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta6,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%7,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta7,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%8,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta8,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%9,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta9,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%10,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta10,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta2 like '%11,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid1respuesta11,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%12,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta12,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%13,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta13,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%14,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta14,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%15,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta15,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%16,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta16,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%17,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta17,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%18,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta18,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%19,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta19,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta4 like '%20,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid2respuesta20,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%21,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta21,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%22,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta22,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%23,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta23,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%24,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta24,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%25,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta25,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%26,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta26,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%27,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta27,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta5 like '%28,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid3respuesta28,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%29,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta29,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%30,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta30,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%31,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta31,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%32,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta32,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%33,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta33,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%34,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta34,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%35,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta35,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta9 like '%36,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid4respuesta36,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%37,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta37,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%38,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta38,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%39,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta39,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%40,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta40,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%41,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta41,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%42,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta42,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%43,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta43,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%44,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta44,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta13 like '%45,=%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid5respuesta45,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%46,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta46,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%47,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta47,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%48,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta48,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%49,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta49,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%50,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta50,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%51,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta51,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta14 like '%52,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid6respuesta52,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%53,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta53,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%54,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta54,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%55,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta55,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%56,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta56,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%57,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta57,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%58,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta58,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%59,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta59,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta15 like '%60,=%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid7respuesta60,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%61,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta61,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%62,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta62,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%63,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta63,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%64,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta64,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%65,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta65,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%66,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta66,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%67,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta67,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%68,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta68,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta16 like '%69,=%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid8respuesta69,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%70,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta70,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%71,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta71,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%72,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta72,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%73,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta73,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%74,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta74,
+case when  (select count(*) from apec_informe_final a2 where a2.respuesta17 like '%75,-%' and a2.c_apec=aif.c_apec)>=1 then 'X' else '' end as grid9respuesta75
+from apec_informe_final aif 
+			where c_apec= #{cApec,jdbcType=SMALLINT}
+			and c_reunion = #{cReunion,jdbcType=SMALLINT}
+   	</select>
+ <select id="selectSeccionesReunion3" parameterType="Map"
+		resultMap="SeccionesRegistroMap">
+
+	select a.c_seccion_registro, a.c_reunion, b.c_apec,
+		a.nom_seccion_registro
+		from c_seccion_Registro a,apec_seccion b
+		where
+		a.c_reunion=4
+		and a.c_seccion_registro=b.c_seccion_registro
+		and b.c_apec=#{cApec,jdbcType=SMALLINT}
+		order by
+		a.c_seccion_registro;
+
+	</select>
+
+</mapper>

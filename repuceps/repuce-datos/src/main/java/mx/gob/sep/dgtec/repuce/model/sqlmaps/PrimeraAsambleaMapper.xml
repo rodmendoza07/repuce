@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper">
+  
+  <resultMap id="PrimeraAsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.PrimeraAsambleaVO">
+    <!--
+    	Mapeo para obtener la informacion para el formaulario de la Segunda Asamblea
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+    		
+    <association property="ceInfGral" column="c_cct" 
+    		javaType="CeInfGral" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeInfGralMapper.selectByPrimaryKey" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+
+ 	<association property="hijoPresidente" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.HijoPresidenteElectoVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.HijoPresidenteMapper.selectHijo" />
+    		
+    <association property="presidenteGanador" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.model.PresidenteElecto" 
+    		select="mx.gob.sep.dgtec.repuce.dao.PresidenteGanadorMapper.selectPreGan" />
+    		
+    <association property="secreatioGanador" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.SecretarioElectoVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.SecretarioGanadorMapper.selectSecre" />	
+     
+     <association property="preguntas" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.model.CePreguntas" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CePreguntasMapper.selectByPrimaryKey" />	
+    
+    <association property="validacionPeriodo" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.ValidacionPeriodoVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ValidacionPeriodo.selectPeriodo" />
+    
+    <association property="validacionHijo" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.ValidacionNombreHijoVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.ValidacionNombreHijo.selectNombreHijo" />
+    		
+    								
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="selectNomConsejeros" />
+
+	<collection property="actividades" column="{cCct=c_cct,cSesion=c_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="selectActividades" />
+
+	<collection property="integrantes" column="{cCct=c_cct,cSesion=c_sesion, acta=acta}"
+	 		javaType="ArrayList"
+	 		ofType="CeIntegranteCstm"
+	 		select="selectIntegrantes" />
+
+	<collection property="asistentes" column="{cCct=c_cct,cSesion=c_sesion}" 
+	 		javaType="ArrayList"
+	 		ofType="CeAsistenteCstm"
+	 		select="selectAsistentes" />
+	 		
+<!-- 	<collection property="escrutadores" column="{cCct=c_cct,cSesion=c_sesion}" -->
+<!-- 	 		javaType="ArrayList" -->
+<!-- 	 		ofType="CeEscrutador" -->
+<!-- 	 		select="selectEscrutadores" />	 		 -->
+
+	<collection property="asuntos" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeAsunto"
+	 		select="selectAsuntos" />
+	 		 		
+	<collection property="presidentes" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeCandidatopresi"
+	 		select="selectPresidentes" />	
+	 		
+	<collection property="secretarios" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeCandidatosecre"
+	 		select="selectSecretarios" />
+	 		
+	<collection property="presidentesActa" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeCandidatopresiCstm"
+	 		select="selectPresidentesActa" />	 		
+
+	<collection property="secretariosActa" column="{cCct=c_cct,cSesion=c_sesion}"
+	 		javaType="ArrayList"
+	 		ofType="CeCandidatopresiCstm"
+	 		select="selectSecretarioActa" />
+
+<collection property="consejeros" column="{cCct=c_cct,cSesion=c_sesion}"
+			javaType="ArrayList"
+			ofType="ConsejeroC1415"
+			select="selectConsejero" /> 			 		
+ 		
+    		
+  </resultMap>
+  
+  <resultMap id="CeActSesionMap" type="mx.gob.sep.dgtec.repuce.model.CeActSesionCstm">
+    <id column="c_actividad" jdbcType="SMALLINT" property="cActividad" />
+    <result column="nom_actividad" jdbcType="VARCHAR" property="nomActividad" />
+    <result column="nom_otra_actividad" jdbcType="VARCHAR" property="nomOtraActividad" />
+  </resultMap>
+  
+  <resultMap id="CeIntegrantetMap" type="mx.gob.sep.dgtec.repuce.model.CeIntegranteCstm">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="csc_integrante" jdbcType="SMALLINT" property="cscIntegrante" />
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paternoIntegrante" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="maternoIntegrante" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombreIntegrante" />
+    <result column="email_integrante" jdbcType="VARCHAR" property="emailIntegrante" />
+    <result column="tel_integrante" jdbcType="VARCHAR" property="telIntegrante" />
+    <result column="fch_alta" jdbcType="DATE" property="fchAlta" />
+    <result column="c_cargo" jdbcType="INTEGER" property="cCargo" />
+    <result column="nom_cargo" jdbcType="VARCHAR" property="nomCargo" />
+    <result column="c_niveleduc" jdbcType="INTEGER" property="cNiveleduc" />
+    <result column="nom_niveleduc" jdbcType="VARCHAR" property="nomNiveleduc" />
+    <result column="genero" jdbcType="CHAR" property="genero" />
+    <result column="c_grado" jdbcType="INTEGER" property="cGrado" />
+    <result column="c_nivel" jdbcType="SMALLINT" property="cNivel" />
+    <result column="nom_nivel" jdbcType="SMALLINT" property="nomNivel" />
+    <result column="c_calidad" jdbcType="INTEGER" property="cCalidad" />
+    <result column="nom_calidad" jdbcType="SMALLINT" property="nomCalidad" />
+    <result column="estatus_int" jdbcType="SMALLINT" property="estatusInt" />
+    <result column="curp" jdbcType="VARCHAR" property="curp" />
+    <result column="identificacion" jdbcType="INTEGER" property="identificacion" />
+  </resultMap>
+  
+  <resultMap id="CeAsistenteMap" type="mx.gob.sep.dgtec.repuce.model.CeAsistenteCstm">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="csc_asistente" jdbcType="SMALLINT" property="cscAsistente" />
+    <result column="paterno_asistente" jdbcType="VARCHAR" property="paternoAsistente" />
+    <result column="materno_asistente" jdbcType="VARCHAR" property="maternoAsistente" />
+    <result column="nombre_asistente" jdbcType="VARCHAR" property="nombreAsistente" />
+    <result column="c_calidad" jdbcType="INTEGER" property="cCalidad" />
+    <result column="nom_calidad" jdbcType="VARCHAR" property="nomCalidad" />
+  </resultMap>
+    
+<!--   <resultMap id="CeEscrutadoresMap" type="mx.gob.sep.dgtec.repuce.model.CeEscrutador"> -->
+<!--     <id column="c_cct" jdbcType="INTEGER" property="cCct" /> -->
+<!--     <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" /> -->
+<!--     <id column="csc_escrutador" jdbcType="SMALLINT" property="cscEscrutador" /> -->
+<!--     <result column="paterno_escrutador" jdbcType="VARCHAR" property="paternoEscrutador" /> -->
+<!--     <result column="materno_escrutador" jdbcType="VARCHAR" property="maternoEscrutador" /> -->
+<!--     <result column="nombre_escrutador" jdbcType="VARCHAR" property="nombreEscrutador" />     -->
+<!--   </resultMap> -->
+
+
+  <resultMap id="CePresidenteActaMap" type="mx.gob.sep.dgtec.repuce.model.CeCandidatopresiCstm">
+    <id column="idcandidato" jdbcType="SMALLINT" property="idcandidato" />
+    <result column="idconsejero" jdbcType="SMALLINT" property="idconsejero" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombre" />
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paterno" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="materno" />
+    <result column="votos" jdbcType="SMALLINT" property="votos" />        
+  </resultMap>
+  
+  <resultMap id="CePresidentesMap" type="mx.gob.sep.dgtec.repuce.model.CeCandidatopresi">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="idcandidato" jdbcType="SMALLINT" property="idcandidato" />
+    <result column="idconsejero" jdbcType="SMALLINT" property="idconsejero" />
+    <result column="votos" jdbcType="SMALLINT" property="votos" />        
+    <result column="acreditacion" jdbcType="VARCHAR" property="acreditacion" />
+    <result column="nombre_hijo_presi" jdbcType="VARCHAR" property="nombreHijoPresi" />
+  </resultMap>
+    
+  <resultMap id="CeSecretarioActaMap" type="mx.gob.sep.dgtec.repuce.model.CeCandidatopresiCstm">
+    <id column="idcandidato" jdbcType="SMALLINT" property="idcandidato" />
+    <result column="idconsejero" jdbcType="SMALLINT" property="idconsejero" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombre" />
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paterno" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="materno" />
+    <result column="votos" jdbcType="SMALLINT" property="votos" />        
+  </resultMap>
+  
+  <resultMap id="CeSecretariosMap" type="mx.gob.sep.dgtec.repuce.model.CeCandidatosecre">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="idcandidato" jdbcType="SMALLINT" property="idcandidato" />
+    <result column="idconsejero" jdbcType="SMALLINT" property="idconsejero" />
+    <result column="votos" jdbcType="SMALLINT" property="votos" />        
+  </resultMap>    
+    
+  <resultMap id="CeAsuntoMap" type="mx.gob.sep.dgtec.repuce.model.CeAsunto">
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+    <id column="csc_asunto" jdbcType="SMALLINT" property="cscAsunto" />
+    <result column="asunto" jdbcType="VARCHAR" property="asunto" />
+    <result column="acuerdo" jdbcType="VARCHAR" property="acuerdo" />        
+  </resultMap>
+  
+  <resultMap id="ConsejeroC1415Map" type="mx.gob.sep.dgtec.repuce.model.ConsejeroC1415">    
+    <id column="csc_integrante" jdbcType="SMALLINT" property="cscIntegrante" />    
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paternoIntegrante" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="maternoIntegrante" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombreIntegrante" />      
+  </resultMap>
+
+  <select id="selectPrimeraAsamblea" parameterType="Integer" resultMap="PrimeraAsambleaMap">      
+   	select g.c_cct, c_sesion,
+   		0 as acta
+   	from ce_inf_gral g, outer(ce_sesion s) 
+   	where g.c_cct = #{cCct}
+                and g.c_cct = s.c_cct
+   		and c_sesion = 1   		
+  </select>    
+
+  <select id="selectPrimeraAsambleaActa" parameterType="Integer" resultMap="PrimeraAsambleaMap">
+   	select c_cct, c_sesion,
+   		1 as acta
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion = 1
+  </select> 
+
+  <select id="selectNomConsejeros" parameterType="Integer" resultType="String">
+   	select nombre_integrante||' '||paterno_integrante||' '||materno_integrante
+   	from ce_integrante
+   	where c_cct = #{cCct}
+   		and c_sesion = 1
+   		and c_cargo = 3
+  </select> 
+
+  <select id="selectMaxCscIntBaja" parameterType="Integer" resultType="Short">
+   	select nvl(max(csc_integrante),0)+1  
+   	from ce_integrante_baja
+   	where c_cct = #{cCct}
+   		and c_sesion = 1
+  </select>    
+  
+  <select id="selectActividades" parameterType="Map" resultMap="CeActSesionMap ">
+   select c.c_actividad, nom_actividad, nom_otra_actividad
+    from c_act_sesion c 
+    join ce_act_sesion a on c.c_sesion = a.c_sesion 
+        and c.c_actividad = a.c_actividad
+    where c_cct = #{cCct}
+        and a.c_sesion = #{cSesion}
+    order by c.c_actividad
+  </select>
+
+
+  <select id="selectIntegrantes" parameterType="Map" resultMap="CeIntegrantetMap">
+			<choose>
+			    <when test="acta != 0">
+			  		select i.c_cct, i.c_sesion, csc_integrante, paterno_integrante, materno_integrante, nombre_integrante, 
+					    email_integrante, tel_integrante, fch_alta, i.c_cargo, nom_cargo, i.c_niveleduc, nom_niveleduc,
+					    genero, i.c_grado, nom_nivel,
+					    i.c_nivel, i.c_calidad, nom_calidad, 1 as estatus_int, curp,i.identificacion
+					from ce_integrante i
+					left join c_cargo_int ci on i.c_cargo = ci.'c_cargo'
+					left join c_calidad_int cal on i.c_calidad = cal.c_calidad 
+					left join c_niveleduc n on i.c_niveleduc = n.c_niveleduc
+					left join c_grado g on i.c_grado = g.c_grado
+				    where c_cct = #{cCct}
+				        and i.c_sesion = #{cSesion,jdbcType=SMALLINT}
+					    and fch_alta not in (
+					    	select max(fch_alta) 
+					    	from ce_integrante where c_cct = #{cCct} 
+					    		and i.c_sesion = #{cSesion,jdbcType=SMALLINT})
+					union all
+					select i.c_cct, i.c_sesion, csc_integrante, paterno_integrante, materno_integrante, nombre_integrante, 
+					    email_integrante, tel_integrante, fch_baja, i.c_cargo, nom_cargo, i.c_niveleduc, nom_niveleduc,
+					    genero, i.c_grado, nom_nivel,
+					    i.c_nivel, i.c_calidad, nom_calidad, 0 as estatus_int, curp,i.identificacion
+					from ce_integrante_baja i
+					left join c_cargo_int ci on i.c_cargo = ci.'c_cargo'
+					left join c_calidad_int cal on i.c_calidad = cal.c_calidad 
+					left join c_niveleduc n on i.c_niveleduc = n.c_niveleduc
+					left join c_grado g on i.c_grado = g.c_grado
+				    where c_cct = #{cCct}
+				        and i.c_sesion = #{cSesion,jdbcType=SMALLINT}
+					union all
+					select i.c_cct, i.c_sesion, csc_integrante, paterno_integrante, materno_integrante, nombre_integrante, 
+					    email_integrante, tel_integrante, fch_alta, i.c_cargo, nom_cargo, i.c_niveleduc, nom_niveleduc,
+					    genero, i.c_grado, nom_nivel,
+					    i.c_nivel, i.c_calidad, nom_calidad, 2 as estatus_int, curp,i.identificacion
+					from ce_integrante i
+					left join c_cargo_int ci on i.c_cargo = ci.'c_cargo'
+					left join c_calidad_int cal on i.c_calidad = cal.c_calidad 
+					left join c_niveleduc n on i.c_niveleduc = n.c_niveleduc
+					left join c_grado g on i.c_grado = g.c_grado
+				    where c_cct = #{cCct}
+				        and i.c_sesion = #{cSesion,jdbcType=SMALLINT}
+					    and fch_alta in (
+					    	select max(fch_alta) 
+					    	from ce_integrante where c_cct = #{cCct} 
+					    		and i.c_sesion = #{cSesion,jdbcType=SMALLINT})
+			    </when>
+			    <otherwise>
+			    	select
+					    c_cct, c_sesion, csc_integrante, paterno_integrante, materno_integrante, nombre_integrante, 
+					    email_integrante, tel_integrante, fch_alta, c_cargo, c_niveleduc, genero, c_grado, 
+					    c_nivel, c_calidad, curp,identificacion
+					from ce_integrante
+				    where c_cct = #{cCct}
+				        and c_sesion = #{cSesion,jdbcType=SMALLINT}
+				    order by c_sesion
+			    </otherwise>
+		  	</choose>
+  </select>
+  
+  <select id="selectAsistentes" parameterType="Map" resultMap="CeAsistenteMap">
+  		select c_cct, a.c_sesion, csc_asistente, paterno_asistente,
+  			materno_asistente, nombre_asistente, 
+  			a.c_calidad, c.nom_calidad 
+    	from ce_asistente a join c_calidad_int c 
+    		on a.c_calidad = c.c_calidad
+    	where c_cct = #{cCct,jdbcType=SMALLINT}
+    		and c_sesion = #{cSesion,jdbcType=SMALLINT}
+  </select>
+  
+  <select id="selectIntegrante" parameterType="Map" resultMap="CeIntegrantetMap">
+		select
+		c_cct, c_sesion, csc_integrante, paterno_integrante, materno_integrante, nombre_integrante, 
+		    email_integrante, tel_integrante, fch_alta, i.c_cargo, c_niveleduc, genero, c_grado, 
+		    c_nivel, i.c_calidad, nom_cargo, nom_calidad, curp
+		from ce_integrante i 
+		join c_cargo_int c on i.'c_cargo' = c.'c_cargo'
+		join c_calidad_int ca on i.c_calidad = ca.c_calidad
+		where c_cct = #{cCct,jdbcType=INTEGER}
+		  and csc_integrante = #{cscIntegrante,jdbcType=SMALLINT}
+  </select>
+	
+  <select id="selectCURPAValidar" resultMap="CeIntegrantetMap">
+		select curp, paterno_integrante, materno_integrante, 
+			nombre_integrante from ce_integrante
+		where curp_valida = '0'
+		    and curp is not null
+		    and trim(curp) != ''	
+  </select>
+
+<!--   <select id="selectEscrutadores" parameterType="Map" resultMap="CeEscrutadoresMap">			 -->
+<!--     	select -->
+<!-- 		    c_cct, c_sesion, csc_escrutador, paterno_escrutador, materno_escrutador, nombre_escrutador -->
+<!-- 		from ce_escrutador -->
+<!-- 	    where c_cct = #{cCct} -->
+<!-- 	        and c_sesion = #{cSesion,jdbcType=SMALLINT} -->
+<!-- 	    order by c_sesion			     -->
+<!--   </select> -->
+
+  <select id="selectPresidentes" parameterType="Map" resultMap="CePresidentesMap">			
+    	select c_cct, c_sesion, idcandidato, idconsejero, votos, acreditacion,nombre_hijo_presi
+		from   ce_candidatopresi
+	    where  c_cct = #{cCct}
+	      and  c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    order by c_sesion			    
+  </select>
+
+  <select id="selectPresidentesActa" parameterType="Map" resultMap="CePresidenteActaMap">			
+    	select idcandidato, idconsejero, paterno_integrante,materno_integrante,nombre_integrante,votos
+  		  from ce_candidatopresi a,
+       		   ce_integrante b
+ 		 where b.csc_integrante = a.idconsejero    
+   		   and b.c_cct = a.c_cct
+   		   and b.c_sesion = a.c_sesion
+   		   and b.c_cct = #{cCct}  
+      	   and b.c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    
+  </select>
+    
+  <select id="selectSecretarioActa" parameterType="Map" resultMap="CeSecretarioActaMap">			
+    	select idcandidato, idconsejero, paterno_integrante,materno_integrante,nombre_integrante,votos
+  		  from ce_candidatosecre a,
+       		   ce_integrante b
+ 		 where b.csc_integrante = a.idconsejero    
+   		   and b.c_cct = a.c_cct
+   		   and b.c_sesion = a.c_sesion
+   		   and b.c_cct = #{cCct}  
+      	   and b.c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    
+  </select>      
+    
+  <select id="selectSecretarios" parameterType="Map" resultMap="CeSecretariosMap">			
+    	select c_cct, c_sesion, idcandidato, idconsejero, votos
+		from   ce_candidatosecre
+	    where  c_cct = #{cCct}
+	      and  c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    order by c_sesion			    
+  </select>
+    
+  <select id="selectAsuntos" parameterType="Map" resultMap="CeAsuntoMap">			
+    	select
+		    c_cct, c_sesion, csc_asunto, asunto, acuerdo 
+		from ce_asunto
+	    where c_cct = #{cCct}
+	        and c_sesion = #{cSesion,jdbcType=SMALLINT}
+	    order by c_sesion			    
+  </select>
+  
+   <select id="selectConsejero" parameterType="Map" resultMap="ConsejeroC1415Map">			
+    	select ce.csc_integrante,ce.paterno_integrante,ce.materno_integrante,ce.nombre_integrante
+			from ce_integrante ce where ce.csc_integrante not in
+				(select idconsejero
+			from ce_candidatopresi cec , ce_integrante cei
+				where cec.votos =(select max(votos) from ce_candidatopresi pre where pre.c_cct=cec.c_cct and pre.c_sesion=cec.c_sesion)
+				and csc_integrante=idconsejero  and cec.c_cct=cei.c_cct  
+				and cec.c_cct=ce.c_cct)
+				and ce.c_cct=#{cCct}
+	       			    
+  </select>
+  
+</mapper>

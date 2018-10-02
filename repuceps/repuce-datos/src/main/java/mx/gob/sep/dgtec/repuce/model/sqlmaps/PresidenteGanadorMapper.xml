@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.PresidenteGanadorMapper">
+  
+  <resultMap id="PreMap" type="mx.gob.sep.dgtec.repuce.model.PresidenteElecto">
+   
+   	<id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <result column="paterno_integrante" jdbcType="VARCHAR" property="paterno" />
+    <result column="materno_integrante" jdbcType="VARCHAR" property="materno" />
+    <result column="nombre_integrante" jdbcType="VARCHAR" property="nombre" />
+    <result column="votos" jdbcType="SMALLINT" property="votos" />
+    </resultMap>
+    
+  <select id="selectPreGan" parameterType="map" resultMap="PreMap">
+  		select limit 1 cec.c_cct,paterno_integrante,materno_integrante,nombre_integrante,votos 
+  		from ce_candidatopresi cec , ce_integrante cei
+		where cec.votos =(select max(votos) from ce_candidatopresi pre where pre.c_cct=cec.c_cct and pre.c_sesion=cec.c_sesion)
+		and csc_integrante=idconsejero  and cec.c_cct=cei.c_cct  
+		and cec.c_cct= #{cCct,jdbcType=INTEGER}
+  		</select>
+    
+</mapper>

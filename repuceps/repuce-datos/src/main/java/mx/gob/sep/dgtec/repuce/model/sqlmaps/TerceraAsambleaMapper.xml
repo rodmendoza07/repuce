@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.TerceraAsambleaMapper">
+  
+  <resultMap id="TerceraAsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.ReunionVO">
+    <!--
+    	Mapeo para obtener la informacion para el formulario de la Tercera Asamblea
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    
+    <id column="num_consejeros" jdbcType="INTEGER" property="numConsejeros" />
+ 		
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" /> 		
+
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectNomConsejeros" />
+
+    <collection property="actividades" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectActividades" />
+
+	<collection property="asistentes" column="{cCct=c_cct,cSesion=c_sesion}" 
+	 		javaType="ArrayList"
+	 		ofType="CeAsistenteCstm"
+	 		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectAsistentes" />
+    		
+  </resultMap>
+  
+  <select id="selectTerceraAsamblea" parameterType="Integer" resultMap="TerceraAsambleaMap">
+   	select c_cct, 7 as c_sesion, 2 as c_sesion_1ra_sesion
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion = 1    
+  </select>
+
+</mapper>

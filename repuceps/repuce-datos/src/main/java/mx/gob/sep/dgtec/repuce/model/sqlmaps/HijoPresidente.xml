@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.HijoPresidenteMapper">
+  
+  <resultMap id="HijoMap" type="mx.gob.sep.dgtec.repuce.vo.HijoPresidenteElectoVO">
+   
+   	<id column="c_cct" jdbcType="INTEGER" property="cCct" />
+    <result column="nomc_niveleduc" jdbcType="VARCHAR" property="nivel" />
+    <result column="nom_nivel" jdbcType="VARCHAR" property="grado" />
+    <result column="acreditacion" jdbcType="VARCHAR" property="acreditacion" />
+    <result column="hijo" jdbcType="VARCHAR" property="hijo" />
+    
+    </resultMap>
+    
+  <select id="selectHijo" parameterType="map" resultMap="HijoMap">
+  		select limit 1 ce.c_cct,cc.nom_nivel as nomc_niveleduc,cg.nom_nivel as nom_nivel,ce.acreditacion,nombre_hijo_presi as hijo 
+  		from ce_candidatopresi ce , ce_integrante cei, c_grado cg, c_cct cc
+		where ce.votos =(select max(votos) from ce_candidatopresi pre where pre.c_cct=ce.c_cct and pre.c_sesion=ce.c_sesion)
+		and csc_integrante=idconsejero 
+		and ce.c_cct=cei.c_cct  and ce.c_cct=cc.c_cct 
+		and cei.c_grado=cg.c_grado and  ce.c_cct=#{cCct,jdbcType=INTEGER}
+  		</select>
+    
+</mapper>

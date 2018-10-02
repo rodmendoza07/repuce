@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-07T14:08:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrimeraReunion" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc5c792d-54f3-4676-a745-de555fe2d627">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="java.util.List"/>
+	<import value="mx.gob.sep.dgtec.conafe.vo.PrimeraReunionVO"/>
+	<import value="mx.gob.sep.dgtec.repuce.util.Constants"/>
+	<import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<import value="java.util.ArrayList"/>
+	<parameter name="pRuta" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/Users/lourdes.ortiz/Documents/workspace-sts-3.3.0.RELEASE/repuceps/repuce-web/src/main/webapp"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/Users/lourdes.ortiz/Documents/workspace-sts-3.3.0.RELEASE/repuceps/repuce-web/src/main/webapp/WEB-INF/jasperTemplates"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="primeraReunion" class="mx.gob.sep.dgtec.conafe.vo.PrimeraReunionVO"/>
+	<variable name="CURRENT_DS_BEAN" class="java.lang.String">
+		<variableExpression><![CDATA[((List)((JRBeanCollectionDataSource)$P{REPORT_DATA_SOURCE}).getData())
+    .subList($V{REPORT_COUNT}.intValue()-1,$V{REPORT_COUNT}.intValue())]]></variableExpression>
+	</variable>
+	<title>
+		<band height="15" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="270" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Centros" positionType="Float" mode="Transparent" x="4" y="30" width="746" height="10" uuid="cc17ea7f-5079-409e-94ca-07736fbe851f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(
+    $F{primeraReunion}.getNumeroAlumnos(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/CctNinosNinasPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Dialogo01" positionType="Float" x="4" y="16" width="746" height="10" uuid="cc17ea7f-5079-409e-94ca-07736fbe851f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/DialogoPrimeraReunion01.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Dialogo02" positionType="Float" x="4" y="162" width="747" height="10" uuid="cc17ea7f-5079-409e-94ca-07736fbe851f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList( $F{primeraReunion}.getReunion() ) ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/DialogoPrimeraReunion02.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-Anuncio" positionType="Float" x="4" y="202" width="747" height="9" isRemoveLineWhenBlank="true" uuid="694c4735-0e04-43a0-b83c-d9e642441e6f"/>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/AcuerdoPrivacidadPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Integrantes" positionType="Float" x="4" y="172" width="748" height="10" uuid="cc17ea7f-5079-409e-94ca-07736fbe851f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(
+ $F{primeraReunion}.getIntegrantesR1(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/RepresentantesApecPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Instructores" positionType="Float" x="4" y="182" width="747" height="10" uuid="cc17ea7f-5079-409e-94ca-07736fbe851f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( $F{primeraReunion}.getInstructoresR1(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/LecsPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-PrincipalesDificultades" positionType="Float" x="4" y="43" width="746" height="10" uuid="602ed3a4-ba0e-422c-8a9a-967ee7b7dd47"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(
+   $F{primeraReunion}.getDificultades(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/PrincipalesDificultadesPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-PrincipalesNecesidades" positionType="Float" x="4" y="56" width="746" height="10" uuid="c41db59d-35f7-4e31-8f93-f9d5bf5a64cd"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(
+   $F{primeraReunion}.getNecesidades(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/PrincipalesNecesidadesPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="-15" width="748" height="15" uuid="3c14ce38-1669-46c8-bf8f-af34ecf82691">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Minuta de asamblea para elaborar el plan de trabajo.]]></text>
+			</staticText>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte1" positionType="Float" x="4" y="70" width="746" height="10" uuid="9f8d61c5-1596-473f-8348-0e62f3e23c24"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte2" positionType="Float" x="4" y="81" width="746" height="10" uuid="93531e73-92d7-4b7a-9b45-d60f4dcfc9cf"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP2PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte3" positionType="Float" x="4" y="92" width="746" height="10" uuid="3ef1b53d-7d3d-4c99-8fc0-ce0e96d986d3"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP3PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte4" positionType="Float" x="4" y="102" width="746" height="10" uuid="a6c559b3-7902-4383-9b13-93e2a90ad84f"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP4PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte5" positionType="Float" x="4" y="112" width="746" height="10" uuid="c7fe9ace-337e-43d5-aefb-4401e5a6afdc"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP5PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte6" positionType="Float" x="4" y="122" width="746" height="10" uuid="d8847e00-2b1b-47f4-9616-1609c1ba8d8c"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP6PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte7" positionType="Float" x="4" y="132" width="746" height="10" uuid="1fbf85d5-76a8-4501-9b1d-99dcfeae4381"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP7PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte8" positionType="Float" x="4" y="142" width="746" height="10" uuid="61862970-605f-4ec4-902f-1d2da8c87f01"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP8PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement key="subreport-ActividadesParte9" positionType="Float" x="4" y="152" width="746" height="10" uuid="872c6ce0-631e-4791-86f1-203ff588b8fd"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource( new ArrayList(
+    Arrays.asList($F{primeraReunion})  ),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/ActividadesUnoP9PrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-Promotor" positionType="Float" x="4" y="192" width="747" height="10" uuid="b33e71d7-6839-47dc-92b7-c61a66fe7d86"/>
+				<subreportParameter name="pRuta">
+					<subreportParameterExpression><![CDATA[$P{pRuta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(
+    $F{primeraReunion}.getPromotor(),false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{pRuta} + "/WEB-INF/jasperTemplates/PromotorPrimeraReunion.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-62" stretchType="RelativeToTallestObject" mode="Transparent" x="7" y="4" width="273" height="13" isPrintInFirstWholeBand="true" forecolor="#000000" backcolor="#FFFFFF" uuid="c9355dbf-f33b-42b3-ad99-5454e1fe6103"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARACTERES DE AUTENTICIDAD DE LA MINUTA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-56" mode="Transparent" x="13" y="26" width="209" height="16" isRemoveLineWhenBlank="true" uuid="4cddd4ff-8bc3-47a1-8090-db70a78598bd"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-57" mode="Transparent" x="535" y="25" width="170" height="16" isRemoveLineWhenBlank="true" uuid="ba6862ae-414d-44e4-b6f9-b2a96f4f70db"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-58" mode="Transparent" x="709" y="25" width="36" height="16" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF" uuid="c882f40d-61ea-4ea3-855e-499f87299fac"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="207" y="4" width="101" height="13" uuid="37bb99f1-7203-442e-b8a9-c24b2aebea3f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primeraReunion}.getReunion().getCadena()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="10">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</pageFooter>
+</jasperReport>

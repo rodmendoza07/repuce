@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.Comites1SesionMapper">
+
+   <resultMap id="Comites1SesionMap" type="mx.gob.sep.dgtec.repuce.vo.Comites1SesionVO">  	   
+  	  <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+  	  <id column="c_sesion" jdbcType="SMALLINT" property="cSesion" />
+  	  <id column="nom_comite" jdbcType="VARCHAR" property="nomComite" />  	   
+  	  <id column="num_integrantes" jdbcType="SMALLINT" property="numIntegrantes" />
+  	  <result column="nom_presidente" jdbcType="VARCHAR" property="nomPresidente" />
+  	  <result column="nom_cargo" jdbcType="VARCHAR" property="nomCargo" />	  
+	  <result column="id_acuerdo" jdbcType="INTEGER" property="idAcuerdo" />
+	  <result column="nom_otro_comite" jdbcType="VARCHAR" property="nomOtroComite" />
+	  <result column="id_comite" jdbcType="INTEGER" property="idComite" />
+	         		            
+   </resultMap>
+   
+   
+   
+	<select id="selectComites1SesionActa" parameterType="Map" resultMap="Comites1SesionMap">
+select c_cct,
+	  c_sesion,
+	  id_comite,
+	  nom_comite,
+	  nom_otro_comite,
+	  num_integrantes,
+	  nom_presidente,
+	  nom_cargo,
+	  id_acuerdo
+	  from ce_comites cc, c_cargo_comite ccc
+	where c_cargo=id_calidad 
+	and c_cct =  #{cCct,jdbcType=INTEGER}
+	and c_sesion= #{cSesion,jdbcType=SMALLINT}
+	 order by 3
+  </select>
+  
+  	</mapper>

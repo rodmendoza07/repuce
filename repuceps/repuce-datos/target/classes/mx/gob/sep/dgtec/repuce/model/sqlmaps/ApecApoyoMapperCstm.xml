@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ApecApoyoMapperCstm">
+	<resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ApecApoyoCstm">
+		<id column="c_apec" jdbcType="INTEGER" property="cApec" />
+		<id column="c_reunion" jdbcType="SMALLINT" property="cReunion" />
+		<id column="c_apoyo" jdbcType="SMALLINT" property="cApoyo" />
+	</resultMap>
+
+		<select id="selectApoyosRegistradosPosterior" parameterType="map"
+			resultMap="BaseResultMap">
+
+			select a.c_apoyo, a.c_reunion, a.c_apec
+			from apec_apoyo a, c_apoyo b
+			where a.c_apec=#{cApec,jdbcType=INTEGER}
+			and a.c_reunion<![CDATA[>]]>#{cReunion,jdbcType=SMALLINT}
+			and b.c_tipo_apoyo=3
+			and a.c_apoyo=b.c_apoyo					
+			
+		</select>
+
+
+</mapper>
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ConProgramasYComitesMapper">
+	
+	<resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ConProgramasYComitesCstm">
+		<id column="nombre" jdbcType="VARCHAR" property="nombre" />
+		<id column="tipo" jdbcType="VARCHAR" property="tipo" />
+
+	</resultMap>
+	<select id="selectConProgramasYComites"
+		parameterType="map" resultMap="BaseResultMap">		
+
+	 select case when nom_programa='Otro' then nom_otro_programa else nom_programa end as nombre, 'Programa Federal' as tipo
+ from ce_programas cp , c_programa c
+ where cp.c_programa=c.c_programa
+ and tipo_programa=0
+ and cp.c_cct=#{cCct,jdbcType=INTEGER}
+ union 
+ select case when nom_programa='Otro' then nom_otro_programa else nom_programa end as nombre, 'Programa Estatal' as tipo
+ from ce_programas cp , c_programa c
+ where cp.c_programa=c.c_programa
+ and tipo_programa=1
+ and cp.c_cct=#{cCct,jdbcType=INTEGER}
+ union
+ select case when nom_programa='Otro' then nom_otro_programa else nom_programa end as nombre, 'Programa Municipal' as tipo
+ from ce_programas cp , c_programa c
+ where cp.c_programa=c.c_programa
+ and tipo_programa=2
+ and cp.c_cct=#{cCct,jdbcType=INTEGER}
+ union
+ select case when nom_programa='Otro' then nom_otro_programa else nom_programa end as nombre, 'Programa OSC' as tipo
+ from ce_programas cp , c_programa c
+ where cp.c_programa=c.c_programa
+ and tipo_programa=3
+ and cp.c_cct=#{cCct,jdbcType=INTEGER}
+ union
+ select case when nom_comite='Otro' then nom_otro_comite else nom_comite end , 'Comité'
+ from ce_comites 
+ where c_cct=#{cCct,jdbcType=INTEGER}
+ order by tipo
+ 
+	
+	
+	</select>
+	</mapper>

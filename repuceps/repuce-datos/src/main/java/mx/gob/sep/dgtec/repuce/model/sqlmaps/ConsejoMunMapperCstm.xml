@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.ConsejoMunMapperCstm">
+  <resultMap id="BaseResultMap" type="mx.gob.sep.dgtec.repuce.model.ConsejoMunCstm">
+    <id column="id_entidadfed" jdbcType="SMALLINT" property="idEntidadfed" />
+    <id column="id_municipio" jdbcType="INTEGER" property="idMunicipio" />
+    <id column="nom_entidadfed" jdbcType="VARCHAR" property="nomEntidadfed" />
+    <id column="nom_municipio" jdbcType="VARCHAR" property="nomMunicipio" />
+    <result column="archivo" jdbcType="VARCHAR" property="archivo" />
+  </resultMap>
+  <select id="selectActasMunicipales" parameterType="map" resultMap="BaseResultMap">
+    select m.id_entidadfed,	m.id_municipio, archivo, 
+    	trim(nom_entidadfed) as nom_entidadfed, 
+    	trim(nom_municipio) as  nom_municipio
+    from consejo_mun m
+    join c_entidad e on m.id_entidadfed = e.id_entidadfed
+    join c_municipio cm on  m.id_entidadfed = cm.id_entidadfed
+    	and  m.id_municipio = cm.id_municipio  
+    where 1=1
+    <if test="idEntidadfed">
+    	and m.id_entidadfed = #{idEntidadfed,jdbcType=SMALLINT}
+    </if>
+    order by m.id_entidadfed, m.id_municipio
+  </select>
+</mapper>

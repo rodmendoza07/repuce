@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mx.gob.sep.dgtec.repuce.dao.SegundaAsambleaMapper">
+  
+  <resultMap id="SegundaAsambleaMap" type="mx.gob.sep.dgtec.repuce.vo.SegundaAsambleaVO">
+    <!--
+    	Mapeo para obtener la informacion para el formaulario de la Segunda Asamblea
+    -->
+    <id column="c_cct" jdbcType="INTEGER" property="cCct" />
+
+    <result column="num_consejeros" jdbcType="INTEGER" property="numConsejeros" />
+
+    <association property="cctViewVO" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.CCctViewVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CCctViewMapper.selectCCctView" />
+
+    <association property="ceSesion" column="{cCct=c_cct,cSesion=c_sesion}" 
+    		javaType="CeSesion" 
+    		select="mx.gob.sep.dgtec.repuce.dao.CeSesionMapper.selectByPrimaryKey" />
+
+    <association property="planeacion" column="c_cct" 
+    		javaType="CePlaneacionCstm" 
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper.selectPlaneacion" />
+    		
+    <association property="indicadorEnlace" column="c_cct" 
+    		javaType="mx.gob.sep.dgtec.repuce.vo.IndicadorEnlaceVO" 
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectIndicadorEnlace" />
+
+	<collection property="nomConsejeros" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="String"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectNomConsejeros" />
+
+    <collection property="actividades" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeActSesionCstm"
+    		select="selectActividades" />
+
+	<collection property="programas" column="{cCct=c_cct,cSesion=c_sesion_1ra_sesion}"
+    		javaType="ArrayList"
+    		ofType="CeProgramaCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper.selectProgramas" />
+
+    <collection property="mejoras" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeMejoraCctCstm"
+    		select="selectMejorasCct" />
+
+    <collection property="recursos" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeRecurso"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper.selectRecursos" />
+
+    <collection property="comites" column="c_cct"
+    		javaType="ArrayList"
+    		ofType="CeComiteCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.PrimeraSesionMapper.selectComites" />
+
+    <collection property="metas" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeCompEnlace"
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectMetaEnlace" /> 
+
+    <collection property="compromisos" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CeCompEnlaceCstm"
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectCompEnlace" />
+
+    <collection property="resultadosEnlace" column="c_cct" 
+    		javaType="ArrayList"
+    		ofType="CctResultEnlace"
+    		select="mx.gob.sep.dgtec.repuce.dao.SegundaSesionMapper.selectResultadosEnlace" />
+    		
+	<collection property="asistentes" column="{cCct=c_cct,cSesion=c_sesion}" 
+	 		javaType="ArrayList"
+	 		ofType="CeAsistenteCstm"
+	 		select="mx.gob.sep.dgtec.repuce.dao.PrimeraAsambleaMapper.selectAsistentes" />
+    		    		
+  </resultMap>
+  
+  <resultMap id="CeMejoraCctMap" type="mx.gob.sep.dgtec.repuce.model.CeMejoraCctCstm">
+    <id column="c_mejora_cct" jdbcType="SMALLINT" property="cMejoraCct" />
+    <result column="nom_mejora_cct" jdbcType="VARCHAR" property="nomMejoraCct" />
+    <result column="nom_otra_mejora" jdbcType="VARCHAR" property="nomOtraMejora" />
+    <result column="actividades" jdbcType="VARCHAR" property="actividades" />
+    <result column="metas_objetivos" jdbcType="VARCHAR" property="metasObjetivos" />
+    <result column="monto" jdbcType="DECIMAL" property="monto" />
+    <result column="monto_str" jdbcType="VARCHAR" property="montoStr" />
+    <result column="actividades_fin" jdbcType="VARCHAR" property="actividadesFin" />
+    <result column="objetivo_fin" jdbcType="VARCHAR" property="objetivoFin" />
+    <result column="ind_recurso" jdbcType="VARCHAR" property="indRecurso" />
+    <result column="periodo_inicio" jdbcType="VARCHAR" property="periodoInicio" />
+  </resultMap>
+  
+  <resultMap id="CeActSesionMap" type="mx.gob.sep.dgtec.repuce.model.CeActSesionCstm">
+    <id column="c_actividad" jdbcType="SMALLINT" property="cActividad" />
+    <result column="nom_actividad" jdbcType="VARCHAR" property="nomActividad" />
+  </resultMap>
+  
+  <select id="selectSegundaAsamblea" parameterType="Integer" resultMap="SegundaAsambleaMap">
+   	select c_cct, 4 as c_sesion, 2 as c_sesion_1ra_sesion
+   	from ce_sesion
+   	where c_cct = #{cCct}
+   		and c_sesion in (2,3)
+   	group by c_cct
+  </select>
+
+  <select id="selectMejorasCct" parameterType="Integer" resultMap="CeMejoraCctMap">
+    select cm.c_mejora_cct,
+		nom_mejora_cct,
+		nom_otra_mejora,
+		actividades,
+		metas_objetivos,
+		monto,
+		monto_str,
+		actividades_fin,
+		objetivo_fin,
+		ind_recurso,
+		periodo_inicio
+    from ce_mejora_cct m
+    join c_mejora_cct cm on m.c_mejora_cct = cm.c_mejora_cct
+    where c_cct = #{cCct}
+    	and c_sesion = 4
+    order by m.c_mejora_cct
+  </select>
+
+  <select id="selectActividades" parameterType="Integer" resultMap="CeActSesionMap ">
+    select c_actividad, nom_actividad
+    from c_act_sesion
+    where num_pestania in (
+        select c_actividad
+        from ce_act_sesion
+        where c_cct = #{cCct}
+            and c_sesion in (2,3)
+    )
+    order by c_actividad
+  </select>
+
+</mapper>

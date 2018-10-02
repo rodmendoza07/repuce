@@ -1,0 +1,153 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#333333; margin:0;}
+h2{	font-size:16px;
+	line-height: 18px;
+	font-weight:bold;
+	text-align:center;
+	}
+/***estilo tabla de puntajes***/
+table.puntaje {
+	border-width: 0px;
+	border-spacing: 7px;
+	border-style: none;
+	border-collapse: separate;
+	width: 700px;
+}
+table.puntaje th {
+	border-width: 0px;
+	padding: 2px;
+	background-color: #ffd083;
+	font-size:15px;
+}
+table.puntaje td {
+	border-width: 0px;
+	padding: 2px 2px 25px 45px;
+	background-color: #ffedcd;
+	height: 250px;
+}
+/***estilo tabla de meta***/
+
+.porcentaje {
+	border-width: 0px;
+	border-spacing: 7px;
+	border-style: none;
+	border-collapse: separate;
+	text-align:center;
+
+}
+.porcentaje th {
+	border-width: 0px;
+	padding: 5px;
+	background-color: #ffd083;
+}
+/*estilo fondo neutral*/
+.porcentaje td {
+	border-width: 0px;
+	padding: 75px 5px 5px 5px;
+	font-size:16px;
+	line-height: 18px;
+	font-weight:bold;
+	background: url(escuela.png) 50% 30% no-repeat #e6e6e6; /*imagen de fondo datos*/
+	height: 192px;
+
+}
+/*estilo fondo rojo*/
+.percsup td {
+	border-width: 0px;
+	padding: 2px;
+	background-color: #a53319;
+}
+/*estilo fondo verde*/
+.percinf td {
+	border-width: 0px;
+	padding: 2px;
+	background-color: #24880d;
+}
+
+/***estilo tabla nivel de logro***/
+.nivell {
+	border-width: 0px;
+	border-spacing: 7px;
+	border-style: none;
+	border-collapse: separate;
+	width: 800px;
+}
+.nivell th {
+	border-width: 0px;
+	padding: 2px;
+	background-color: #ffd083;
+	font-size:15px;
+	text-align:center;
+}
+.nivell td {
+	border-width: 0px;
+	padding: 5px;
+	background-color: #ffedcd;
+	/*text-align:left;*/
+
+}
+
+/***estilo pordentajes***/
+.nivelogro {
+	border-width: 0px;
+	border-spacing: 0px;
+	border-style: none;
+	border-collapse: collapse;
+	height:42px;
+	background: none;
+	font-weight:bold;
+	text-align:center;
+}
+
+/*insuficiente*/
+.nivelogro1 {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-image:  url("1.gif");
+    background-position: center top;
+    background-repeat: repeat;
+}
+/*elemental*/
+.nivelogro2 {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-image:  url("2.gif");
+    background-position:  center top;
+    background-repeat:  repeat;
+}
+/*bueno*/
+.nivelogro3 {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-image:  url("3.gif");
+    background-position: center top;
+    background-repeat: repeat;
+}
+/*excelente*/
+.nivelogro4 {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-image:  url("4.gif");
+    background-position: center top;
+    background-repeat:  repeat;
+}
+
+
+.amarillo{background: url("amarillo.jpg") repeat-x bottom;}
+.azul{background: url("azul.jpg") repeat-x bottom;}
+.rojo{background: url("rojo.jpg") repeat-x bottom;}
+.verde{background: url("verde.jpg") repeat-x bottom;}

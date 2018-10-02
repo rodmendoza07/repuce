@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"       
+       xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/jee
+       http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- Paquete para  implementaciones específicastales como
+		 mx.gob.sep.dgtec.repuce.dao.impl.JdbcTemplateEjemploDao -->
+	<context:component-scan base-package="mx.gob.sep.dgtec.repuce.dao.impl"/>
+	
+	<!-- Este bean que provee mybatis es el encargado de crear implementaciones de nuestros daos al
+		 vuelo -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="mx.gob.sep.dgtec.repuce.dao" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- Bean para configurar mybatis -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- Archivo de principales configuraciones de mybatis. Settings como el cache van en este archivo. -->
+		<property name="configLocation" value="classpath:mx/gob/sep/dgtec/repuce/datos/mybatis/mybatis-sqlmap.xml" />
+		<!-- Con esta propiedad pedimos al SessionFactory que al referir a una clase de nuestro modelo
+			sólo tengamos que mencionar su nombre (y no le paquete completo). -->
+		<property name="typeAliasesPackage" value="mx.gob.sep.dgtec.repuce.model" />
+		<!-- La ubicación de todos mapeos de SQL que mybatis tomará. -->
+		<property name="mapperLocations" value="classpath*:mx/gob/sep/dgtec/repuce/model/sqlmaps/**/*.xml" />
+	</bean>
+	
+	<!-- Bean que maneja la transacción de conexiones que provienen de un DataSource para drives JDBC2.0
+		o JDBC3.0. Recomendable este último pues soporta transacciones anidadas (nested transactions) entre otros beneficios.-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	    p:dataSource-ref="dataSource" />
+	
+	<!-- Aqui especificamos de dónde provendrán las conexiones a base de datos cuando ejecutemos en "profile" desarrollo. -->    
+	<beans profile="desarrollo">
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="com.informix.jdbc.IfxDriver" />
+			<property name="url" value="jdbc:informix-sqli://168.255.101.222:2000/renace_d:informixserver=srvdess_tcp" />
+			<property name="username" value="grarncd1" />
+			<property name="password" value="gomrncd3" />
+		</bean>		
+	</beans>	    
+	
+	<beans profile="testing">
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="com.informix.jdbc.IfxDriver" />
+			<property name="url" value="jdbc:informix-sqli://168.255.101.30:2010/repuce:informixserver=srvtests_tcp" />
+			<property name="username" value="grarnct1" />
+			<property name="password" value="gomrnct2" />
+		</bean>		
+	</beans>		
+	
+	<!-- Podemos agregar otros profiles si requerimos de otros ambientes aplicativos. -->
+<!-- 	<beans profile="produccion"> -->
+		<!-- Aqui se podría agregar un datasource a un recurso JNDI -->
+<!--         <jee:jndi-lookup id="dataSource" jndi-name="jdbc/repuce"/> -->
+<!--          <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">        -->
+<!-- 	        <property name="driverClassName" value="com.informix.jdbc.IfxDriver" /> -->
+<!-- 	        <property name="url" value="jdbc:informix-sqli://168.255.101.236:1600/nvorepuce:informixserver=srvrenace_tcp" /> -->
+<!-- 			<property name="username" value="grarncp1" /> -->
+<!-- 			<property name="password" value="r3PuC3p5" /> -->
+<!-- 			<property name="initialSize" value="50" /> -->
+<!-- 			<property name="maxActive" value="5000" /> -->
+<!-- 	    </bean> -->
+<!-- 	</beans> -->
+	
+	<beans profile="produccion">
+	    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="prototype">       
+	        <property name="jndiName" value="jdbc/repuce"/>
+	    </bean>
+	</beans>
+    
+    
+</beans>
