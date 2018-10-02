@@ -1,0 +1,6 @@
+INDEX VERSION 1.122+C:\Users\Administrador\Documents\REPUCE 17-18\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+408940408.index
+3479325741.index
+1409453384.index
+365364933.index
+2282295860.index
